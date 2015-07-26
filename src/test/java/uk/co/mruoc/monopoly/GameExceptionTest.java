@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MonopolyExceptionTest {
+public class GameExceptionTest {
 
     private static final String MESSAGE = "MESSAGE";
 
