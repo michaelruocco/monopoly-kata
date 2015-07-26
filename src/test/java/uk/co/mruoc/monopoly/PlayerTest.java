@@ -6,12 +6,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerTest {
 
-    private static final String NAME = "NAME";
+    private static final String NAME = "Horse";
 
     private Player player = new Player(NAME);
 
     @Test
-    public void shouldDefaultPlayerPositionToZero() {
+    public void playerStartPositionShouldBeZero() {
         assertThat(player.getPosition()).isEqualTo(0);
     }
 
@@ -23,12 +23,12 @@ public class PlayerTest {
     }
 
     @Test
-    public void nameIsShouldReturnTrueIfMatchesPlayerName() {
+    public void shouldReturnTrueIfMatchesPlayerName() {
         assertThat(player.nameIs(NAME)).isTrue();
     }
 
     @Test
-    public void nameIsShouldReturnFalseDoesNotMatchPlayerName() {
+    public void shouldReturnFalseDoesNotMatchPlayerName() {
         assertThat(player.nameIs("NON MATCHING NAME")).isFalse();
     }
 
@@ -38,7 +38,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldAddRoundToPlayer() {
+    public void numberOfRoundsPlayedShouldIncrementWithEachRoundAdded() {
         player.addRound(new Round());
         player.addRound(new Round());
 

@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +11,6 @@ public class RoundTest {
 
     private static final Player HORSE = new Player("Horse");
     private static final Player CAT = new Player("Cat");
-    private static final List<Player> ROUND_PLAYERS = Arrays.asList(HORSE, CAT);
 
     private final Round round = new Round();
 
