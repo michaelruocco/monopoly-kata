@@ -1,7 +1,6 @@
 package uk.co.mruoc.monopoly;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -71,9 +70,9 @@ public class Game {
 
     private void validate(int numberOfPlayers) {
         if (numberOfPlayers < MIN_PLAYERS)
-            throw new MonopolyException(MIN_PLAYERS_MESSAGE);
+            throw new GameException(MIN_PLAYERS_MESSAGE);
         if (numberOfPlayers > MAX_PLAYERS)
-            throw new MonopolyException(MAX_PLAYERS_MESSAGE);
+            throw new GameException(MAX_PLAYERS_MESSAGE);
     }
 
     private void generatePlayers(int numberOfPlayers) {

@@ -62,7 +62,7 @@ public class GamePlayers {
     private void createGame(int numberOfPlayers) {
         try {
             game = new Game(numberOfPlayers);
-        } catch (MonopolyException e) {
+        } catch (GameException e) {
             errorMessage = e.getMessage();
         }
     }

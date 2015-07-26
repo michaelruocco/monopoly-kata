@@ -6,12 +6,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameTest {
 
-    @Test(expected = MonopolyException.class)
+    @Test(expected = GameException.class)
     public void shouldThrowExceptionIfLessThanTwoPlayers() {
         new Game(1);
     }
 
-    @Test(expected = MonopolyException.class)
+    @Test(expected = GameException.class)
     public void shouldThrowExceptionIfMoreThanEightPlayers() {
         new Game(9);
     }

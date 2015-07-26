@@ -12,7 +12,7 @@ public class MonopolyExceptionTest {
 
     @Test
     public void shouldReturnMessage() {
-        exception = new MonopolyException(MESSAGE);
+        exception = new GameException(MESSAGE);
 
         assertThat(exception.getMessage()).isEqualTo(MESSAGE);
     }
