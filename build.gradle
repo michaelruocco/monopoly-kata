@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    integrationtest {
+        java { srcDir 'src/integrationtest/java' }
+        resources { srcDir 'src/integrationtest/resources' }
+        compileClasspath += sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+    }
+}
+
+task integrationtest(type: Test) {
+    description = "Runs Integration Tests"
+    testClassesDir = sourceSets.integrationtest.output.classesDir
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    testCompile 'info.cukes:cucumber-java:1.2.0'
+    testCompile 'info.cukes:cucumber-junit:1.2.0'
+    testCompile 'org.mockito:mockito-core:1.10.8'
+    testCompile 'org.assertj:assertj-core:1.7.1'
+    testCompile 'eu.codearte.catch-exception:catch-exception:1.3.4'
+}
