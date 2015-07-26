@@ -16,14 +16,6 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    cucumber {
-        java { srcDir 'src/cucumber/java' }
-        resources { srcDir 'src/cucumber/resources' }
-        compileClasspath += sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
-    }
-}
-
 cucumber {
     formats = ['pretty']
 }
