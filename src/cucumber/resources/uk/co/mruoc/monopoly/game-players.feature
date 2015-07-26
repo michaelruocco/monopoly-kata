@@ -5,17 +5,17 @@ Feature: Game Players
   # So that the person that goes first is decided fairly
 
   Scenario: Create game with two players
-    When A new game is created with 2 players
+    When A game is set up with 2 players
     Then The game has 2 players
     And One of the players is "Horse"
     And One of the players is "Car"
 
   Scenario: Error if less than two players
-    When A new game is created with 1 players
+    When A game is set up with one player
     Then An error is thrown with the message "cannot create a game with less than 2 players"
 
   Scenario: Error if more than eight players
-    When A new game is created with 9 players
+    When A game is set up with 9 players
     Then An error is thrown with the message "cannot create a game with more than 8 players"
 
   Scenario: Player order is assigned randomly

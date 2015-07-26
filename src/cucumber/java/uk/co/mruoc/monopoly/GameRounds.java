@@ -8,17 +8,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameRounds {
 
-    private int numberOfPlayers;
     private Game game;
 
-    @Given("^A game is created with (\\d+) players$")
-    public void a_game_is_created_with_players(int numberOfPlayers) throws Throwable {
-        this.numberOfPlayers = numberOfPlayers;
+    @Given("^A game is played$")
+    public void a_game_is_played() throws Throwable {
+        game = new Game(2);
     }
 
     @When("^The game is complete$")
     public void the_game_is_complete() throws Throwable {
-        game = new Game(numberOfPlayers);
         game.play();
     }
 

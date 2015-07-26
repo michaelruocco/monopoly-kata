@@ -5,12 +5,12 @@ Feature: Game Rounds
   # So that I can complete a game
 
   Scenario: Each player plays 20 rounds
-    Given A game is created with 2 players
+    Given A game is played
     When The game is complete
     Then There were 20 rounds in total
     And Each player has played 20 rounds
 
   Scenario: Each player plays 20 rounds in the correct order
-    Given A game is created with 2 players
+    Given A game is played
     When The game is complete
     Then The order of the players is the same for each round

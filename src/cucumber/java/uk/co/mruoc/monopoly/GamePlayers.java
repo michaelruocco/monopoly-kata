@@ -14,9 +14,14 @@ public class GamePlayers {
     private Game game;
     private String errorMessage;
 
-    @When("^A new game is created with (\\d+) players$")
-    public void a_new_game_is_created_with_players(int numberOfPlayers) throws Throwable {
+    @When("^A game is set up with (\\d+) players$")
+    public void a_game_is_set_up_with_players(int numberOfPlayers) throws Throwable {
         createGame(numberOfPlayers);
+    }
+
+    @When("^A game is set up with one player$")
+    public void a_game_is_set_up_with_one_player() throws Throwable {
+        createGame(1);
     }
 
     @When("^(\\d+) games are created with (\\d+) players$")
