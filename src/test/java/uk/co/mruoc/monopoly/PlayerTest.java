@@ -32,4 +32,17 @@ public class PlayerTest {
         assertThat(player.nameIs("NON MATCHING NAME")).isFalse();
     }
 
+    @Test
+    public void newPlayerShouldHavePlayedNoRounds() {
+        assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldAddRoundToPlayer() {
+        player.addRound(new Round());
+        player.addRound(new Round());
+
+        assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(2);
+    }
+
 }

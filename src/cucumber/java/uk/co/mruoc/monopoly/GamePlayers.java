@@ -29,7 +29,7 @@ public class GamePlayers {
 
     @Then("^The game has (\\d+) players$")
     public void the_game_has_players(int numberOfPlayers) throws Throwable {
-        assertThat(game.getPlayerCount()).isEqualTo(numberOfPlayers);
+        assertThat(game.getNumberOfPlayers()).isEqualTo(numberOfPlayers);
     }
 
     @Then("^One of the players is \"(.*?)\"$")
