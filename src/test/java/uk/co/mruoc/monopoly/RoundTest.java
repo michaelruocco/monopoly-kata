@@ -16,7 +16,7 @@ public class RoundTest {
 
     @Test
     public void roundShouldHaveNoPlayersIfNoTurnsHaveBeenTaken() {
-        boolean playersMatch = round.playersMatch(new ArrayList<>());
+        boolean playersMatch = round.playersMatch(new ArrayList<Player>());
         assertThat(playersMatch).isTrue();
     }
 
