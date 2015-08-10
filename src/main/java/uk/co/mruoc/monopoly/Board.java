@@ -55,7 +55,7 @@ public class Board {
         player.move(roll);
         while (passedGo(player)) {
             player.setPosition(getPassedGoPosition(player));
-            player.incrementBalance(200);
+            player.recieveSalary();
         }
         Location location = getLocation(player);
         if (location.isGoToJail())

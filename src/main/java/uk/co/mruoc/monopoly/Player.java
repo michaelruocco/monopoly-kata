@@ -8,6 +8,7 @@ public class Player {
     private static final double INCOME_TAX_RATE  = 0.1;
     private static final double MAX_INCOME_TAX_VALUE = 200;
     private static final double SUPER_TAX_VALUE = 75;
+    private static final double SALARY_VALUE = 200;
 
     private final String name;
     private int position;
@@ -44,14 +45,6 @@ public class Player {
 
     public double getBalance() { return balance; }
 
-    public void incrementBalance(double valueToAdd) {
-        balance += valueToAdd;
-    }
-
-    public void decrementBalance(double valueToSubtract) {
-        balance -= valueToSubtract;
-    }
-
     public void setBalance(double balance) {
         this.balance = balance;
     }
@@ -61,15 +54,27 @@ public class Player {
         decrementBalance(incomeTaxValue);
     }
 
+    public void paySuperTax() {
+        decrementBalance(SUPER_TAX_VALUE);
+    }
+
+    public void recieveSalary() {
+        incrementBalance(SALARY_VALUE);
+    }
+
+    private void incrementBalance(double valueToAdd) {
+        balance += valueToAdd;
+    }
+
+    private void decrementBalance(double valueToSubtract) {
+        balance -= valueToSubtract;
+    }
+
     private double getIncomeTaxValue() {
         double incomeTaxValue = balance * INCOME_TAX_RATE;
         if (incomeTaxValue > MAX_INCOME_TAX_VALUE)
             return MAX_INCOME_TAX_VALUE;
         return incomeTaxValue;
-    }
-
-    public void paySuperTax() {
-        decrementBalance(SUPER_TAX_VALUE);
     }
 
 }
