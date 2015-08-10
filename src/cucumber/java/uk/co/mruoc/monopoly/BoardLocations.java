@@ -16,7 +16,7 @@ public class BoardLocations {
 
     @Then("^Location (\\d+) is \"(.*?)\"$")
     public void location_is(int position, String expectedName) throws Throwable {
-        Location location = board.getLocation(position - 1);
+        Location location = board.getLocation(position);
         assertThat(location.getName()).isEqualTo(expectedName);
     }
 

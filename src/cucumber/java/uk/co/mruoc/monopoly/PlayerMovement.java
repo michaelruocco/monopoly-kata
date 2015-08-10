@@ -26,4 +26,15 @@ public class PlayerMovement {
         assertThat(player.getPosition()).isEqualTo(endPosition);
     }
 
+    @Then("^The player is on \"(.*?)\"$")
+    public void the_player_is_on(String expectedLocationName) throws Throwable {
+        Location location = board.getLocation(player.getPosition());
+        assertThat(location.getName()).isEqualTo(expectedLocationName);
+    }
+
+    @Then("^The player has a balance of (\\d+)$")
+    public void the_player_has_a_balance_of(double expectedBalance) throws Throwable {
+        assertThat(player.getBalance()).isEqualTo(expectedBalance);
+    }
+
 }

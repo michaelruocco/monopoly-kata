@@ -6,7 +6,8 @@ import java.util.List;
 public class Player {
 
     private final String name;
-    private int position = 0;
+    private int position;
+    private double balance;
     private final List<Round> rounds = new ArrayList<>();
 
     public Player(String name) {
@@ -35,6 +36,12 @@ public class Player {
 
     public void addRound(Round round) {
         rounds.add(round);
+    }
+
+    public double getBalance() { return balance; }
+
+    public void incrementBalance(int valueToAdd) {
+        balance += valueToAdd;
     }
 
 }
