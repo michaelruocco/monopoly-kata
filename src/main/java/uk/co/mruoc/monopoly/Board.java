@@ -53,15 +53,10 @@ public class Board {
 
     public void movePlayer(int roll, Player player) {
         player.move(roll);
-        if (passedGo(player))
+        while (passedGo(player)) {
             player.setPosition(getPassedGoPosition(player));
-        if (playerIsOnGo(player))
             player.incrementBalance(200);
-    }
-
-    private boolean playerIsOnGo(Player player) {
-        Location endLocation = getLocation(player.getPosition());
-        return endLocation.getName().equalsIgnoreCase("Go");
+        }
     }
 
     public Location getLocation(int position) {
