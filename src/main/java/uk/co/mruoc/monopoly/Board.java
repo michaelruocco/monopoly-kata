@@ -57,6 +57,8 @@ public class Board {
             player.setPosition(getPassedGoPosition(player));
             player.incrementBalance(200);
         }
+        if (goToJail(player))
+            player.setPosition(getJailPosition());
     }
 
     public Location getLocation(int position) {
@@ -67,8 +69,16 @@ public class Board {
         return player.getPosition() > BOARD_SIZE;
     }
 
+    private boolean goToJail(Player player) {
+        return player.getPosition() == 31;
+    }
+
     private int getPassedGoPosition(Player player) {
         return player.getPosition() - BOARD_SIZE;
+    }
+
+    private int getJailPosition() {
+        return 11;
     }
 
 }
