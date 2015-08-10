@@ -57,20 +57,25 @@ public class Board {
             player.setPosition(getPassedGoPosition(player));
             player.incrementBalance(200);
         }
-        if (goToJail(player))
+        Location location = getLocation(player);
+        if (location.isGoToJail())
             player.setPosition(getJailPosition());
+        if (location.isIncomeTax())
+            player.payIncomeTax();
+        if (location.isSuperTax())
+            player.paySuperTax();
     }
 
     public Location getLocation(int position) {
         return locations.get(position - 1);
     }
 
-    private boolean passedGo(Player player) {
-        return player.getPosition() > BOARD_SIZE;
+    public Location getLocation(Player player) {
+        return getLocation(player.getPosition());
     }
 
-    private boolean goToJail(Player player) {
-        return player.getPosition() == 31;
+    private boolean passedGo(Player player) {
+        return player.getPosition() > BOARD_SIZE;
     }
 
     private int getPassedGoPosition(Player player) {

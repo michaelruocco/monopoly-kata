@@ -1,4 +1,4 @@
-Feature: Passing over go
+Feature: Go To Jail
 
   # As a player
   # When I land on Go To Jail

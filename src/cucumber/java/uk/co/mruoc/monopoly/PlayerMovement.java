@@ -16,6 +16,11 @@ public class PlayerMovement {
         player.setPosition(startPosition);
     }
 
+    @Given("^has an initial balance of (\\d+)$")
+    public void has_an_initial_balance_of(double balance) throws Throwable {
+        player.setBalance(balance);
+    }
+
     @When("^The player rolls a (\\d+)$")
     public void the_player_rolls_a(int roll) throws Throwable {
         board.movePlayer(roll, player);

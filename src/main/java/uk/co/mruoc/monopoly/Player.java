@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Player {
 
+    private static final double INCOME_TAX_RATE  = 0.1;
+    private static final double MAX_INCOME_TAX_VALUE = 200;
+    private static final double SUPER_TAX_VALUE = 75;
+
     private final String name;
     private int position;
     private double balance;
@@ -40,8 +44,32 @@ public class Player {
 
     public double getBalance() { return balance; }
 
-    public void incrementBalance(int valueToAdd) {
+    public void incrementBalance(double valueToAdd) {
         balance += valueToAdd;
+    }
+
+    public void decrementBalance(double valueToSubtract) {
+        balance -= valueToSubtract;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void payIncomeTax() {
+        double incomeTaxValue = getIncomeTaxValue();
+        decrementBalance(incomeTaxValue);
+    }
+
+    private double getIncomeTaxValue() {
+        double incomeTaxValue = balance * INCOME_TAX_RATE;
+        if (incomeTaxValue > MAX_INCOME_TAX_VALUE)
+            return MAX_INCOME_TAX_VALUE;
+        return incomeTaxValue;
+    }
+
+    public void paySuperTax() {
+        decrementBalance(SUPER_TAX_VALUE);
     }
 
 }

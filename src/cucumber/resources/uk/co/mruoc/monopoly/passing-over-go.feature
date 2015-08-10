@@ -1,4 +1,4 @@
-Feature: Passing over go
+Feature: Passing Over Go
 
   # As a player
   # When I pass over go

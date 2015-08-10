@@ -1,4 +1,4 @@
-Feature: Land on go
+Feature: Land On Go
 
   # As a player
   # When I land on go
