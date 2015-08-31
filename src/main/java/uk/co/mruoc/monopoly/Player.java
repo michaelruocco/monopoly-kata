@@ -13,6 +13,7 @@ public class Player {
     private int position;
     private double balance;
     private final List<Round> rounds = new ArrayList<>();
+    private final List<Location> properties = new ArrayList<>();
 
     public Player(String name) {
         this.name = name;
@@ -73,6 +74,22 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean canAfford(Location location) {
+        return balance > location.getCost();
+    }
+
+    public void purchase(Location location) {
+        decrementBalance(location.getCost());
+        properties.add(location);
+    }
+
+    public boolean ownsProperty(String propertyName) {
+        for (Location location : properties)
+            if (location.getName().equalsIgnoreCase(propertyName))
+                return true;
+        return false;
     }
 
     private boolean hasNegativeBalance() {

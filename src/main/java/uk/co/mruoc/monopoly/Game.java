@@ -37,6 +37,10 @@ public class Game {
         if (players.allOtherPlayersHaveLost(player))
             return;
 
+        Location location = getLocation(player);
+        if (player.canAfford(location))
+            player.purchase(location);
+
         nextPlayerIndex++;
         if (nextPlayerIndex >= players.getNumberOfPlayers()) {
             nextPlayerIndex = 0;
@@ -81,6 +85,10 @@ public class Game {
         return players.getWinner();
     }
 
+    public Location getLocation(Player player) {
+        return board.getLocation(player);
+    }
+
     private int generateRoll() {
         return random.nextInt(12 - 1 + 1) + 1;
     }
@@ -102,5 +110,4 @@ public class Game {
     private boolean isGameComplete() {
         return !playersRemaining() || !roundsRemaining();
     }
-
 }

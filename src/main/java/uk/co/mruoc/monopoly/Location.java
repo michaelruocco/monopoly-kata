@@ -4,6 +4,7 @@ public class Location {
 
     private final String name;
     private final int cost;
+    private Player owner;
 
     public Location(String name) {
         this(name, 0);
@@ -32,6 +33,18 @@ public class Location {
 
     public int getCost() {
         return cost;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    public boolean hasOwner() {
+        return getOwner() != null;
     }
 
 }
