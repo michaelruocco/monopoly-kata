@@ -29,7 +29,7 @@ public class Game {
         }
     }
 
-    public void playFullGame() {
+    public void completeGame() {
         for(int r = 0; r < totalTurns; r++) {
             nextTurn(2);
         }
