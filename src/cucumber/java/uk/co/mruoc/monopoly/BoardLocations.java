@@ -20,5 +20,11 @@ public class BoardLocations {
         assertThat(location.getName()).isEqualTo(expectedName);
     }
 
+    @Then("^Location (\\d+) has a cost of (\\d+)$")
+    public void location_has_a_cost_of(int position, int expectedCost) throws Throwable {
+        Location location = board.getLocation(position);
+        assertThat(location.getCost()).isEqualTo(expectedCost);
+    }
+
 
 }

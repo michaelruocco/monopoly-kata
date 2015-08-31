@@ -3,9 +3,15 @@ package uk.co.mruoc.monopoly;
 public class Location {
 
     private final String name;
+    private final int cost;
 
     public Location(String name) {
+        this(name, 0);
+    }
+
+    public Location(String name, int cost) {
         this.name = name;
+        this.cost = cost;
     }
 
     public String getName() {
@@ -22,6 +28,10 @@ public class Location {
 
     public boolean isSuperTax() {
         return getName().equalsIgnoreCase("Super Tax");
+    }
+
+    public int getCost() {
+        return cost;
     }
 
 }
