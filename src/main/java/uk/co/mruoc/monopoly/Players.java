@@ -1,10 +1,14 @@
 package uk.co.mruoc.monopoly;
 
+import com.sun.istack.internal.logging.Logger;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Players {
+
+    private static Logger LOG = Logger.getLogger(Players.class);
 
     private static final String[] NAMES = { "Horse" , "Car", "Boat", "Dog", "Thimble", "Boot", "Hat", "Wheelbarrow" };
     private static final int MAX_PLAYERS = NAMES.length;
@@ -20,14 +24,20 @@ public class Players {
         for(int p = 0; p < numberOfPlayers; p++)
             players.add(new Player(NAMES[p]));
         Collections.shuffle(players);
+        for (Player player : players)
+            logInfo("generated player " + player.getName());
     }
 
     public Player getPlayer(int index) {
         return players.get(index);
     }
 
-    public int count() {
+    public int getNumberOfPlayers() {
         return players.size();
+    }
+
+    public int getNumberOfRemainingPlayers() {
+        return getRemainingPlayers().size();
     }
 
     public boolean exists(String name) {
@@ -69,11 +79,16 @@ public class Players {
     }
 
     private Player getPlayerWithHighestBalance(List<Player> remainingPlayers) {
-        Player playerWithHighestBalance = remainingPlayers.get(0);
-        for (Player remainingPlayer : remainingPlayers)
-            if (remainingPlayer.getBalance() > playerWithHighestBalance.getBalance())
+        Player playerWithHighestBalance = null;
+        for (Player remainingPlayer : remainingPlayers) {
+            if (playerWithHighestBalance == null || (remainingPlayer.getBalance() > playerWithHighestBalance.getBalance()))
                 playerWithHighestBalance = remainingPlayer;
+        }
         return playerWithHighestBalance;
+    }
+
+    private void logInfo(String message) {
+        LOG.info(message);
     }
 
 }

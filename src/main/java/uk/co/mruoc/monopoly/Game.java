@@ -11,7 +11,6 @@ public class Game {
     private final List<Round> rounds = new ArrayList(TOTAL_ROUNDS);
     private final Board board = new Board();
     private final Players players = new Players();
-    private final int totalTurns;
 
     private int nextPlayerIndex;
     private Round currentRound = new Round();
@@ -20,40 +19,43 @@ public class Game {
     public Game(int numberOfPlayers) {
         players.validate(numberOfPlayers);
         players.generate(numberOfPlayers);
-        totalTurns = numberOfPlayers * TOTAL_ROUNDS;
     }
 
     public void play() {
-        for(int r = 0; r < totalTurns; r++) {
+        while(!isGameComplete())
             nextTurn(generateRoll());
-        }
     }
 
     public void completeGame() {
-        for(int r = 0; r < totalTurns; r++) {
+        while(!isGameComplete())
             nextTurn(2);
-        }
     }
 
     public void nextTurn(int roll) {
-        Player player = players.getList().get(nextPlayerIndex);
-        board.movePlayer(roll, player);
-        currentRound.takeTurn(player);
-        player.addRound(currentRound);
-
+        Player player = getNextPlayer();
+        takeTurn(player, roll);
         if (players.allOtherPlayersHaveLost(player))
             return;
 
         nextPlayerIndex++;
-        if (nextPlayerIndex >= players.count()) {
+        if (nextPlayerIndex >= players.getNumberOfPlayers()) {
             nextPlayerIndex = 0;
             rounds.add(currentRound);
             currentRound = new Round();
         }
     }
 
+    private Player getNextPlayer() {
+        Player player = players.getList().get(nextPlayerIndex);
+        while(!player.isStillPlaying()) {
+            nextPlayerIndex++;
+            player = players.getList().get(nextPlayerIndex);
+        }
+        return player;
+    }
+
     public int getNumberOfPlayers() {
-        return players.count();
+        return players.getNumberOfPlayers();
     }
 
     public boolean playerExists(String name) {
@@ -81,6 +83,24 @@ public class Game {
 
     private int generateRoll() {
         return random.nextInt(12 - 1 + 1) + 1;
+    }
+
+    private void takeTurn(Player player, int roll) {
+        board.movePlayer(roll, player);
+        currentRound.takeTurn(player);
+        player.addRound(currentRound);
+    }
+
+    private boolean playersRemaining() {
+        return players.getNumberOfRemainingPlayers() >= 1;
+    }
+
+    private boolean roundsRemaining() {
+        return rounds.size() < TOTAL_ROUNDS;
+    }
+
+    private boolean isGameComplete() {
+        return !playersRemaining() || !roundsRemaining();
     }
 
 }

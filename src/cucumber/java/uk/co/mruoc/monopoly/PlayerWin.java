@@ -15,15 +15,34 @@ public class PlayerWin {
         game = new Game(numberOfPlayers);
     }
 
-    @When("^The first player lands on super tax$")
-    public void the_first_player_lands_on_super_tax() throws Throwable {
+    @When("^The first player lands on super tax and their balance goes below zero$")
+    public void the_first_player_lands_on_super_tax_and_their_balance_goes_below_zero() throws Throwable {
         game.nextTurn(39);
+        assertThat(game.getPlayer(0).getBalance() < 0).isTrue();
     }
+
+    @When("^The the first two players balance goes below zero in different rounds$")
+    public void the_the_first_two_players_balance_goes_below_zero_in_different_rounds() throws Throwable {
+        game.nextTurn(39); //first player hits super tax and is out of the game
+        game.nextTurn(10);
+        game.nextTurn(10);
+        game.nextTurn(29); //second player hits super tax and is out of the game
+
+        // Write code here that turns the phrase above into concrete actions
+        //throw new PendingException();
+    }
+
 
     @Then("^The second player is the winner$")
     public void the_second_player_is_the_winner() throws Throwable {
         Player winner = game.getWinner();
         assertThat(winner).isEqualTo(game.getPlayer(1));
+    }
+
+    @Then("^The third player is the winner$")
+    public void the_third_player_is_the_winner() throws Throwable {
+        Player winner = game.getWinner();
+        assertThat(winner).isEqualTo(game.getPlayer(2));
     }
 
     @Then("^The other two players continue complete the game$")

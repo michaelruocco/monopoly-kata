@@ -1,9 +1,13 @@
 package uk.co.mruoc.monopoly;
 
+import com.sun.istack.internal.logging.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
+
+    private Logger LOG = Logger.getLogger(Board.class);
 
     private static final int BOARD_SIZE = 40;
     private final List<Location> locations = new ArrayList<>();
@@ -64,6 +68,8 @@ public class Board {
             player.payIncomeTax();
         if (location.isSuperTax())
             player.paySuperTax();
+
+        logInfo(createMoveDebugMessage(player, roll, location));
     }
 
     public Location getLocation(int position) {
@@ -84,6 +90,20 @@ public class Board {
 
     private int getJailPosition() {
         return 11;
+    }
+
+    private String createMoveDebugMessage(Player player, int roll, Location location) {
+        StringBuilder message = new StringBuilder("moved player ");
+        message.append(player.getName());
+        message.append(" ");
+        message.append(roll);
+        message.append(" space to location ");
+        message.append(location.getName());
+        return message.toString();
+    }
+
+    private void logInfo(String message) {
+        LOG.info(message);
     }
 
 }

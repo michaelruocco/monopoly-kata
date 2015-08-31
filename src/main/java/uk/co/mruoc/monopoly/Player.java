@@ -18,10 +18,6 @@ public class Player {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setPosition(int position) {
         this.position = position;
     }
@@ -69,6 +65,14 @@ public class Player {
 
     public boolean hasLost() {
         return hasNegativeBalance();
+    }
+
+    public boolean isStillPlaying() {
+        return !hasLost();
+    }
+
+    public String getName() {
+        return name;
     }
 
     private boolean hasNegativeBalance() {
