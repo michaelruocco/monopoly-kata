@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GamePlayers {
 
-    private List<Player> firstPlayers = new ArrayList<Player>();
+    private List<Player> firstPlayers = new ArrayList<>();
     private Game game;
     private String errorMessage;
 

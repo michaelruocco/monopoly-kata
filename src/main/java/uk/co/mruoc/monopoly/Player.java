@@ -5,10 +5,9 @@ import java.util.List;
 
 public class Player {
 
-    private static final double INCOME_TAX_RATE  = 0.1;
-    private static final double MAX_INCOME_TAX_VALUE = 200;
-    private static final double SUPER_TAX_VALUE = 75;
-    private static final double SALARY_VALUE = 200;
+    private static final IncomeTaxCalculator INCOME_TAX_CALCULATOR = new IncomeTaxCalculator();
+    private static final SalaryCalculator SALARY_CALCULATOR = new SalaryCalculator();
+    private static final SuperTaxCalculator SUPER_TAX_CALCULATOR = new SuperTaxCalculator();
 
     private final String name;
     private int position;
@@ -17,6 +16,10 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setPosition(int position) {
@@ -50,16 +53,26 @@ public class Player {
     }
 
     public void payIncomeTax() {
-        double incomeTaxValue = getIncomeTaxValue();
-        decrementBalance(incomeTaxValue);
+        double charge = calculateIncomeTaxCharge();
+        decrementBalance(charge);
     }
 
     public void paySuperTax() {
-        decrementBalance(SUPER_TAX_VALUE);
+        double charge = calculateSuperTaxCharge();
+        decrementBalance(charge);
     }
 
-    public void recieveSalary() {
-        incrementBalance(SALARY_VALUE);
+    public void receiveSalary() {
+        double payment = calculateSalaryPayment();
+        incrementBalance(payment);
+    }
+
+    public boolean hasLost() {
+        return hasNegativeBalance();
+    }
+
+    private boolean hasNegativeBalance() {
+        return balance < 0;
     }
 
     private void incrementBalance(double valueToAdd) {
@@ -70,11 +83,16 @@ public class Player {
         balance -= valueToSubtract;
     }
 
-    private double getIncomeTaxValue() {
-        double incomeTaxValue = balance * INCOME_TAX_RATE;
-        if (incomeTaxValue > MAX_INCOME_TAX_VALUE)
-            return MAX_INCOME_TAX_VALUE;
-        return incomeTaxValue;
+    private double calculateSalaryPayment() {
+        return SALARY_CALCULATOR.calculate();
+    }
+
+    private double calculateIncomeTaxCharge() {
+        return INCOME_TAX_CALCULATOR.calculate(this);
+    }
+
+    private double calculateSuperTaxCharge() {
+        return SUPER_TAX_CALCULATOR.calculate();
     }
 
 }

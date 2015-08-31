@@ -37,15 +37,43 @@ public class Players {
         return false;
     }
 
-    public void play(Round round) {
-        for(Player player : players) {
-            round.takeTurn(player);
-            player.addRound(round);
-        }
-    }
-
     public List<Player> getList() {
         return players;
+    }
+
+    public boolean allOtherPlayersHaveLost(Player player) {
+        List<Player> otherPlayers = new ArrayList<>(players);
+        Collections.copy(otherPlayers, players);
+        otherPlayers.remove(player);
+        return allHaveLost(otherPlayers);
+    }
+
+    public Player getWinner() {
+        List<Player> remainingPlayers = getRemainingPlayers();
+        return getPlayerWithHighestBalance(remainingPlayers);
+    }
+
+    private boolean allHaveLost(List<Player> otherPlayers) {
+        for (Player player : otherPlayers)
+            if (!player.hasLost())
+                return false;
+        return true;
+    }
+
+    private List<Player> getRemainingPlayers() {
+        List<Player> remainingPlayers = new ArrayList<>();
+        for (Player player : players)
+            if (!player.hasLost())
+                remainingPlayers.add(player);
+        return remainingPlayers;
+    }
+
+    private Player getPlayerWithHighestBalance(List<Player> remainingPlayers) {
+        Player playerWithHighestBalance = remainingPlayers.get(0);
+        for (Player remainingPlayer : remainingPlayers)
+            if (remainingPlayer.getBalance() > playerWithHighestBalance.getBalance())
+                playerWithHighestBalance = remainingPlayer;
+        return playerWithHighestBalance;
     }
 
 }
