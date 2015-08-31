@@ -85,6 +85,7 @@ public class Player {
     public void purchase(Location location) {
         decrementBalance(location.getCost());
         properties.add(location);
+        location.setOwner(this);
     }
 
     public boolean ownsProperty(String propertyName) {

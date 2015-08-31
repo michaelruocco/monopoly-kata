@@ -9,3 +9,14 @@ Feature: Property Purchase
     When The player moves 4 places
     Then The player owns "Whitechapel Road"
     And The player balance has decreased by the cost of the property
+
+  Scenario: Player lands on a property they already own
+    Given A player has a balance of 1000
+    And The player has brought a property
+    When The player lands on that property again
+    Then The the players balance remains unchanged
+
+  Scenario: Player passes over a property that is unowned
+    Given A player has a balance of 1000
+    When The passes over an unowned property
+    Then The the players balance remains unchanged
