@@ -26,15 +26,6 @@ public class GameTest {
     }
 
     @Test
-    public void gameShouldLastForTwentyRounds() {
-        Game game = new Game(2);
-
-        game.play();
-
-        assertThat(game.getNumberOfRounds()).isEqualTo(20);
-    }
-
-    @Test
     public void playerOrderShouldBeTheSameForEveryRound() {
         Game game = new Game(2);
 

@@ -28,7 +28,7 @@ public class Game {
 
     public void completeGame() {
         while(!isGameComplete())
-            nextTurn(2);
+            nextTurn(10);
     }
 
     public void nextTurn(int roll) {
@@ -100,7 +100,7 @@ public class Game {
     }
 
     private boolean playersRemaining() {
-        return players.getNumberOfRemainingPlayers() >= 1;
+        return players.getNumberOfRemainingPlayers() > 1;
     }
 
     private boolean roundsRemaining() {
