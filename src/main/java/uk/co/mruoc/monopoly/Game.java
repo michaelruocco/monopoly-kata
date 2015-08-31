@@ -38,7 +38,7 @@ public class Game {
             return;
 
         Location location = getLocation(player);
-        if (player.canAfford(location))
+        if (player.canPurchase(location))
             player.purchase(location);
 
         nextPlayerIndex++;

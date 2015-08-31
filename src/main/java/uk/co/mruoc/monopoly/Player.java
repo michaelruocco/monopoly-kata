@@ -76,8 +76,10 @@ public class Player {
         return name;
     }
 
-    public boolean canAfford(Location location) {
-        return balance > location.getCost();
+    public boolean canPurchase(Location location) {
+        if (location.hasOwner())
+            return false;
+        return canAfford(location);
     }
 
     public void purchase(Location location) {
@@ -94,6 +96,10 @@ public class Player {
 
     private boolean hasNegativeBalance() {
         return balance < 0;
+    }
+
+    private boolean canAfford(Location location) {
+        return balance > location.getCost();
     }
 
     private void incrementBalance(double valueToAdd) {
