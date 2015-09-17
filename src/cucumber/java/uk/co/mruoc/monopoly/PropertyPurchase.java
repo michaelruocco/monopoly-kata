@@ -8,6 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PropertyPurchase {
 
+    private static final int PASS_GO_SALARY = 200;
+
     private Game game = new Game(2);
     private Player player = game.getPlayer(0);
 
@@ -22,9 +24,13 @@ public class PropertyPurchase {
     @Given("^The player has brought a property$")
     public void the_player_has_brought_a_property() throws Throwable {
         game.nextTurn(4);
-        //get value after purchasing property and add 200 for passing go
-        balance = player.getBalance() + 200;
         game.nextTurn(3);
+    }
+
+    @Given("^The players balance has changed to (\\d+)$")
+    public void the_players_balance_has_changed_to(double expectedBalance) throws Throwable {
+        balance = expectedBalance;
+        assertThat(player.getBalance()).isEqualTo(expectedBalance);
     }
 
     @When("^The player moves (\\d+) places$")
@@ -32,10 +38,11 @@ public class PropertyPurchase {
         game.nextTurn(places);
     }
 
-    @When("^The player lands on that property again$")
-    public void the_player_lands_on_that_property_again() throws Throwable {
+    @When("^The player passes go and lands on that property again$")
+    public void the_player_passes_go_and_lands_on_that_property_again() throws Throwable {
         game.nextTurn(40);
         game.nextTurn(40);
+        balance += PASS_GO_SALARY;
     }
 
     @When("^The passes over an unowned property$")

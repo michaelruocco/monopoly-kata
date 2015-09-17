@@ -44,18 +44,11 @@ public class PlayerWin {
         Player thirdPlayer = game.getPlayer(2);
         assertThat(thirdPlayer).isEqualTo(winner);
     }
-
-    @Then("^The other two players continue complete the game$")
-    public void the_other_two_players_continue_complete_the_game() throws Throwable {
+    @Then("^The other two players continue complete the game have played (\\d+) rounds each$")
+    public void the_other_two_players_continue_complete_the_game_have_played_rounds_each(int expectedNumberOfRounds) throws Throwable {
         game.completeGame();
-    }
-
-    @Then("^have played (\\d+) rounds each$")
-    public void have_played_rounds_each(int expectedNumberOfRounds) throws Throwable {
-        for(int p = 0; p < game.getNumberOfPlayers(); p++) {
-            Player player = game.getPlayer(p);
-            assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
-        }
+        assertThat(game.getPlayer(1).getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
+        assertThat(game.getPlayer(2).getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
     }
 
 }

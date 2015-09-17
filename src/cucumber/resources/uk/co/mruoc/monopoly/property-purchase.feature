@@ -13,7 +13,8 @@ Feature: Property Purchase
   Scenario: Player lands on a property they already own
     Given A player has a balance of 1000
     And The player has brought a property
-    When The player lands on that property again
+    And The players balance has changed to 940
+    When The player passes go and lands on that property again
     Then The the players balance remains unchanged
 
   Scenario: Player passes over a property that is unowned
