@@ -30,7 +30,6 @@ public class PlayerWin {
         game.nextTurn(29); //second player hits super tax and is out of the game
     }
 
-
     @Then("^The second player is the winner$")
     public void the_second_player_is_the_winner() throws Throwable {
         Player winner = game.getWinner();

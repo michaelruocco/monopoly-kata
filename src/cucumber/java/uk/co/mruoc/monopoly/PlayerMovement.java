@@ -8,8 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerMovement {
 
+    private Game game = new Game(2);
     private Board board = new Board();
-    private Player player = new Player("NAME");
+    private Player player = game.getPlayer(0);
 
     @Given("^A player is at position (\\d+)$")
     public void a_player_is_at_position(int startPosition) throws Throwable {
@@ -23,7 +24,7 @@ public class PlayerMovement {
 
     @When("^The player rolls a (\\d+)$")
     public void the_player_rolls_a(int roll) throws Throwable {
-        board.movePlayer(roll, player);
+        game.move(player, roll);
     }
 
     @Then("^The player is at position (\\d+)$")

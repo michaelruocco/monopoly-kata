@@ -15,10 +15,12 @@ public class Game {
     private int nextPlayerIndex;
     private Round currentRound = new Round();
     private Random random = new Random();
+    private Rules rules;
 
     public Game(int numberOfPlayers) {
         players.validate(numberOfPlayers);
         players.generate(numberOfPlayers);
+        rules = new Rules(this, board);
     }
 
     public void play() {
@@ -33,30 +35,17 @@ public class Game {
 
     public void nextTurn(int roll) {
         Player player = getNextPlayer();
-        takeTurn(player, roll);
-
-        Location location = getLocation(player);
-        if (player.canPurchase(location))
-            player.purchase(location);
-
-        if (players.allOtherPlayersHaveLost(player))
-            return;
-
-        nextPlayerIndex++;
-        if (nextPlayerIndex >= players.getNumberOfPlayers()) {
-            nextPlayerIndex = 0;
-            rounds.add(currentRound);
-            currentRound = new Round();
-        }
+        move(player, roll);
     }
 
-    private Player getNextPlayer() {
-        Player player = players.getList().get(nextPlayerIndex);
-        while(!player.isStillPlaying()) {
-            nextPlayerIndex++;
-            player = players.getList().get(nextPlayerIndex);
-        }
-        return player;
+    public void move(Player player, int roll) {
+        board.movePlayer(roll, player);
+        currentRound.takeTurn(player);
+        player.addRound(currentRound);
+        rules.apply(player);
+        if (players.onlyRemainingPlayer(player))
+            return;
+        setNextPlayer();
     }
 
     public int getNumberOfPlayers() {
@@ -94,10 +83,25 @@ public class Game {
         return random.nextInt(12 - 1 + 1) + 1;
     }
 
-    private void takeTurn(Player player, int roll) {
-        board.movePlayer(roll, player);
-        currentRound.takeTurn(player);
-        player.addRound(currentRound);
+    private Player getNextPlayer() {
+        Player player = players.getList().get(nextPlayerIndex);
+        while(!player.isStillPlaying()) {
+            nextPlayerIndex++;
+            player = players.getList().get(nextPlayerIndex);
+        }
+        return player;
+    }
+
+    private void setNextPlayer() {
+        nextPlayerIndex++;
+        if (nextPlayerIndex >= players.getNumberOfPlayers())
+            setNextRound();
+    }
+
+    private void setNextRound() {
+        nextPlayerIndex = 0;
+        rounds.add(currentRound);
+        currentRound = new Round();
     }
 
     private boolean playersRemaining() {

@@ -28,6 +28,6 @@ Feature: Land On Income Tax
   Scenario: Player passes over income tax. Nothing happens.
     Given A player is at position 1
     And has an initial balance of 2000
-    When The player rolls a 5
-    Then The player is on "Kings Cross Station"
+    When The player rolls a 20
+    Then The player is on "Free Parking"
     And The player has a balance of 2000

@@ -12,8 +12,8 @@ Feature: Land On Super Tax
     And The player has a balance of 1725
 
   Scenario: Player passes over super tax. Nothing happens.
-    Given A player is at position 35
+    Given A player is at position 1
     And has an initial balance of 2000
-    When The player rolls a 5
-    Then The player is on "Mayfair"
+    When The player rolls a 20
+    Then The player is on "Free Parking"
     And The player has a balance of 2000

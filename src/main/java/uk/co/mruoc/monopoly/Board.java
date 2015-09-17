@@ -59,17 +59,9 @@ public class Board {
         player.move(roll);
         while (passedGo(player)) {
             player.setPosition(getPassedGoPosition(player));
-            player.receiveSalary();
+            player.incrementTimesPassedGo();
         }
-        Location location = getLocation(player);
-        if (location.isGoToJail())
-            player.setPosition(getJailPosition());
-        if (location.isIncomeTax())
-            player.payIncomeTax();
-        if (location.isSuperTax())
-            player.paySuperTax();
-
-        logInfo(createMoveDebugMessage(player, roll, location));
+        logInfo(createMoveDebugMessage(player, roll));
     }
 
     public Location getLocation(int position) {
@@ -80,6 +72,10 @@ public class Board {
         return getLocation(player.getPosition());
     }
 
+    public int getJailPosition() {
+        return 11;
+    }
+
     private boolean passedGo(Player player) {
         return player.getPosition() > BOARD_SIZE;
     }
@@ -88,11 +84,8 @@ public class Board {
         return player.getPosition() - BOARD_SIZE;
     }
 
-    private int getJailPosition() {
-        return 11;
-    }
-
-    private String createMoveDebugMessage(Player player, int roll, Location location) {
+    private String createMoveDebugMessage(Player player, int roll) {
+        Location location = getLocation(player);
         StringBuilder message = new StringBuilder("moved player ");
         message.append(player.getName());
         message.append(" ");

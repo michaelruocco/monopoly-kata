@@ -51,7 +51,7 @@ public class Players {
         return players;
     }
 
-    public boolean allOtherPlayersHaveLost(Player player) {
+    public boolean onlyRemainingPlayer(Player player) {
         List<Player> otherPlayers = new ArrayList<>(players);
         Collections.copy(otherPlayers, players);
         otherPlayers.remove(player);
