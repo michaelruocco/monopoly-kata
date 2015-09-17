@@ -18,7 +18,8 @@ public class PlayerWin {
     @When("^The first player lands on super tax and their balance goes below zero$")
     public void the_first_player_lands_on_super_tax_and_their_balance_goes_below_zero() throws Throwable {
         game.nextTurn(39);
-        assertThat(game.getPlayer(0).getBalance() < 0).isTrue();
+        Player firstPlayer = game.getPlayer(0);
+        assertThat(firstPlayer.getBalance() < 0).isTrue();
     }
 
     @When("^The the first two players balance goes below zero in different rounds$")
@@ -33,13 +34,15 @@ public class PlayerWin {
     @Then("^The second player is the winner$")
     public void the_second_player_is_the_winner() throws Throwable {
         Player winner = game.getWinner();
-        assertThat(winner).isEqualTo(game.getPlayer(1));
+        Player secondPlayer = game.getPlayer(1);
+        assertThat(secondPlayer).isEqualTo(winner);
     }
 
     @Then("^The third player is the winner$")
     public void the_third_player_is_the_winner() throws Throwable {
         Player winner = game.getWinner();
-        assertThat(winner).isEqualTo(game.getPlayer(2));
+        Player thirdPlayer = game.getPlayer(2);
+        assertThat(thirdPlayer).isEqualTo(winner);
     }
 
     @Then("^The other two players continue complete the game$")
@@ -49,8 +52,10 @@ public class PlayerWin {
 
     @Then("^have played (\\d+) rounds each$")
     public void have_played_rounds_each(int expectedNumberOfRounds) throws Throwable {
-        assertThat(game.getPlayer(1).getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
-        assertThat(game.getPlayer(2).getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
+        for(int p = 0; p < game.getNumberOfPlayers(); p++) {
+            Player player = game.getPlayer(p);
+            assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
+        }
     }
 
 }
