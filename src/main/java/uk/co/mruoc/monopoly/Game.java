@@ -34,12 +34,13 @@ public class Game {
     public void nextTurn(int roll) {
         Player player = getNextPlayer();
         takeTurn(player, roll);
-        if (players.allOtherPlayersHaveLost(player))
-            return;
 
         Location location = getLocation(player);
         if (player.canPurchase(location))
             player.purchase(location);
+
+        if (players.allOtherPlayersHaveLost(player))
+            return;
 
         nextPlayerIndex++;
         if (nextPlayerIndex >= players.getNumberOfPlayers()) {
