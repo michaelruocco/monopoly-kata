@@ -1,6 +1,6 @@
 package uk.co.mruoc.monopoly;
 
-import com.sun.istack.internal.logging.Logger;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
