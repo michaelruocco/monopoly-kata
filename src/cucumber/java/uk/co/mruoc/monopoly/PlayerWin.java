@@ -27,9 +27,6 @@ public class PlayerWin {
         game.nextTurn(10);
         game.nextTurn(10);
         game.nextTurn(29); //second player hits super tax and is out of the game
-
-        // Write code here that turns the phrase above into concrete actions
-        //throw new PendingException();
     }
 
 
