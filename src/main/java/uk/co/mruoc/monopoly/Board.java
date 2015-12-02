@@ -15,12 +15,12 @@ public class Board {
     public Board() {
         locations.add(new Location("Go"));
         locations.add(new Location("Old Kent Road", 60));
-        locations.add(new Location("Community Chest"));
+        locations.add(new Location("Community Chest 1"));
         locations.add(new Location("Whitechapel Road", 60));
         locations.add(new Location("Income Tax"));
         locations.add(new Location("Kings Cross Station", 200));
         locations.add(new Location("The Angel Islington", 100));
-        locations.add(new Location("Chance"));
+        locations.add(new Location("Chance 1"));
         locations.add(new Location("Euston Road", 100));
         locations.add(new Location("Pentonville Road", 120));
         locations.add(new Location("Just Visiting / Jail"));
@@ -30,12 +30,12 @@ public class Board {
         locations.add(new Location("Northumberland Avenue", 160));
         locations.add(new Location("Marylebone Station", 200));
         locations.add(new Location("Bow Street", 180));
-        locations.add(new Location("Community Chest"));
+        locations.add(new Location("Community Chest 2"));
         locations.add(new Location("Marlborough Street", 180));
         locations.add(new Location("Vine Street", 200));
         locations.add(new Location("Free Parking"));
         locations.add(new Location("Strand", 220));
-        locations.add(new Location("Chance"));
+        locations.add(new Location("Chance 2"));
         locations.add(new Location("Fleet Street", 220));
         locations.add(new Location("Trafalgar Square", 240));
         locations.add(new Location("Fenchurch Street Station", 200));
