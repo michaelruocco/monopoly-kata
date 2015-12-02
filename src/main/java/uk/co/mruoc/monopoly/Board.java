@@ -23,7 +23,7 @@ public class Board {
         locations.add(new Location("Chance"));
         locations.add(new Location("Euston Road", 100));
         locations.add(new Location("Pentonville Road", 120));
-        locations.add(new Location("Just Visiting"));
+        locations.add(new Location("Just Visiting / Jail"));
         locations.add(new Location("Pall Mall", 140));
         locations.add(new Location("Electric Company", 150));
         locations.add(new Location("Whitehall", 140));
@@ -95,8 +95,8 @@ public class Board {
             player.purchase(location);
     }
 
-    public int getJailPosition() {
-        return 11;
+    private int getJailPosition() {
+        return 10;
     }
 
     private boolean passedGo(Player player) {
@@ -130,4 +130,12 @@ public class Board {
         LOG.info(message);
     }
 
+    public int getLocationPosition(String locationName) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            Location location = getLocation(i);
+            if (location.getName().equalsIgnoreCase(locationName))
+                return i;
+        }
+        throw new GameException("no location found with name " + locationName);
+    }
 }

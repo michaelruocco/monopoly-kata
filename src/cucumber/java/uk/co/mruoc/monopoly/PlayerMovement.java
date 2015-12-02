@@ -12,9 +12,16 @@ public class PlayerMovement {
     private Board board = new Board();
     private Player player = game.getPlayer(0);
 
-    @Given("^A player is at position (\\d+)$")
+    /*@Given("^A player is at position (\\d+)$")
     public void a_player_is_at_position(int startPosition) throws Throwable {
         player.setPosition(startPosition);
+    }*/
+
+    @Given("^A player starts a turn on \"(.*?)\" with a balance of (\\d+)$")
+    public void a_player_starts_a_turn_on_with_a_balance_of(String locationName, double balance) throws Throwable {
+        int locationPosition = board.getLocationPosition(locationName);
+        player.setPosition(locationPosition);
+        player.setBalance(balance);
     }
 
     @Given("^has an initial balance of (\\d+)$")
@@ -32,9 +39,15 @@ public class PlayerMovement {
         assertThat(player.getPosition()).isEqualTo(endPosition);
     }
 
-    @Then("^The player is on \"(.*?)\"$")
+    /*@Then("^The player is on \"(.*?)\"$")
     public void the_player_is_on(String expectedLocationName) throws Throwable {
         String locationName =  board.getLocationName(player);
+        assertThat(locationName).isEqualTo(expectedLocationName);
+    }*/
+
+    @Then("^The player ends the turn on \"(.*?)\"$")
+    public void the_player_ends_the_turn_on(String expectedLocationName) throws Throwable {
+        String locationName = board.getLocationName(player);
         assertThat(locationName).isEqualTo(expectedLocationName);
     }
 
@@ -42,5 +55,7 @@ public class PlayerMovement {
     public void the_player_has_a_balance_of(double expectedBalance) throws Throwable {
         assertThat(player.getBalance()).isEqualTo(expectedBalance);
     }
+
+
 
 }

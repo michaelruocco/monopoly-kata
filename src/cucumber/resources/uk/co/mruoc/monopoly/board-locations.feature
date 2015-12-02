@@ -12,7 +12,7 @@ Feature: Board Locations
     Then location 7 is "Chance"
     Then location 8 is "Euston Road"
     Then location 9 is "Pentonville Road"
-    Then location 10 is "Just Visiting"
+    Then location 10 is "Just Visiting / Jail"
     Then location 11 is "Pall Mall"
     Then location 12 is "Electric Company"
     Then location 13 is "Whitehall"
