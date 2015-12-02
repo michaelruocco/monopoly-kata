@@ -14,16 +14,10 @@ public class BoardLocations {
         board = new Board();
     }
 
-    @Then("^Location (\\d+) is \"(.*?)\"$")
+    @Then("^location (\\d+) is \"(.*?)\"$")
     public void location_is(int position, String expectedName) throws Throwable {
-        Location location = board.getLocation(position);
-        assertThat(location.getName()).isEqualTo(expectedName);
-    }
-
-    @Then("^Location (\\d+) has a cost of (\\d+)$")
-    public void location_has_a_cost_of(int position, int expectedCost) throws Throwable {
-        Location location = board.getLocation(position);
-        assertThat(location.getCost()).isEqualTo(expectedCost);
+        String locationName = board.getLocationName(position);
+        assertThat(locationName).isEqualTo(expectedName);
     }
 
 

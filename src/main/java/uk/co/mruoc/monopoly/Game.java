@@ -15,12 +15,10 @@ public class Game {
     private int nextPlayerIndex;
     private Round currentRound = new Round();
     private Random random = new Random();
-    private Rules rules;
 
     public Game(int numberOfPlayers) {
         players.validate(numberOfPlayers);
         players.generate(numberOfPlayers);
-        rules = new Rules(this, board);
     }
 
     public void play() {
@@ -42,7 +40,7 @@ public class Game {
         board.movePlayer(roll, player);
         currentRound.takeTurn(player);
         player.addRound(currentRound);
-        rules.apply(player);
+        board.applyRules(player);
         if (players.onlyRemainingPlayer(player))
             return;
         setNextPlayer();
@@ -75,8 +73,8 @@ public class Game {
         return players.getWinner();
     }
 
-    public Location getLocation(Player player) {
-        return board.getLocation(player);
+    public int getLocationCost(Player player) {
+        return board.getLocationCost(player);
     }
 
     private int generateRoll() {

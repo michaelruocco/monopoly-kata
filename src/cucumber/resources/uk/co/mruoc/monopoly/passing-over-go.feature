@@ -1,3 +1,4 @@
+@wip
 Feature: Passing Over Go
 
   # As a player

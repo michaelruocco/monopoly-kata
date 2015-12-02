@@ -18,6 +18,7 @@ repositories {
 
 cucumber {
     formats = ['pretty']
+    tags = ['~@wip']
 }
 
 dependencies {

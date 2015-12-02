@@ -64,12 +64,35 @@ public class Board {
         logInfo(createMoveDebugMessage(player, roll));
     }
 
-    public Location getLocation(int position) {
-        return locations.get(position - 1);
+    public String getLocationName(int index) {
+        Location location = getLocation(index);
+        return location.getName();
     }
 
-    public Location getLocation(Player player) {
-        return getLocation(player.getPosition());
+    public String getLocationName(Player player) {
+        return getLocationName(player.getPosition());
+    }
+
+    public int getLocationCost(Player player) {
+        Location location = getLocation(player);
+        return location.getCost();
+    }
+
+    public void applyRules(Player player) {
+        Location location = getLocation(player);
+        if (location.isGoToJail()) {
+            player.setPosition(getJailPosition());
+            return;
+        }
+
+        if (player.hasPassedGo())
+            player.receiveSalary();
+        if (location.isIncomeTax())
+            player.payIncomeTax();
+        if (location.isSuperTax())
+            player.paySuperTax();
+        if (player.canPurchase(location))
+            player.purchase(location);
     }
 
     public int getJailPosition() {
@@ -77,7 +100,7 @@ public class Board {
     }
 
     private boolean passedGo(Player player) {
-        return player.getPosition() > BOARD_SIZE;
+        return player.getPosition() >= BOARD_SIZE;
     }
 
     private int getPassedGoPosition(Player player) {
@@ -93,6 +116,14 @@ public class Board {
         message.append(" space to location ");
         message.append(location.getName());
         return message.toString();
+    }
+
+    private Location getLocation(Player player) {
+        return getLocation(player.getPosition());
+    }
+
+    private Location getLocation(int index) {
+        return locations.get(index);
     }
 
     private void logInfo(String message) {

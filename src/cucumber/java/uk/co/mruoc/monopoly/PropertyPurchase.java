@@ -57,8 +57,8 @@ public class PropertyPurchase {
 
     @Then("^The player balance has decreased by the cost of the property$")
     public void the_player_balance_has_decreased_by_the_cost_of_the_property() throws Throwable {
-        Location location = game.getLocation(player);
-        assertThat(player.getBalance()).isEqualTo(balance - location.getCost());
+        int locationCost = game.getLocationCost(player);
+        assertThat(player.getBalance()).isEqualTo(balance - locationCost);
     }
 
     @Then("^The the players balance remains unchanged$")

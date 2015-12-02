@@ -1,3 +1,4 @@
+@wip
 Feature: Property Purchase
 
   # As a player

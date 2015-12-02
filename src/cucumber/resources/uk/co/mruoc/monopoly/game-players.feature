@@ -1,9 +1,5 @@
 Feature: Game Players
 
-  # As a game
-  # I can have between 2 and 8 players with an initial random ordering
-  # So that the person that goes first is decided fairly
-
   Scenario: Create game with two players
     When A game is set up with 2 players
     Then The game has 2 players
