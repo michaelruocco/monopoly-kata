@@ -14,14 +14,18 @@ public class PlayerMovement {
 
     @Given("^A player starts a turn on \"(.*?)\" with a balance of (\\d+)$")
     public void a_player_starts_a_turn_on_with_a_balance_of(String locationName, double balance) throws Throwable {
-        int locationPosition = board.getLocationPosition(locationName);
-        player.setPosition(locationPosition);
+        setPlayerLocation(locationName);
         player.setBalance(balance);
     }
 
     @Given("^has an initial balance of (\\d+)$")
     public void has_an_initial_balance_of(double balance) throws Throwable {
         player.setBalance(balance);
+    }
+
+    @Given("^A player starts a turn on \"(.*?)\"$")
+    public void a_player_starts_a_turn_on(String locationName) throws Throwable {
+        setPlayerLocation(locationName);
     }
 
     @When("^The player rolls a (\\d+)$")
@@ -43,6 +47,11 @@ public class PlayerMovement {
     @Then("^The player has a balance of (\\d+)$")
     public void the_player_has_a_balance_of(double expectedBalance) throws Throwable {
         assertThat(player.getBalance()).isEqualTo(expectedBalance);
+    }
+
+    private void setPlayerLocation(String locationName) {
+        int locationPosition = board.getLocationPosition(locationName);
+        player.setPosition(locationPosition);
     }
 
 }
