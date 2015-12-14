@@ -16,16 +16,9 @@ public class Players {
     private final PlayersValidator validator = new PlayersValidator(Players.MAX_PLAYERS);
     private final List<Player> players = new ArrayList();
 
-    public void validate(int numberOfPlayers) {
-        validator.validate(numberOfPlayers);
-    }
-
-    public void generate(int numberOfPlayers) {
-        for(int p = 0; p < numberOfPlayers; p++)
-            players.add(new Player(NAMES[p]));
-        Collections.shuffle(players);
-        for (Player player : players)
-            logInfo("generated player " + player.getName());
+    public Players(int numberOfPlayers) {
+        validate(numberOfPlayers);
+        generate(numberOfPlayers);
     }
 
     public Player getPlayer(int index) {
@@ -63,19 +56,31 @@ public class Players {
         return getPlayerWithHighestBalance(remainingPlayers);
     }
 
-    private boolean allHaveLost(List<Player> otherPlayers) {
-        for (Player player : otherPlayers)
-            if (!player.hasLost())
-                return false;
-        return true;
-    }
-
-    private List<Player> getRemainingPlayers() {
+    public List<Player> getRemainingPlayers() {
         List<Player> remainingPlayers = new ArrayList<>();
         for (Player player : players)
             if (!player.hasLost())
                 remainingPlayers.add(player);
         return remainingPlayers;
+    }
+
+    private void validate(int numberOfPlayers) {
+        validator.validate(numberOfPlayers);
+    }
+
+    private void generate(int numberOfPlayers) {
+        for(int p = 0; p < numberOfPlayers; p++)
+            players.add(new Player(NAMES[p]));
+        Collections.shuffle(players);
+        for (Player player : players)
+            logInfo("generated player " + player.getName());
+    }
+
+    private boolean allHaveLost(List<Player> otherPlayers) {
+        for (Player player : otherPlayers)
+            if (!player.hasLost())
+                return false;
+        return true;
     }
 
     private Player getPlayerWithHighestBalance(List<Player> remainingPlayers) {

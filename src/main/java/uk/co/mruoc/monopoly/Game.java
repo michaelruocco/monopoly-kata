@@ -9,16 +9,21 @@ public class Game {
     private static final int TOTAL_ROUNDS = 20;
 
     private final List<Round> rounds = new ArrayList(TOTAL_ROUNDS);
-    private final Board board = new Board();
-    private final Players players = new Players();
+
+    private final Board board;
+    private final Players players;
 
     private int nextPlayerIndex;
     private Round currentRound = new Round();
     private Random random = new Random();
 
     public Game(int numberOfPlayers) {
-        players.validate(numberOfPlayers);
-        players.generate(numberOfPlayers);
+        this(new Board(), new Players(numberOfPlayers));
+    }
+
+    public Game(Board board, Players players) {
+        this.board = board;
+        this.players = players;
     }
 
     public void play() {
