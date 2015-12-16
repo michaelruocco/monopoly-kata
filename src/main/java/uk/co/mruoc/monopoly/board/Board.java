@@ -59,7 +59,7 @@ public class Board {
         locations.add(new DefaultLocation("Old Kent Road", 60));
         locations.add(new DefaultLocation("Community Chest 1"));
         locations.add(new DefaultLocation("Whitechapel Road", 60));
-        locations.add(new DefaultLocation("Income Tax"));
+        locations.add(new IncomeTax());
         locations.add(new DefaultLocation("Kings Cross Station", 200));
         locations.add(new DefaultLocation("The Angel Islington", 100));
         locations.add(new DefaultLocation("Chance 1"));
