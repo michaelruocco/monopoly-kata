@@ -11,7 +11,7 @@ public class BoardTest {
 
     @Test
     public void shouldMovePlayerPosition() {
-        board.movePlayer(8, player);
+        player.move(8);
 
         assertThat(player.getPosition()).isEqualTo(8);
     }
@@ -20,7 +20,7 @@ public class BoardTest {
     public void playerLocationShouldRevertBackToZeroAfterLocationForty() {
         player.setPosition(39);
 
-        board.movePlayer(6, player);
+        player.move(6);
 
         assertThat(player.getPosition()).isEqualTo(5);
     }

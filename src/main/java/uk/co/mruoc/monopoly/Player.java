@@ -1,9 +1,13 @@
 package uk.co.mruoc.monopoly;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+
+    private Logger LOG = Logger.getLogger(Player.class);
 
     private static final IncomeTaxCalculator INCOME_TAX_CALCULATOR = new IncomeTaxCalculator();
     private static final SalaryCalculator SALARY_CALCULATOR = new SalaryCalculator();
@@ -27,12 +31,17 @@ public class Player {
         this.board = board;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     public void move(int roll) {
         this.position += roll;
+        while (board.passedGo(this)) {
+            setPosition(board.getPassedGoPosition(this));
+            incrementTimesPassedGo();
+        }
+        logInfo(createMoveDebugMessage(roll));
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public int getPosition() {
@@ -51,7 +60,7 @@ public class Player {
         rounds.add(round);
     }
 
-    public void incrementTimesPassedGo() {
+    private void incrementTimesPassedGo() {
         timesPassedGo++;
     }
 
@@ -160,5 +169,21 @@ public class Player {
     private void resetTimesPassedGo() {
         timesPassedGo = 0;
     }
+
+    private String createMoveDebugMessage(int roll) {
+        Location location = board.getLocation(this);
+        StringBuilder message = new StringBuilder("moved player ");
+        message.append(getName());
+        message.append(" ");
+        message.append(roll);
+        message.append(" space to location ");
+        message.append(location.getName());
+        return message.toString();
+    }
+
+    private void logInfo(String message) {
+        LOG.info(message);
+    }
+
 
 }

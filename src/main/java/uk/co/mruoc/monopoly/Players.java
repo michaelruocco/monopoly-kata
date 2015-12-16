@@ -14,7 +14,7 @@ public class Players {
     private static final int MAX_PLAYERS = NAMES.length;
 
     private final PlayersValidator validator = new PlayersValidator(Players.MAX_PLAYERS);
-    private final List<Player> players = new ArrayList();
+    private final List<Player> players = new ArrayList<>();
     private final Board board;
 
     public Players(int numberOfPlayers, Board board) {

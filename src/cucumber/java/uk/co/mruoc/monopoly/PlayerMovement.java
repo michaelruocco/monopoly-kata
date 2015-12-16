@@ -10,7 +10,7 @@ public class PlayerMovement {
 
     private final Board board = new Board();
     private final Players players = new Players(2, board);
-    private final Game game = new Game(board, players);
+    private final Game game = new Game(players);
     private final Player player = players.getPlayer(0);
 
     @Given("^A player starts a turn on \"(.*?)\" with a balance of (\\d+)$")

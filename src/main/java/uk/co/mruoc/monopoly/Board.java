@@ -7,8 +7,6 @@ import java.util.List;
 
 public class Board {
 
-    private Logger LOG = Logger.getLogger(Board.class);
-
     private static final int BOARD_SIZE = 40;
     private final List<Location> locations = new ArrayList<>();
 
@@ -55,15 +53,6 @@ public class Board {
         locations.add(new Location("Mayfair", 400));
     }
 
-    public void movePlayer(int roll, Player player) {
-        player.move(roll);
-        while (passedGo(player)) {
-            player.setPosition(getPassedGoPosition(player));
-            player.incrementTimesPassedGo();
-        }
-        logInfo(createMoveDebugMessage(player, roll));
-    }
-
     public String getLocationName(int index) {
         Location location = getLocation(index);
         return location.getName();
@@ -91,23 +80,12 @@ public class Board {
         return 10;
     }
 
-    private boolean passedGo(Player player) {
+    public boolean passedGo(Player player) {
         return player.getPosition() >= BOARD_SIZE;
     }
 
-    private int getPassedGoPosition(Player player) {
+    public int getPassedGoPosition(Player player) {
         return player.getPosition() - BOARD_SIZE;
-    }
-
-    private String createMoveDebugMessage(Player player, int roll) {
-        Location location = getLocation(player);
-        StringBuilder message = new StringBuilder("moved player ");
-        message.append(player.getName());
-        message.append(" ");
-        message.append(roll);
-        message.append(" space to location ");
-        message.append(location.getName());
-        return message.toString();
     }
 
     public Location getLocation(Player player) {
@@ -116,10 +94,6 @@ public class Board {
 
     private Location getLocation(int index) {
         return locations.get(index);
-    }
-
-    private void logInfo(String message) {
-        LOG.info(message);
     }
 
 }

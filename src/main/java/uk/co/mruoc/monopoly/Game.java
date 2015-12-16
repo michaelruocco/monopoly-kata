@@ -8,9 +8,8 @@ public class Game {
 
     private static final int TOTAL_ROUNDS = 20;
 
-    private final List<Round> rounds = new ArrayList(TOTAL_ROUNDS);
+    private final List<Round> rounds = new ArrayList<>(TOTAL_ROUNDS);
 
-    private final Board board;
     private final Players players;
 
     private int nextPlayerIndex;
@@ -18,11 +17,10 @@ public class Game {
     private Random random = new Random();
 
     public Game(int numberOfPlayers, Board board) {
-        this(board, new Players(numberOfPlayers, board));
+        this(new Players(numberOfPlayers, board));
     }
 
-    public Game(Board board, Players players) {
-        this.board = board;
+    public Game(Players players) {
         this.players = players;
     }
 
@@ -42,7 +40,7 @@ public class Game {
     }
 
     public void move(Player player, int roll) {
-        board.movePlayer(roll, player);
+        player.move(roll);
         currentRound.takeTurn(player);
         player.addRound(currentRound);
         player.endTurn();

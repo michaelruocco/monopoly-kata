@@ -18,7 +18,7 @@ public class PlayerWin {
     @Given("^The game is set up with (\\d+) players$")
     public void the_game_is_set_up_with_players(int numberOfPlayers) throws Throwable {
         players = new Players(numberOfPlayers, board);
-        game = new Game(board, players);
+        game = new Game(players);
     }
 
     @When("^Player (\\d+) lands on \"(.*?)\"$")
