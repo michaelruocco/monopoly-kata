@@ -7,3 +7,11 @@ http://schuchert.wikispaces.com/Katas.MonopolyTheGame(r)
 I have chosen to use cucumber as my BDD tool to translate the stated acceptance criteria into an executable
 specification to help verify the correctness of the system. The implementation has been developed using TDD and I have
 tried to keep the code as clean and simple as possible. Feedback and comments are very welcome!
+
+## Running the Tests
+
+You can run the unit and cucumber tests for this project by running the following command:
+
+```
+gradlew clean build cucumber
+```
