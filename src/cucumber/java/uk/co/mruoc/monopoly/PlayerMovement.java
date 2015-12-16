@@ -8,9 +8,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerMovement {
 
-    private Game game = new Game(2);
-    private Board board = new Board();
-    private Player player = game.getPlayer(0);
+    private final Board board = new Board();
+    private final Players players = new Players(2);
+    private final Game game = new Game(board, players);
+    private final Player player = players.getPlayer(0);
 
     @Given("^A player starts a turn on \"(.*?)\" with a balance of (\\d+)$")
     public void a_player_starts_a_turn_on_with_a_balance_of(String locationName, double balance) throws Throwable {
@@ -26,6 +27,12 @@ public class PlayerMovement {
     @Given("^A player starts a turn on \"(.*?)\"$")
     public void a_player_starts_a_turn_on(String locationName) throws Throwable {
         setPlayerLocation(locationName);
+    }
+
+    @Given("^A player owns \"(.*?)\"$")
+    public void a_player_owns(String locationName) throws Throwable {
+        Location location = board.getLocation(locationName);
+        player.purchase(location);
     }
 
     @When("^The player rolls a (\\d+)$")
@@ -47,6 +54,11 @@ public class PlayerMovement {
     @Then("^The player has a balance of (\\d+)$")
     public void the_player_has_a_balance_of(double expectedBalance) throws Throwable {
         assertThat(player.getBalance()).isEqualTo(expectedBalance);
+    }
+
+    @Then("^The player owns \"(.*?)\"$")
+    public void the_player_owns(String expectedPropertyName) throws Throwable {
+        assertThat(player.ownsProperty(expectedPropertyName)).isTrue();
     }
 
     private void setPlayerLocation(String locationName) {

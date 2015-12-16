@@ -78,10 +78,6 @@ public class Game {
         return players.getWinner();
     }
 
-    public int getLocationCost(Player player) {
-        return board.getLocationCost(player);
-    }
-
     private int generateRoll() {
         return random.nextInt(12 - 1 + 1) + 1;
     }

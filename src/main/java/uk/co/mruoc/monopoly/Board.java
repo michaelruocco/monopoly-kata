@@ -78,6 +78,20 @@ public class Board {
         return location.getCost();
     }
 
+    public int getLocationPosition(String locationName) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            Location location = getLocation(i);
+            if (location.getName().equalsIgnoreCase(locationName))
+                return i;
+        }
+        throw new GameException("no location found with name " + locationName);
+    }
+
+    public Location getLocation(String locationName) {
+        int position = getLocationPosition(locationName);
+        return getLocation(position);
+    }
+
     public void applyRules(Player player) {
         Location location = getLocation(player);
         if (location.isGoToJail()) {
@@ -130,12 +144,4 @@ public class Board {
         LOG.info(message);
     }
 
-    public int getLocationPosition(String locationName) {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            Location location = getLocation(i);
-            if (location.getName().equalsIgnoreCase(locationName))
-                return i;
-        }
-        throw new GameException("no location found with name " + locationName);
-    }
 }

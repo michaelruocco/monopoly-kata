@@ -50,17 +50,6 @@ public class PropertyPurchase {
         game.nextTurn(3);
     }
 
-    @Then("^The player owns \"(.*?)\"$")
-    public void the_player_owns(String expectedPropertyName) throws Throwable {
-        assertThat(player.ownsProperty(expectedPropertyName)).isTrue();
-    }
-
-    @Then("^The player balance has decreased by the cost of the property$")
-    public void the_player_balance_has_decreased_by_the_cost_of_the_property() throws Throwable {
-        int locationCost = game.getLocationCost(player);
-        assertThat(player.getBalance()).isEqualTo(balance - locationCost);
-    }
-
     @Then("^The the players balance remains unchanged$")
     public void the_the_players_balance_remains_unchanged() throws Throwable {
         assertThat(player.getBalance()).isEqualTo(balance);
