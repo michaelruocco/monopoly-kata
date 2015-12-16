@@ -12,7 +12,7 @@ public class GameRounds {
 
     @Given("^A game is played$")
     public void a_game_is_played() throws Throwable {
-        game = new Game(2);
+        game = new Game(2, new Board());
     }
 
     @When("^The game is complete$")

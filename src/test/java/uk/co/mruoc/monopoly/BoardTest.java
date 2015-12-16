@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BoardTest {
 
     private Board board = new Board();
-    private Player player = new Player("NAME");
+    private Player player = new Player("NAME", board);
 
     @Test
     public void shouldMovePlayerPosition() {

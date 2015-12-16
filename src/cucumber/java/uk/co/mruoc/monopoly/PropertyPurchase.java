@@ -10,7 +10,7 @@ public class PropertyPurchase {
 
     private static final int PASS_GO_SALARY = 200;
 
-    private Game game = new Game(2);
+    private Game game = new Game(2, new Board());
     private Player player = game.getPlayer(0);
 
     private double balance;

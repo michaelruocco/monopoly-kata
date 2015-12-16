@@ -15,8 +15,10 @@ public class Players {
 
     private final PlayersValidator validator = new PlayersValidator(Players.MAX_PLAYERS);
     private final List<Player> players = new ArrayList();
+    private final Board board;
 
-    public Players(int numberOfPlayers) {
+    public Players(int numberOfPlayers, Board board) {
+        this.board = board;
         validate(numberOfPlayers);
         generate(numberOfPlayers);
     }
@@ -70,7 +72,7 @@ public class Players {
 
     private void generate(int numberOfPlayers) {
         for(int p = 0; p < numberOfPlayers; p++)
-            players.add(new Player(NAMES[p]));
+            players.add(new Player(NAMES[p], board));
         Collections.shuffle(players);
         for (Player player : players)
             logInfo("generated player " + player.getName());

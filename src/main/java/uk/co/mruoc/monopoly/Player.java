@@ -11,6 +11,7 @@ public class Player {
 
     private final List<Round> rounds = new ArrayList<>();
     private final List<Location> properties = new ArrayList<>();
+    private final Board board;
 
     private final String name;
     private int position;
@@ -18,7 +19,12 @@ public class Player {
     private int timesPassedGo;
 
     public Player(String name) {
+        this(name, new Board());
+    }
+
+    public Player(String name, Board board) {
         this.name = name;
+        this.board = board;
     }
 
     public void setPosition(int position) {
@@ -55,17 +61,17 @@ public class Player {
         this.balance = balance;
     }
 
-    public void payIncomeTax() {
+    private void payIncomeTax() {
         double charge = calculateIncomeTaxCharge();
         decrementBalance(charge);
     }
 
-    public void paySuperTax() {
+    private void paySuperTax() {
         double charge = calculateSuperTaxCharge();
         decrementBalance(charge);
     }
 
-    public void receiveSalary() {
+    private void receiveSalary() {
         double payment = calculateSalaryPayment();
         incrementBalance(payment * timesPassedGo);
         resetTimesPassedGo();
@@ -83,7 +89,7 @@ public class Player {
         return name;
     }
 
-    public boolean canPurchase(Location location) {
+    private boolean canPurchase(Location location) {
         if (location.hasOwner())
             return false;
         return canAfford(location);
@@ -102,8 +108,25 @@ public class Player {
         return false;
     }
 
-    public boolean hasPassedGo() {
+    private boolean hasPassedGo() {
         return timesPassedGo > 0;
+    }
+
+    public void endTurn() {
+        Location location = board.getLocation(this);
+        if (location.isGoToJail()) {
+            setPosition(board.getJailPosition());
+            return;
+        }
+
+        if (hasPassedGo())
+            receiveSalary();
+        if (location.isIncomeTax())
+            payIncomeTax();
+        if (location.isSuperTax())
+            paySuperTax();
+        if (canPurchase(location))
+            purchase(location);
     }
 
     private boolean hasNegativeBalance() {

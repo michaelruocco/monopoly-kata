@@ -61,7 +61,7 @@ public class GamePlayers {
 
     private void createGame(int numberOfPlayers) {
         try {
-            game = new Game(numberOfPlayers);
+            game = new Game(numberOfPlayers, new Board());
         } catch (GameException e) {
             errorMessage = e.getMessage();
         }

@@ -17,8 +17,8 @@ public class Game {
     private Round currentRound = new Round();
     private Random random = new Random();
 
-    public Game(int numberOfPlayers) {
-        this(new Board(), new Players(numberOfPlayers));
+    public Game(int numberOfPlayers, Board board) {
+        this(board, new Players(numberOfPlayers, board));
     }
 
     public Game(Board board, Players players) {
@@ -45,7 +45,7 @@ public class Game {
         board.movePlayer(roll, player);
         currentRound.takeTurn(player);
         player.addRound(currentRound);
-        board.applyRules(player);
+        player.endTurn();
         if (players.onlyRemainingPlayer(player))
             return;
         setNextPlayer();

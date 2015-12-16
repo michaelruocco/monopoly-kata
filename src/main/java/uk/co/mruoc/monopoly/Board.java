@@ -73,11 +73,6 @@ public class Board {
         return getLocationName(player.getPosition());
     }
 
-    public int getLocationCost(Player player) {
-        Location location = getLocation(player);
-        return location.getCost();
-    }
-
     public int getLocationPosition(String locationName) {
         for (int i = 0; i < BOARD_SIZE; i++) {
             Location location = getLocation(i);
@@ -92,24 +87,7 @@ public class Board {
         return getLocation(position);
     }
 
-    public void applyRules(Player player) {
-        Location location = getLocation(player);
-        if (location.isGoToJail()) {
-            player.setPosition(getJailPosition());
-            return;
-        }
-
-        if (player.hasPassedGo())
-            player.receiveSalary();
-        if (location.isIncomeTax())
-            player.payIncomeTax();
-        if (location.isSuperTax())
-            player.paySuperTax();
-        if (player.canPurchase(location))
-            player.purchase(location);
-    }
-
-    private int getJailPosition() {
+    public int getJailPosition() {
         return 10;
     }
 
@@ -132,7 +110,7 @@ public class Board {
         return message.toString();
     }
 
-    private Location getLocation(Player player) {
+    public Location getLocation(Player player) {
         return getLocation(player.getPosition());
     }
 
