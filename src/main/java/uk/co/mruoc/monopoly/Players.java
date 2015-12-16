@@ -12,9 +12,8 @@ public class Players {
     private static Logger LOG = Logger.getLogger(Players.class);
 
     private static final String[] NAMES = { "Horse" , "Car", "Boat", "Dog", "Thimble", "Boot", "Hat", "Wheelbarrow" };
-    private static final int MAX_PLAYERS = NAMES.length;
 
-    private final PlayersValidator validator = new PlayersValidator(Players.MAX_PLAYERS);
+    private final PlayersValidator validator = new PlayersValidator();
     private final List<Player> players = new ArrayList<>();
     private final Board board;
 
