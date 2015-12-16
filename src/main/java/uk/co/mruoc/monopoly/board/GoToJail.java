@@ -16,9 +16,4 @@ public class GoToJail extends Location {
         player.setPosition(board.getJailPosition());
     }
 
-    @Override
-    public boolean isGoToJail() {
-        return true;
-    }
-
 }

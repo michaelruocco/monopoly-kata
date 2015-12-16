@@ -16,11 +16,6 @@ public class SuperTax extends Location {
         paySuperTax(player);
     }
 
-    @Override
-    public boolean isGoToJail() {
-        return false;
-    }
-
     private void paySuperTax(Player player) {
         double charge = SUPER_TAX_CALCULATOR.calculateCharge();
         player.decrementBalance(charge);

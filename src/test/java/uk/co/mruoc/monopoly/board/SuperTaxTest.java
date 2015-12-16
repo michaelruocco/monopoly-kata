@@ -16,11 +16,6 @@ public class SuperTaxTest {
     }
 
     @Test
-    public void shouldReturnIsGoToJailFalse() {
-        assertThat(location.isGoToJail()).isFalse();
-    }
-
-    @Test
     public void shouldChargeSuperTax() {
         player.setBalance(100);
 

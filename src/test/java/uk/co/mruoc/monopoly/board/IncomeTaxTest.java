@@ -16,11 +16,6 @@ public class IncomeTaxTest {
     }
 
     @Test
-    public void shouldReturnIsGoToJailFalse() {
-        assertThat(location.isGoToJail()).isFalse();
-    }
-
-    @Test
     public void shouldChargeIncomeTax() {
         player.setBalance(2000);
 

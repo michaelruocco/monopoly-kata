@@ -34,6 +34,4 @@ public abstract class Location {
 
     public abstract void applyTo(Player player);
 
-    public abstract boolean isGoToJail();
-
 }

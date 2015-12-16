@@ -2,6 +2,7 @@ package uk.co.mruoc.monopoly;
 
 import org.apache.log4j.Logger;
 import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.GoToJail;
 import uk.co.mruoc.monopoly.board.Location;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.List;
 public class Player {
 
     private Logger LOG = Logger.getLogger(Player.class);
-
 
     private static final SalaryCalculator SALARY_CALCULATOR = new SalaryCalculator();
 
@@ -110,7 +110,7 @@ public class Player {
 
     public void endTurn() {
         Location location = board.getLocation(this);
-        if (location.isGoToJail()) {
+        if (isGoToJail(location)) {
             location.applyTo(this);
             return;
         }
@@ -121,13 +121,13 @@ public class Player {
         location.applyTo(this);
     }
 
+    private boolean isGoToJail(Location location) {
+        return (location instanceof GoToJail);
+    }
+
     private boolean hasNegativeBalance() {
         return balance < 0;
     }
-
-    //public boolean canAfford(Location location) {
-    //    return balance > location.getCost();
-    //}
 
     private void incrementBalance(double valueToAdd) {
         balance += valueToAdd;
@@ -167,6 +167,5 @@ public class Player {
     private void logInfo(String message) {
         LOG.info(message);
     }
-
 
 }

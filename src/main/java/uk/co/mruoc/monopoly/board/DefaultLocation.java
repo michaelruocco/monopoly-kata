@@ -34,9 +34,4 @@ public class DefaultLocation extends Location {
         return player.getBalance() >= cost;
     }
 
-    @Override
-    public boolean isGoToJail() {
-        return false;
-    }
-
 }

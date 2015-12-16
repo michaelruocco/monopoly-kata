@@ -30,26 +30,17 @@ public class DefaultLocationTest {
 
     @Test
     public void shouldNotHaveOwnerByDefault() {
-        Location location = new DefaultLocation(NAME);
         assertThat(location.hasOwner()).isFalse();
         assertThat(location.getOwner()).isNull();
     }
 
     @Test
     public void shouldSetOwner() {
-        Location location = new DefaultLocation(NAME);
-
         location.setOwner(player);
 
         assertThat(location.hasOwner()).isTrue();
         assertThat(location.getOwner()).isEqualTo(player);
         assertThat(player.ownsProperty(location)).isTrue();
-    }
-
-    @Test
-    public void shouldReturnIsGoToJailFalse() {
-        Location location = new DefaultLocation(NAME);
-        assertThat(location.isGoToJail()).isFalse();
     }
 
     @Test

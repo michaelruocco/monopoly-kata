@@ -17,11 +17,6 @@ public class GoToJailTest {
     }
 
     @Test
-    public void shouldReturnIsGoToJailTrue() {
-        assertThat(location.isGoToJail()).isTrue();
-    }
-
-    @Test
     public void shouldMovePlayerToJail() {
         location.applyTo(player);
         assertThat(player.getPosition()).isEqualTo(board.getJailPosition());

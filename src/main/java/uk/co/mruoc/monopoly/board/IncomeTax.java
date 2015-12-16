@@ -16,11 +16,6 @@ public class IncomeTax extends Location {
         payIncomeTax(player);
     }
 
-    @Override
-    public boolean isGoToJail() {
-        return false;
-    }
-
     private void payIncomeTax(Player player) {
         double charge = INCOME_TAX_CALCULATOR.calculateCharge(player);
         player.decrementBalance(charge);
