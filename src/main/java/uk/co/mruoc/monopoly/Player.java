@@ -157,15 +157,15 @@ public class Player {
     }
 
     private double calculateSalaryPayment() {
-        return SALARY_CALCULATOR.calculate();
+        return SALARY_CALCULATOR.calculateSalary();
     }
 
     private double calculateIncomeTaxCharge() {
-        return INCOME_TAX_CALCULATOR.calculate(this);
+        return INCOME_TAX_CALCULATOR.calculateCharge(this);
     }
 
     private double calculateSuperTaxCharge() {
-        return SUPER_TAX_CALCULATOR.calculate();
+        return SUPER_TAX_CALCULATOR.calculateCharge();
     }
 
     private void resetTimesPassedGo() {

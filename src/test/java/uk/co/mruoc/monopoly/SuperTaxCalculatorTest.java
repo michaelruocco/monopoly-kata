@@ -12,7 +12,7 @@ public class SuperTaxCalculatorTest {
 
     @Test
     public void shouldCalculateSuperTaxCharge() {
-        assertThat(calculator.calculate()).isEqualTo(SUPER_TAX_CHARGE);
+        assertThat(calculator.calculateCharge()).isEqualTo(SUPER_TAX_CHARGE);
     }
 
 }

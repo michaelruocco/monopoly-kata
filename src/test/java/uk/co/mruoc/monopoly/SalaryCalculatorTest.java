@@ -12,7 +12,7 @@ public class SalaryCalculatorTest {
 
     @Test
     public void shouldCalculateSalary() {
-        assertThat(calculator.calculate()).isEqualTo(SALARY);
+        assertThat(calculator.calculateSalary()).isEqualTo(SALARY);
     }
 
 }
