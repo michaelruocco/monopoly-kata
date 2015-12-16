@@ -1,9 +1,11 @@
 package uk.co.mruoc.monopoly.board;
 
 import org.junit.Test;
+import uk.co.mruoc.monopoly.GameException;
 import uk.co.mruoc.monopoly.Player;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 public class BoardTest {
 
@@ -38,6 +40,16 @@ public class BoardTest {
     @Test
     public void shouldReturnLocationPositionForLocationName() {
         assertThat(board.getLocationPosition("Go")).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldThrowGameExceptionIfLocationPositionNotFound() {
+        try {
+            board.getLocationPosition("Invalid Location");
+            fail();
+        } catch (GameException e) {
+            assertThat(e.getMessage()).isEqualTo("no location found with name Invalid Location");
+        }
     }
 
     @Test
