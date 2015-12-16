@@ -15,17 +15,17 @@ public class DefaultLocation extends Location {
 
     @Override
     public boolean isGoToJail() {
-        return nameEquals("Go To Jail");
+        return false;
     }
 
     @Override
     public boolean isIncomeTax() {
-        return nameEquals("Income Tax");
+        return false;
     }
 
     @Override
     public boolean isSuperTax() {
-        return nameEquals("Super Tax");
+        return false;
     }
 
     @Override

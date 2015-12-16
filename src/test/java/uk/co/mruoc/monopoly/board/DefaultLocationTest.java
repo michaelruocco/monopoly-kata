@@ -59,15 +59,21 @@ public class DefaultLocationTest {
     }
 
     @Test
-    public void shouldReturnIsSuperTaxFalseIfNotSuperTax() {
+    public void shouldReturnIsSuperTaxFalse() {
         Location location = new DefaultLocation(NAME);
         assertThat(location.isSuperTax()).isFalse();
     }
 
     @Test
-    public void shouldReturnIsSuperTaxTrueIfNotSuperTax() {
+    public void shouldReturnIsIncomeTaxFalse() {
         Location location = new DefaultLocation(NAME);
-        assertThat(location.isSuperTax()).isFalse();
+        assertThat(location.isIncomeTax()).isFalse();
+    }
+
+    @Test
+    public void shouldReturnIsGoToJailFalse() {
+        Location location = new DefaultLocation(NAME);
+        assertThat(location.isGoToJail()).isFalse();
     }
 
 }
