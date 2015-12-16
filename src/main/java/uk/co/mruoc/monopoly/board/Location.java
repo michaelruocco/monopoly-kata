@@ -25,18 +25,15 @@ public abstract class Location {
 
     public void setOwner(Player owner) {
         this.owner = owner;
+        owner.addProperty(this);
     }
 
     public boolean hasOwner() {
         return getOwner() != null;
     }
 
+    public abstract void applyTo(Player player);
+
     public abstract boolean isGoToJail();
-
-    public abstract boolean isIncomeTax();
-
-    public abstract boolean isSuperTax();
-
-    public abstract int getCost();
 
 }

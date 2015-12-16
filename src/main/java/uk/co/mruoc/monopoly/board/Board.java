@@ -85,7 +85,7 @@ public class Board {
         locations.add(new DefaultLocation("Coventry Street", 260));
         locations.add(new DefaultLocation("Water Works", 150));
         locations.add(new DefaultLocation("Piccadilly", 280));
-        locations.add(new GoToJail());
+        locations.add(new GoToJail(this));
         locations.add(new DefaultLocation("Regent Street", 300));
         locations.add(new DefaultLocation("Oxford Street", 300));
         locations.add(new DefaultLocation("Community Chest"));

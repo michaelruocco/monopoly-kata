@@ -1,29 +1,24 @@
 package uk.co.mruoc.monopoly.board;
 
+import uk.co.mruoc.monopoly.Player;
+
 public class GoToJail extends Location {
 
-    public GoToJail() {
+    private final Board board;
+
+    public GoToJail(Board board) {
         super("Go To Jail");
+        this.board = board;
+    }
+
+    @Override
+    public void applyTo(Player player) {
+        player.setPosition(board.getJailPosition());
     }
 
     @Override
     public boolean isGoToJail() {
         return true;
-    }
-
-    @Override
-    public boolean isIncomeTax() {
-        return false;
-    }
-
-    @Override
-    public boolean isSuperTax() {
-        return false;
-    }
-
-    @Override
-    public int getCost() {
-        return 0;
     }
 
 }

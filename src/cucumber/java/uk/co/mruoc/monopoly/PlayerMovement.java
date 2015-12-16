@@ -3,6 +3,7 @@ package uk.co.mruoc.monopoly;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import uk.co.mruoc.monopoly.board.Location;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,8 +32,8 @@ public class PlayerMovement {
 
     @Given("^A player owns \"(.*?)\"$")
     public void a_player_owns(String locationName) throws Throwable {
-        uk.co.mruoc.monopoly.board.Location location = board.getLocation(locationName);
-        player.purchase(location);
+        Location location = board.getLocation(locationName);
+        location.setOwner(player);
     }
 
     @When("^The player rolls a (\\d+)$")

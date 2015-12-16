@@ -11,9 +11,8 @@ public class Player {
 
     private Logger LOG = Logger.getLogger(Player.class);
 
-    private static final IncomeTaxCalculator INCOME_TAX_CALCULATOR = new IncomeTaxCalculator();
+
     private static final SalaryCalculator SALARY_CALCULATOR = new SalaryCalculator();
-    private static final SuperTaxCalculator SUPER_TAX_CALCULATOR = new SuperTaxCalculator();
 
     private final List<Round> rounds = new ArrayList<>();
     private final List<Location> properties = new ArrayList<>();
@@ -72,16 +71,6 @@ public class Player {
         this.balance = balance;
     }
 
-    private void payIncomeTax() {
-        double charge = calculateIncomeTaxCharge();
-        decrementBalance(charge);
-    }
-
-    private void paySuperTax() {
-        double charge = calculateSuperTaxCharge();
-        decrementBalance(charge);
-    }
-
     private void receiveSalary() {
         double payment = calculateSalaryPayment();
         incrementBalance(payment * timesPassedGo);
@@ -100,21 +89,17 @@ public class Player {
         return name;
     }
 
-    private boolean canPurchase(Location location) {
-        if (location.hasOwner())
-            return false;
-        return canAfford(location);
-    }
-
-    public void purchase(Location location) {
-        decrementBalance(location.getCost());
+    public void addProperty(Location location) {
         properties.add(location);
-        location.setOwner(this);
     }
 
-    public boolean ownsProperty(String propertyName) {
+    public boolean ownsProperty(Location locationToCheck) {
+        return ownsProperty(locationToCheck.getName());
+    }
+
+    public boolean ownsProperty(String locationName) {
         for (Location location : properties)
-            if (location.getName().equalsIgnoreCase(propertyName))
+            if (location.getName().equalsIgnoreCase(locationName))
                 return true;
         return false;
     }
@@ -126,46 +111,34 @@ public class Player {
     public void endTurn() {
         Location location = board.getLocation(this);
         if (location.isGoToJail()) {
-            setPosition(board.getJailPosition());
+            location.applyTo(this);
             return;
         }
 
         if (hasPassedGo())
             receiveSalary();
-        if (location.isIncomeTax())
-            payIncomeTax();
-        if (location.isSuperTax())
-            paySuperTax();
-        if (canPurchase(location))
-            purchase(location);
+
+        location.applyTo(this);
     }
 
     private boolean hasNegativeBalance() {
         return balance < 0;
     }
 
-    private boolean canAfford(Location location) {
-        return balance > location.getCost();
-    }
+    //public boolean canAfford(Location location) {
+    //    return balance > location.getCost();
+    //}
 
     private void incrementBalance(double valueToAdd) {
         balance += valueToAdd;
     }
 
-    private void decrementBalance(double valueToSubtract) {
+    public void decrementBalance(double valueToSubtract) {
         balance -= valueToSubtract;
     }
 
     private double calculateSalaryPayment() {
         return SALARY_CALCULATOR.calculateSalary();
-    }
-
-    private double calculateIncomeTaxCharge() {
-        return INCOME_TAX_CALCULATOR.calculateCharge(this);
-    }
-
-    private double calculateSuperTaxCharge() {
-        return SUPER_TAX_CALCULATOR.calculateCharge();
     }
 
     private void resetTimesPassedGo() {

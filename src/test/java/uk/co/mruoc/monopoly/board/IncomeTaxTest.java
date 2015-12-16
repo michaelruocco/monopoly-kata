@@ -1,12 +1,14 @@
 package uk.co.mruoc.monopoly.board;
 
 import org.junit.Test;
+import uk.co.mruoc.monopoly.Player;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IncomeTaxTest {
 
     private final Location location = new IncomeTax();
+    private final Player player = new Player("NAME");
 
     @Test
     public void shouldReturnName() {
@@ -14,23 +16,17 @@ public class IncomeTaxTest {
     }
 
     @Test
-    public void shouldReturnCost() {
-        assertThat(location.getCost()).isEqualTo(0);
-    }
-
-    @Test
-    public void shouldReturnIsSuperTaxFalse() {
-        assertThat(location.isSuperTax()).isFalse();
-    }
-
-    @Test
-    public void shouldReturnIsIncomeTaxTrue() {
-        assertThat(location.isIncomeTax()).isTrue();
-    }
-
-    @Test
     public void shouldReturnIsGoToJailFalse() {
         assertThat(location.isGoToJail()).isFalse();
+    }
+
+    @Test
+    public void shouldChargeIncomeTax() {
+        player.setBalance(2000);
+
+        location.applyTo(player);
+
+        assertThat(player.getBalance()).isEqualTo(1800);
     }
 
 }

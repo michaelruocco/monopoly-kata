@@ -10,34 +10,22 @@ public class DefaultLocationTest {
     private static final String NAME = "NAME";
     private static final int COST = 20;
 
+    private final Location location = new DefaultLocation(NAME, COST);
+    private final Player player = new Player("PLAYER");
+
     @Test
     public void shouldReturnName() {
-        Location location = new DefaultLocation(NAME);
         assertThat(location.getName()).isEqualTo(NAME);
     }
 
     @Test
-    public void defaultCostShouldBeZero() {
-        Location location = new DefaultLocation(NAME);
-        assertThat(location.getCost()).isEqualTo(0);
-    }
-
-    @Test
     public void shouldReturnTrueIfEqualsName() {
-        Location location = new DefaultLocation(NAME);
         assertThat(location.nameEquals(NAME)).isTrue();
     }
 
     @Test
     public void shouldReturnFalseIfDoesNotEqualName() {
-        Location location = new DefaultLocation(NAME);
         assertThat(location.nameEquals("NOT_EQUAL")).isFalse();
-    }
-
-    @Test
-    public void shouldReturnCost() {
-        Location location = new DefaultLocation(NAME, COST);
-        assertThat(location.getCost()).isEqualTo(COST);
     }
 
     @Test
@@ -50,30 +38,57 @@ public class DefaultLocationTest {
     @Test
     public void shouldSetOwner() {
         Location location = new DefaultLocation(NAME);
-        Player player = new Player("");
 
         location.setOwner(player);
 
         assertThat(location.hasOwner()).isTrue();
         assertThat(location.getOwner()).isEqualTo(player);
-    }
-
-    @Test
-    public void shouldReturnIsSuperTaxFalse() {
-        Location location = new DefaultLocation(NAME);
-        assertThat(location.isSuperTax()).isFalse();
-    }
-
-    @Test
-    public void shouldReturnIsIncomeTaxFalse() {
-        Location location = new DefaultLocation(NAME);
-        assertThat(location.isIncomeTax()).isFalse();
+        assertThat(player.ownsProperty(location)).isTrue();
     }
 
     @Test
     public void shouldReturnIsGoToJailFalse() {
         Location location = new DefaultLocation(NAME);
         assertThat(location.isGoToJail()).isFalse();
+    }
+
+    @Test
+    public void shouldBePurchasedIfPlayerCanAfford() {
+        player.setBalance(30);
+
+        location.applyTo(player);
+
+        assertThat(location.hasOwner()).isTrue();
+        assertThat(location.getOwner()).isEqualTo(player);
+        assertThat(player.ownsProperty(location)).isTrue();
+        assertThat(player.getBalance()).isEqualTo(10);
+    }
+
+    @Test
+    public void shouldNotBePurchasedIfPlayerCanNotAfford() {
+        player.setBalance(10);
+
+        location.applyTo(player);
+
+        assertThat(location.hasOwner()).isFalse();
+        assertThat(location.getOwner()).isNull();
+        assertThat(player.ownsProperty(location)).isFalse();
+        assertThat(player.getBalance()).isEqualTo(10);
+    }
+
+    @Test
+    public void shouldNotBePurchasedIfAlreadyHasOwner() {
+        Player owner = new Player("OWNER");
+        location.setOwner(owner);
+
+        player.setBalance(30);
+
+        location.applyTo(player);
+
+        assertThat(location.hasOwner()).isTrue();
+        assertThat(location.getOwner()).isEqualTo(owner);
+        assertThat(player.ownsProperty(location)).isFalse();
+        assertThat(player.getBalance()).isEqualTo(30);
     }
 
 }

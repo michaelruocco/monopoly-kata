@@ -1,9 +1,19 @@
 package uk.co.mruoc.monopoly.board;
 
+import uk.co.mruoc.monopoly.IncomeTaxCalculator;
+import uk.co.mruoc.monopoly.Player;
+
 public class IncomeTax extends Location {
+
+    private static final IncomeTaxCalculator INCOME_TAX_CALCULATOR = new IncomeTaxCalculator();
 
     public IncomeTax() {
         super("Income Tax");
+    }
+
+    @Override
+    public void applyTo(Player player) {
+        payIncomeTax(player);
     }
 
     @Override
@@ -11,19 +21,9 @@ public class IncomeTax extends Location {
         return false;
     }
 
-    @Override
-    public boolean isIncomeTax() {
-        return true;
-    }
-
-    @Override
-    public boolean isSuperTax() {
-        return false;
-    }
-
-    @Override
-    public int getCost() {
-        return 0;
+    private void payIncomeTax(Player player) {
+        double charge = INCOME_TAX_CALCULATOR.calculateCharge(player);
+        player.decrementBalance(charge);
     }
 
 }
