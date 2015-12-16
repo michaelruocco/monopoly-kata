@@ -7,10 +7,52 @@ import java.util.List;
 
 public class Board {
 
-    private static final int BOARD_SIZE = 40;
     private final List<Location> locations = new ArrayList<>();
 
     public Board() {
+        addLocations();
+    }
+
+    public String getLocationName(int index) {
+        Location location = getLocation(index);
+        return location.getName();
+    }
+
+    public String getLocationName(Player player) {
+        return getLocationName(player.getPosition());
+    }
+
+    public int getLocationPosition(String locationName) {
+        for (int i = 0; i < size(); i++) {
+            Location location = getLocation(i);
+            if (location.getName().equalsIgnoreCase(locationName))
+                return i;
+        }
+        throw new GameException("no location found with name " + locationName);
+    }
+
+    public Location getLocation(String locationName) {
+        int position = getLocationPosition(locationName);
+        return getLocation(position);
+    }
+
+    public int getJailPosition() {
+        return 10;
+    }
+
+    public boolean passedGo(Player player) {
+        return player.getPosition() >= size();
+    }
+
+    public int getPassedGoPosition(Player player) {
+        return player.getPosition() - size();
+    }
+
+    public Location getLocation(Player player) {
+        return getLocation(player.getPosition());
+    }
+
+    private void addLocations() {
         locations.add(new Location("Go"));
         locations.add(new Location("Old Kent Road", 60));
         locations.add(new Location("Community Chest 1"));
@@ -53,47 +95,12 @@ public class Board {
         locations.add(new Location("Mayfair", 400));
     }
 
-    public String getLocationName(int index) {
-        Location location = getLocation(index);
-        return location.getName();
-    }
-
-    public String getLocationName(Player player) {
-        return getLocationName(player.getPosition());
-    }
-
-    public int getLocationPosition(String locationName) {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            Location location = getLocation(i);
-            if (location.getName().equalsIgnoreCase(locationName))
-                return i;
-        }
-        throw new GameException("no location found with name " + locationName);
-    }
-
-    public Location getLocation(String locationName) {
-        int position = getLocationPosition(locationName);
-        return getLocation(position);
-    }
-
-    public int getJailPosition() {
-        return 10;
-    }
-
-    public boolean passedGo(Player player) {
-        return player.getPosition() >= BOARD_SIZE;
-    }
-
-    public int getPassedGoPosition(Player player) {
-        return player.getPosition() - BOARD_SIZE;
-    }
-
-    public Location getLocation(Player player) {
-        return getLocation(player.getPosition());
-    }
-
     private Location getLocation(int index) {
         return locations.get(index);
+    }
+
+    private int size() {
+        return locations.size();
     }
 
 }

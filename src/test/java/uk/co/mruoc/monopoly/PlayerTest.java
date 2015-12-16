@@ -7,8 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PlayerTest {
 
     private static final String NAME = "Horse";
+    private static final Board BOARD = new Board();
 
-    private Player player = new Player(NAME);
+    private Player player = new Player(NAME, BOARD);
 
     @Test
     public void playerStartPositionShouldBeZero() {
@@ -43,6 +44,22 @@ public class PlayerTest {
         player.addRound(new Round());
 
         assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(2);
+    }
+
+    @Test
+    public void playerShouldMove() {
+        player.move(8);
+
+        assertThat(player.getPosition()).isEqualTo(8);
+    }
+
+    @Test
+    public void playerLocationShouldRevertBackToZeroAfterPassingGo() {
+        player.setPosition(39);
+
+        player.move(6);
+
+        assertThat(player.getPosition()).isEqualTo(5);
     }
 
 }
