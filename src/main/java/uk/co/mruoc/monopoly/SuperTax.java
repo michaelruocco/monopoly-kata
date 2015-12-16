@@ -2,8 +2,8 @@ package uk.co.mruoc.monopoly;
 
 public class SuperTax extends Location {
 
-    public SuperTax(String name) {
-        super(name);
+    public SuperTax() {
+        super("Super Tax");
     }
 
     @Override
