@@ -33,8 +33,8 @@ public class Player {
 
     public void move(int roll) {
         this.position += roll;
-        while (board.passedGo(this)) {
-            setPosition(board.getPassedGoPosition(this));
+        while (passedGo()) {
+            setPosition(getPassedGoPosition());
             incrementTimesPassedGo();
         }
         logInfo(createMoveDebugMessage(roll));
@@ -168,6 +168,14 @@ public class Player {
 
     private void resetTimesPassedGo() {
         timesPassedGo = 0;
+    }
+
+    private boolean passedGo() {
+        return getPosition() >= board.size();
+    }
+
+    private int getPassedGoPosition() {
+        return getPosition() - board.size();
     }
 
     private String createMoveDebugMessage(int roll) {

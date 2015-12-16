@@ -1,16 +1,20 @@
 package uk.co.mruoc.monopoly;
 
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
 
+    private static final String JAIL_POSITION_NAME = "Just Visiting / Jail";
+
     private final List<Location> locations = new ArrayList<>();
 
     public Board() {
         addLocations();
+    }
+
+    public int size() {
+        return locations.size();
     }
 
     public String getLocationName(int index) {
@@ -31,25 +35,21 @@ public class Board {
         throw new GameException("no location found with name " + locationName);
     }
 
+    public int getJailPosition() {
+        getLocationPosition(JAIL_POSITION_NAME);
+    }
+
     public Location getLocation(String locationName) {
         int position = getLocationPosition(locationName);
         return getLocation(position);
     }
 
-    public int getJailPosition() {
-        return 10;
-    }
-
-    public boolean passedGo(Player player) {
-        return player.getPosition() >= size();
-    }
-
-    public int getPassedGoPosition(Player player) {
-        return player.getPosition() - size();
-    }
-
     public Location getLocation(Player player) {
         return getLocation(player.getPosition());
+    }
+
+    private Location getLocation(int index) {
+        return locations.get(index);
     }
 
     private void addLocations() {
@@ -63,7 +63,7 @@ public class Board {
         locations.add(new Location("Chance 1"));
         locations.add(new Location("Euston Road", 100));
         locations.add(new Location("Pentonville Road", 120));
-        locations.add(new Location("Just Visiting / Jail"));
+        locations.add(new Location(JAIL_POSITION_NAME));
         locations.add(new Location("Pall Mall", 140));
         locations.add(new Location("Electric Company", 150));
         locations.add(new Location("Whitehall", 140));
@@ -93,14 +93,6 @@ public class Board {
         locations.add(new Location("Park Lane", 350));
         locations.add(new Location("Super Tax"));
         locations.add(new Location("Mayfair", 400));
-    }
-
-    private Location getLocation(int index) {
-        return locations.get(index);
-    }
-
-    private int size() {
-        return locations.size();
     }
 
 }
