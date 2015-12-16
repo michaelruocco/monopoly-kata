@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PlayerTest {
 
     private static final String NAME = "Horse";
-    private static final Board BOARD = new Board();
+    private static final uk.co.mruoc.monopoly.board.Board BOARD = new uk.co.mruoc.monopoly.board.Board();
 
     private Player player = new Player(NAME, BOARD);
 

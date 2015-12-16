@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerMovement {
 
-    private final Board board = new Board();
+    private final uk.co.mruoc.monopoly.board.Board board = new uk.co.mruoc.monopoly.board.Board();
     private final Players players = new Players(2, board);
     private final Game game = new Game(players);
     private final Player player = players.getPlayer(0);
@@ -31,7 +31,7 @@ public class PlayerMovement {
 
     @Given("^A player owns \"(.*?)\"$")
     public void a_player_owns(String locationName) throws Throwable {
-        Location location = board.getLocation(locationName);
+        uk.co.mruoc.monopoly.board.Location location = board.getLocation(locationName);
         player.purchase(location);
     }
 

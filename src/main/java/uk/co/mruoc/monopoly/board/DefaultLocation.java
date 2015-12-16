@@ -1,4 +1,4 @@
-package uk.co.mruoc.monopoly;
+package uk.co.mruoc.monopoly.board;
 
 public class DefaultLocation extends Location {
 

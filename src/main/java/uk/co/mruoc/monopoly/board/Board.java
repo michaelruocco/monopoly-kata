@@ -1,4 +1,6 @@
-package uk.co.mruoc.monopoly;
+package uk.co.mruoc.monopoly.board;
+
+import uk.co.mruoc.monopoly.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,7 @@ public class Board {
         locations.add(new DefaultLocation("Liverpool Street Station", 200));
         locations.add(new DefaultLocation("Chance"));
         locations.add(new DefaultLocation("Park Lane", 350));
-        locations.add(new DefaultLocation("Super Tax"));
+        locations.add(new SuperTax());
         locations.add(new DefaultLocation("Mayfair", 400));
     }
 

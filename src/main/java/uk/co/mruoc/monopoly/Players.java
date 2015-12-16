@@ -1,6 +1,7 @@
 package uk.co.mruoc.monopoly;
 
 import org.apache.log4j.Logger;
+import uk.co.mruoc.monopoly.board.Board;
 
 import java.util.ArrayList;
 import java.util.Collections;

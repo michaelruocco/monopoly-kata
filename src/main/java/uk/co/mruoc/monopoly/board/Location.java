@@ -1,4 +1,6 @@
-package uk.co.mruoc.monopoly;
+package uk.co.mruoc.monopoly.board;
+
+import uk.co.mruoc.monopoly.Player;
 
 public abstract class Location {
 
@@ -29,12 +31,12 @@ public abstract class Location {
         return getOwner() != null;
     }
 
-    abstract boolean isGoToJail();
+    public abstract boolean isGoToJail();
 
-    abstract boolean isIncomeTax();
+    public abstract boolean isIncomeTax();
 
-    abstract boolean isSuperTax();
+    public abstract boolean isSuperTax();
 
-    abstract int getCost();
+    public abstract int getCost();
 
 }

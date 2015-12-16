@@ -7,11 +7,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardLocations {
 
-    private Board board;
+    private uk.co.mruoc.monopoly.board.Board board;
 
     @When("^A board is created$")
     public void a_board_is_created() throws Throwable {
-        board = new Board();
+        board = new uk.co.mruoc.monopoly.board.Board();
     }
 
     @Then("^location (\\d+) is \"(.*?)\"$")

@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardTest {
 
-    private Board board = new Board();
+    private uk.co.mruoc.monopoly.board.Board board = new uk.co.mruoc.monopoly.board.Board();
 
     @Test
     public void shouldReturnBoardSize() {
@@ -30,7 +30,7 @@ public class BoardTest {
     public void shouldReturnLocationForPlayerPosition() {
         Player player = new Player("", board);
         player.setPosition(39);
-        Location location = board.getLocation(player);
+        uk.co.mruoc.monopoly.board.Location location = board.getLocation(player);
         assertThat(location.getName()).isEqualTo("Mayfair");
     }
 
@@ -42,7 +42,7 @@ public class BoardTest {
     @Test
     public void shouldReturnLocationGivenName() {
         String locationName = "Just Visiting / Jail";
-        Location location = board.getLocation(locationName);
+        uk.co.mruoc.monopoly.board.Location location = board.getLocation(locationName);
         assertThat(location.getName()).isEqualTo(locationName);
     }
 

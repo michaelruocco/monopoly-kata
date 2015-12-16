@@ -1,6 +1,8 @@
 package uk.co.mruoc.monopoly;
 
 import org.apache.log4j.Logger;
+import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,7 +186,7 @@ public class Player {
         message.append(getName());
         message.append(" ");
         message.append(roll);
-        message.append(" space to location ");
+        message.append(" space to board ");
         message.append(location.getName());
         return message.toString();
     }

@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameTest {
 
-    private Board board = new Board();
+    private uk.co.mruoc.monopoly.board.Board board = new uk.co.mruoc.monopoly.board.Board();
 
     @Test(expected = GameException.class)
     public void shouldThrowExceptionIfLessThanTwoPlayers() {
