@@ -1,12 +1,13 @@
 package uk.co.mruoc.monopoly;
 
 import org.junit.Test;
+import uk.co.mruoc.monopoly.board.Board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameTest {
 
-    private uk.co.mruoc.monopoly.board.Board board = new uk.co.mruoc.monopoly.board.Board();
+    private Board board = new Board();
 
     @Test(expected = GameException.class)
     public void shouldThrowExceptionIfLessThanTwoPlayers() {

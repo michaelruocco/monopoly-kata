@@ -1,12 +1,13 @@
-package uk.co.mruoc.monopoly;
+package uk.co.mruoc.monopoly.board;
 
 import org.junit.Test;
+import uk.co.mruoc.monopoly.Player;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardTest {
 
-    private uk.co.mruoc.monopoly.board.Board board = new uk.co.mruoc.monopoly.board.Board();
+    private Board board = new Board();
 
     @Test
     public void shouldReturnBoardSize() {

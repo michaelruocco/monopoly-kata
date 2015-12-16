@@ -1,13 +1,14 @@
 package uk.co.mruoc.monopoly;
 
 import org.junit.Test;
+import uk.co.mruoc.monopoly.board.Board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerTest {
 
     private static final String NAME = "Horse";
-    private static final uk.co.mruoc.monopoly.board.Board BOARD = new uk.co.mruoc.monopoly.board.Board();
+    private static final Board BOARD = new Board();
 
     private Player player = new Player(NAME, BOARD);
 
