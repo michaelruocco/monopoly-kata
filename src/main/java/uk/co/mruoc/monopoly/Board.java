@@ -29,14 +29,14 @@ public class Board {
     public int getLocationPosition(String locationName) {
         for (int i = 0; i < size(); i++) {
             Location location = getLocation(i);
-            if (location.getName().equalsIgnoreCase(locationName))
+            if (location.nameEquals(locationName))
                 return i;
         }
         throw new GameException("no location found with name " + locationName);
     }
 
     public int getJailPosition() {
-        getLocationPosition(JAIL_POSITION_NAME);
+        return getLocationPosition(JAIL_POSITION_NAME);
     }
 
     public Location getLocation(String locationName) {

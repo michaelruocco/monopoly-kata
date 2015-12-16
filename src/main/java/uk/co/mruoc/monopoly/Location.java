@@ -19,6 +19,10 @@ public class Location {
         return name;
     }
 
+    public boolean nameEquals(String name) {
+        return this.name.equalsIgnoreCase(name);
+    }
+
     public boolean isGoToJail() {
         return getName().equalsIgnoreCase("Go To Jail");
     }
