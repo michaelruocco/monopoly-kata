@@ -1,23 +1,40 @@
 package uk.co.mruoc.monopoly;
 
-public interface Location {
+public abstract class Location {
 
-    String getName();
+    private final String name;
+    private Player owner;
 
-    boolean nameEquals(String name);
+    public Location(String name) {
+        this.name = name;
+    }
 
-    boolean isGoToJail();
+    public String getName() {
+        return name;
+    }
 
-    boolean isIncomeTax();
+    public boolean nameEquals(String name) {
+        return this.name.equalsIgnoreCase(name);
+    }
 
-    boolean isSuperTax();
+    public Player getOwner() {
+        return owner;
+    }
 
-    int getCost();
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
 
-    Player getOwner();
+    public boolean hasOwner() {
+        return getOwner() != null;
+    }
 
-    void setOwner(Player owner);
+    abstract boolean isGoToJail();
 
-    boolean hasOwner();
+    abstract boolean isIncomeTax();
+
+    abstract boolean isSuperTax();
+
+    abstract int getCost();
 
 }
