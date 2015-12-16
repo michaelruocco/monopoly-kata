@@ -10,7 +10,7 @@ public class PlayerTest {
     private static final String NAME = "Horse";
     private static final Board BOARD = new Board();
 
-    private Player player = new Player(NAME, BOARD);
+    private final Player player = new Player(NAME, BOARD);
 
     @Test
     public void playerStartPositionShouldBeZero() {

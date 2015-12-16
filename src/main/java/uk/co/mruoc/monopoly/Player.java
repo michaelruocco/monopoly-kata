@@ -104,8 +104,8 @@ public class Player {
         return false;
     }
 
-    private boolean hasPassedGo() {
-        return timesPassedGo > 0;
+    public void decrementBalance(double valueToSubtract) {
+        balance -= valueToSubtract;
     }
 
     public void endTurn() {
@@ -121,6 +121,10 @@ public class Player {
         location.applyTo(this);
     }
 
+    private boolean hasPassedGo() {
+        return timesPassedGo > 0;
+    }
+
     private boolean isGoToJail(Location location) {
         return (location instanceof GoToJail);
     }
@@ -131,10 +135,6 @@ public class Player {
 
     private void incrementBalance(double valueToAdd) {
         balance += valueToAdd;
-    }
-
-    public void decrementBalance(double valueToSubtract) {
-        balance -= valueToSubtract;
     }
 
     private double calculateSalaryPayment() {
