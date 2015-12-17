@@ -78,10 +78,6 @@ public class Player {
         return hasNegativeBalance();
     }
 
-    public boolean isStillPlaying() {
-        return !hasLost();
-    }
-
     public String getName() {
         return name;
     }

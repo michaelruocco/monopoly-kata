@@ -50,7 +50,7 @@ public class Game {
 
     public boolean playerOrderIsSameForEveryRound() {
         for(Round round : rounds)
-            if (round.playersMatch(players.getList()))
+            if (round.playersMatch(players))
                 return true;
         return false;
     }
@@ -60,12 +60,15 @@ public class Game {
     }
 
     private Player getNextPlayer() {
-        Player player = players.getList().get(nextPlayerIndex);
-        while(!player.isStillPlaying()) {
-            nextPlayerIndex++;
-            player = players.getList().get(nextPlayerIndex);
-        }
+        Player player = players.getPlayer(nextPlayerIndex);
+        while(player.hasLost())
+            player = skipPlayer();
         return player;
+    }
+
+    private Player skipPlayer() {
+        nextPlayerIndex++;
+        return players.getPlayer(nextPlayerIndex);
     }
 
     private void setNextPlayer() {

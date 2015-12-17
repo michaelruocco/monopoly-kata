@@ -12,7 +12,11 @@ public class Round {
         player.addRound(this);
     }
 
-    public boolean playersMatch(List<Player> players) {
+    public boolean playersMatch(Players players) {
+        return playersMatchList(players.getList());
+    }
+
+    public boolean playersMatchList(List<Player> players) {
         return roundPlayers.equals(players);
     }
 

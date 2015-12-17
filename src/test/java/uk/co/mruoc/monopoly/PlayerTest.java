@@ -139,7 +139,6 @@ public class PlayerTest {
         player.setBalance(0);
 
         assertThat(player.hasLost()).isFalse();
-        assertThat(player.isStillPlaying()).isTrue();
     }
 
     @Test
@@ -147,7 +146,6 @@ public class PlayerTest {
         player.setBalance(-10);
 
         assertThat(player.hasLost()).isTrue();
-        assertThat(player.isStillPlaying()).isFalse();
     }
 
     private void givenPlayerHasPassedGo(int times) {

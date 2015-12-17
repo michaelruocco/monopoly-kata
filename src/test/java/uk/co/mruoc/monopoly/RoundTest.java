@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +17,7 @@ public class RoundTest {
 
     @Test
     public void roundShouldHaveNoPlayersIfNoTurnsHaveBeenTaken() {
-        boolean playersMatch = round.playersMatch(new ArrayList<Player>());
+        boolean playersMatch = round.playersMatchList(Collections.emptyList());
         assertThat(playersMatch).isTrue();
     }
 
@@ -24,7 +25,7 @@ public class RoundTest {
     public void shouldAddPlayerToRound() {
         round.takeTurn(horse);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(horse));
+        boolean playersMatch = round.playersMatchList(Arrays.asList(horse));
 
         assertThat(playersMatch).isTrue();
     }
@@ -34,7 +35,7 @@ public class RoundTest {
         round.takeTurn(horse);
         round.takeTurn(cat);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(horse, cat));
+        boolean playersMatch = round.playersMatchList(Arrays.asList(horse, cat));
 
         assertThat(playersMatch).isTrue();
     }
@@ -43,7 +44,7 @@ public class RoundTest {
     public void playersShouldNotMatchIfNumberOfPlayersIsDifferent() {
         round.takeTurn(cat);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(horse, cat));
+        boolean playersMatch = round.playersMatchList(Arrays.asList(horse, cat));
 
         assertThat(playersMatch).isFalse();
     }
@@ -53,7 +54,7 @@ public class RoundTest {
         round.takeTurn(cat);
         round.takeTurn(horse);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(horse, cat));
+        boolean playersMatch = round.playersMatchList(Arrays.asList(horse, cat));
 
         assertThat(playersMatch).isFalse();
     }
