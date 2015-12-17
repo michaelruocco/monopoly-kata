@@ -9,14 +9,25 @@ public class GameTest {
 
     private Board board = new Board();
     private Players players = new Players(2, board);
+    private Game game = new Game(players);
 
     @Test
     public void playerOrderShouldBeTheSameForEveryRound() {
-        Game game = new Game(players);
-
-        game.play();
+        game.play(10);
 
         assertThat(game.playerOrderIsSameForEveryRound()).isTrue();
+    }
+
+    @Test
+    public void newGameShouldHaveZeroRoundsPlayed() {
+        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(0);
+    }
+
+    @Test
+    public void gameShouldHaveTwentyRoundsPlayed() {
+        game.play(10);
+
+        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(20);
     }
 
 }

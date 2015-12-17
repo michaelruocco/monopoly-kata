@@ -20,12 +20,12 @@ public class GameRounds {
 
     @When("^The game is complete$")
     public void the_game_is_complete() throws Throwable {
-        game.complete();
+        game.play(10);
     }
 
     @Then("^There were (\\d+) rounds in total$")
     public void there_were_rounds_in_total(int expectedNumberOfRounds) throws Throwable {
-        assertThat(game.getNumberOfRounds()).isEqualTo(expectedNumberOfRounds);
+        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
     }
 
     @Then("^Each player has played (\\d+) rounds$")

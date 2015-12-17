@@ -27,9 +27,9 @@ public class Game {
             nextTurn(generateRoll());
     }
 
-    public void complete() {
+    public void play(int fixedRoll) {
         while(!isComplete())
-            nextTurn(10);
+            nextTurn(fixedRoll);
     }
 
     public void nextTurn(int roll) {
@@ -44,7 +44,7 @@ public class Game {
         setNextPlayer();
     }
 
-    public int getNumberOfRounds() {
+    public int getNumberOfRoundsPlayed() {
         return rounds.size();
     }
 
