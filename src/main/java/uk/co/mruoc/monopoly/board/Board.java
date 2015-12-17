@@ -55,29 +55,29 @@ public class Board {
     }
 
     private void addLocations() {
-        locations.add(new DefaultLocation("Go"));
+        locations.add(new BasicLocation("Go"));
         locations.add(new DefaultLocation("Old Kent Road", 60));
-        locations.add(new DefaultLocation("Community Chest 1"));
+        locations.add(new BasicLocation("Community Chest 1"));
         locations.add(new DefaultLocation("Whitechapel Road", 60));
         locations.add(new IncomeTax());
         locations.add(new DefaultLocation("Kings Cross Station", 200));
         locations.add(new DefaultLocation("The Angel Islington", 100));
-        locations.add(new DefaultLocation("Chance 1"));
+        locations.add(new BasicLocation("Chance 1"));
         locations.add(new DefaultLocation("Euston Road", 100));
         locations.add(new DefaultLocation("Pentonville Road", 120));
-        locations.add(new DefaultLocation(JAIL_POSITION_NAME));
+        locations.add(new BasicLocation(JAIL_POSITION_NAME));
         locations.add(new DefaultLocation("Pall Mall", 140));
         locations.add(new DefaultLocation("Electric Company", 150));
         locations.add(new DefaultLocation("Whitehall", 140));
         locations.add(new DefaultLocation("Northumberland Avenue", 160));
         locations.add(new DefaultLocation("Marylebone Station", 200));
         locations.add(new DefaultLocation("Bow Street", 180));
-        locations.add(new DefaultLocation("Community Chest 2"));
+        locations.add(new BasicLocation("Community Chest 2"));
         locations.add(new DefaultLocation("Marlborough Street", 180));
         locations.add(new DefaultLocation("Vine Street", 200));
         locations.add(new DefaultLocation("Free Parking"));
         locations.add(new DefaultLocation("Strand", 220));
-        locations.add(new DefaultLocation("Chance 2"));
+        locations.add(new BasicLocation("Chance 2"));
         locations.add(new DefaultLocation("Fleet Street", 220));
         locations.add(new DefaultLocation("Trafalgar Square", 240));
         locations.add(new DefaultLocation("Fenchurch Street Station", 200));
@@ -88,10 +88,10 @@ public class Board {
         locations.add(new GoToJail(this));
         locations.add(new DefaultLocation("Regent Street", 300));
         locations.add(new DefaultLocation("Oxford Street", 300));
-        locations.add(new DefaultLocation("Community Chest"));
+        locations.add(new BasicLocation("Community Chest"));
         locations.add(new DefaultLocation("Bond Street", 320));
         locations.add(new DefaultLocation("Liverpool Street Station", 200));
-        locations.add(new DefaultLocation("Chance"));
+        locations.add(new BasicLocation("Chance"));
         locations.add(new DefaultLocation("Park Lane", 350));
         locations.add(new SuperTax());
         locations.add(new DefaultLocation("Mayfair", 400));
