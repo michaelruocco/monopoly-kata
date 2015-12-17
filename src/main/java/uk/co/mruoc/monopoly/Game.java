@@ -11,16 +11,12 @@ public class Game {
     private static final int TOTAL_ROUNDS = 20;
 
     private final List<Round> rounds = new ArrayList<>(TOTAL_ROUNDS);
+    private final Random random = new Random();
 
     private final Players players;
 
     private int nextPlayerIndex;
     private Round currentRound = new Round();
-    private Random random = new Random();
-
-    public Game(int numberOfPlayers, Board board) {
-        this(new Players(numberOfPlayers, board));
-    }
 
     public Game(Players players) {
         this.players = players;
@@ -44,7 +40,6 @@ public class Game {
     public void move(Player player, int roll) {
         player.move(roll);
         currentRound.takeTurn(player);
-        player.addRound(currentRound);
         player.endTurn();
         setNextPlayer();
     }

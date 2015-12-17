@@ -9,6 +9,7 @@ public class Round {
 
     public void takeTurn(Player player) {
         roundPlayers.add(player);
+        player.addRound(this);
     }
 
     public boolean playersMatch(List<Player> players) {

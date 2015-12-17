@@ -12,7 +12,7 @@ public class GameTest {
 
     @Test
     public void playerOrderShouldBeTheSameForEveryRound() {
-        Game game = new Game(2, board);
+        Game game = new Game(players);
 
         game.play();
 
