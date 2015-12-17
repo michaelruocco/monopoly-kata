@@ -10,9 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PlayerTest {
 
     private static final String NAME = "Horse";
-    private static final Board BOARD = new Board();
 
-    private final Player player = new Player(NAME, BOARD);
+    private final Board board = new Board();
+    private final Player player = new Player(NAME, board);
 
     @Test
     public void startPositionShouldBeZero() {
@@ -104,7 +104,7 @@ public class PlayerTest {
 
         player.endTurn();
 
-        assertThat(player.getPosition()).isEqualTo(BOARD.getJailPosition());
+        assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class PlayerTest {
     }
 
     private void givenPlayerHasPassedGo(int times) {
-        player.move(BOARD.size() * times);
+        player.move(board.size() * times);
     }
 
     private void givenPlayerLandsOnGoToJail() {

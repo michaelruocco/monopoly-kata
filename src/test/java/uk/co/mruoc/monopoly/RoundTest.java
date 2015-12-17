@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoundTest {
 
-    private static final Player HORSE = new Player("Horse");
-    private static final Player CAT = new Player("Cat");
+    private final Player horse = new Player("Horse");
+    private final Player cat = new Player("Cat");
 
     private final Round round = new Round();
 
@@ -22,38 +22,38 @@ public class RoundTest {
 
     @Test
     public void shouldAddPlayerToRound() {
-        round.takeTurn(HORSE);
+        round.takeTurn(horse);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(HORSE));
+        boolean playersMatch = round.playersMatch(Arrays.asList(horse));
 
         assertThat(playersMatch).isTrue();
     }
 
     @Test
     public void shouldAddMultiplePlayersToRound() {
-        round.takeTurn(HORSE);
-        round.takeTurn(CAT);
+        round.takeTurn(horse);
+        round.takeTurn(cat);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(HORSE, CAT));
+        boolean playersMatch = round.playersMatch(Arrays.asList(horse, cat));
 
         assertThat(playersMatch).isTrue();
     }
 
     @Test
     public void playersShouldNotMatchIfNumberOfPlayersIsDifferent() {
-        round.takeTurn(CAT);
+        round.takeTurn(cat);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(HORSE, CAT));
+        boolean playersMatch = round.playersMatch(Arrays.asList(horse, cat));
 
         assertThat(playersMatch).isFalse();
     }
 
     @Test
     public void shouldPlayersShouldNotMatchIfPlayersAreInDifferentOrder() {
-        round.takeTurn(CAT);
-        round.takeTurn(HORSE);
+        round.takeTurn(cat);
+        round.takeTurn(horse);
 
-        boolean playersMatch = round.playersMatch(Arrays.asList(HORSE, CAT));
+        boolean playersMatch = round.playersMatch(Arrays.asList(horse, cat));
 
         assertThat(playersMatch).isFalse();
     }
