@@ -61,10 +61,6 @@ public class Player {
         rounds.add(round);
     }
 
-    private void incrementTimesPassedGo() {
-        timesPassedGo++;
-    }
-
     public double getBalance() { return balance; }
 
     public void setBalance(double balance) {
@@ -72,8 +68,9 @@ public class Player {
     }
 
     private void receiveSalary() {
-        double payment = calculateSalaryPayment();
-        incrementBalance(payment * timesPassedGo);
+        double salary = SALARY_CALCULATOR.calculateSalary();
+        double payment = salary * timesPassedGo;
+        incrementBalance(payment);
         resetTimesPassedGo();
     }
 
@@ -137,10 +134,6 @@ public class Player {
         balance += valueToAdd;
     }
 
-    private double calculateSalaryPayment() {
-        return SALARY_CALCULATOR.calculateSalary();
-    }
-
     private void resetTimesPassedGo() {
         timesPassedGo = 0;
     }
@@ -162,6 +155,10 @@ public class Player {
         message.append(" space to board ");
         message.append(location.getName());
         return message.toString();
+    }
+
+    private void incrementTimesPassedGo() {
+        timesPassedGo++;
     }
 
     private void logInfo(String message) {
