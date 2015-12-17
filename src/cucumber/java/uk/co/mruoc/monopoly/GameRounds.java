@@ -41,7 +41,7 @@ public class GameRounds {
         assertThat(playerOrderIsSameForEveryRound(game)).isTrue();
     }
 
-    public boolean playerOrderIsSameForEveryRound(Game game) {
+    private boolean playerOrderIsSameForEveryRound(Game game) {
         for(Round round : game.getRounds())
             if (round.playersMatch(players))
                 return true;
