@@ -1,6 +1,7 @@
 # Monopoly Kata
 
 [![Build Status](https://travis-ci.org/michaelruocco/monopoly-kata.svg?branch=master)](https://travis-ci.org/michaelruocco/monopoly-kata)
+[![Coverage Status](https://coveralls.io/repos/michaelruocco/monopoly-kata/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaelruocco/monopoly-kata?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be)
 
 This project is my attempt at the monopoly kata exercise that is outlined here: 
