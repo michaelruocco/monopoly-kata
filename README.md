@@ -1,5 +1,8 @@
 # Monopoly Kata
 
+[![Build Status](https://travis-ci.org/michaelruocco/monopoly-kata.svg?branch=master)](https://travis-ci.org/michaelruocco/monopoly-kata)
+[![Dependency Status](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be)
+
 This project is my attempt at the monopoly kata exercise that is outlined here: 
 
 http://schuchert.wikispaces.com/Katas.MonopolyTheGame(r)
@@ -13,5 +16,5 @@ tried to keep the code as clean and simple as possible. Feedback and comments ar
 You can run the unit and cucumber tests for this project by running the following command:
 
 ```
-gradlew clean build cucumber
+gradlew assemble check cucumber
 ```

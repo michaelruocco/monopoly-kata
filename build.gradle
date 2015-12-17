@@ -38,6 +38,13 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
 tasks.withType(JavaCompile) {
     options.compilerArgs << '-Xlint'
 }
