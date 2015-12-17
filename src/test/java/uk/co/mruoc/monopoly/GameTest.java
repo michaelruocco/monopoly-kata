@@ -15,7 +15,7 @@ public class GameTest {
     public void playerOrderShouldBeTheSameForEveryRound() {
         game.play(10);
 
-        assertThat(game.playerOrderIsSameForEveryRound()).isTrue();
+        assertThat(playerOrderIsSameForEveryRound(game)).isTrue();
     }
 
     @Test
@@ -28,6 +28,20 @@ public class GameTest {
         game.play(10);
 
         assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(20);
+    }
+
+    @Test
+    public void shouldPlayGameWithEachRollRandomlyGenerated() {
+        game.play();
+
+        assertThat(game.isComplete()).isTrue();
+    }
+
+    public boolean playerOrderIsSameForEveryRound(Game game) {
+        for(Round round : game.getRounds())
+            if (round.playersMatch(players))
+                return true;
+        return false;
     }
 
 }

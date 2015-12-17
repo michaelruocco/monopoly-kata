@@ -38,7 +38,14 @@ public class GameRounds {
 
     @Then("^The order of the players is the same for each round$")
     public void the_order_of_the_players_is_the_same_for_each_round() throws Throwable {
-        assertThat(game.playerOrderIsSameForEveryRound()).isTrue();
+        assertThat(playerOrderIsSameForEveryRound(game)).isTrue();
+    }
+
+    public boolean playerOrderIsSameForEveryRound(Game game) {
+        for(Round round : game.getRounds())
+            if (round.playersMatch(players))
+                return true;
+        return false;
     }
 
 }

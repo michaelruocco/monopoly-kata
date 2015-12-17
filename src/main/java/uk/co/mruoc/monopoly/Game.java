@@ -32,6 +32,10 @@ public class Game {
             nextTurn(fixedRoll);
     }
 
+    public boolean isComplete() {
+        return !playersRemaining() || !roundsRemaining();
+    }
+
     public void nextTurn(int roll) {
         Player player = getNextPlayer();
         move(player, roll);
@@ -48,11 +52,8 @@ public class Game {
         return rounds.size();
     }
 
-    public boolean playerOrderIsSameForEveryRound() {
-        for(Round round : rounds)
-            if (round.playersMatch(players))
-                return true;
-        return false;
+    public List<Round> getRounds() {
+        return rounds;
     }
 
     private int generateRoll() {
@@ -89,10 +90,6 @@ public class Game {
 
     private boolean roundsRemaining() {
         return rounds.size() < TOTAL_ROUNDS;
-    }
-
-    private boolean isComplete() {
-        return !playersRemaining() || !roundsRemaining();
     }
 
 }
