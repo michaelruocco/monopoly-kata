@@ -2,7 +2,7 @@ package uk.co.mruoc.monopoly;
 
 import org.junit.Test;
 import uk.co.mruoc.monopoly.board.Board;
-import uk.co.mruoc.monopoly.board.DefaultLocation;
+import uk.co.mruoc.monopoly.board.Property;
 import uk.co.mruoc.monopoly.board.Location;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -158,7 +158,7 @@ public class PlayerTest {
     }
 
     private Location createLocation() {
-        return new DefaultLocation("PROPERTY", 50);
+        return new Property("PROPERTY", 50);
     }
 
 }

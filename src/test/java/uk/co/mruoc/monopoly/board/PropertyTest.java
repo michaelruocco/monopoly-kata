@@ -5,12 +5,12 @@ import uk.co.mruoc.monopoly.Player;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DefaultLocationTest {
+public class PropertyTest {
 
     private static final String NAME = "NAME";
     private static final int COST = 20;
 
-    private final Location location = new DefaultLocation(NAME, COST);
+    private final Location location = new Property(NAME, COST);
     private final Player player = new Player("PLAYER");
 
     @Test

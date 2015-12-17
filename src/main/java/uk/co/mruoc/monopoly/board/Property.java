@@ -2,15 +2,15 @@ package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.Player;
 
-public class DefaultLocation extends Location {
+public class Property extends Location {
 
     private final int cost;
 
-    public DefaultLocation(String name) {
+    public Property(String name) {
         this(name, 0);
     }
 
-    public DefaultLocation(String name, int cost) {
+    public Property(String name, int cost) {
         super(name);
         this.cost = cost;
     }
