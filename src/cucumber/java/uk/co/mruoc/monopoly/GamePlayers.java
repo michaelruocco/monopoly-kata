@@ -36,12 +36,12 @@ public class GamePlayers {
 
     @Then("^The game has (\\d+) players$")
     public void the_game_has_players(int numberOfPlayers) throws Throwable {
-        assertThat(game.getNumberOfPlayers()).isEqualTo(numberOfPlayers);
+        assertThat(players.getNumberOfPlayers()).isEqualTo(numberOfPlayers);
     }
 
     @Then("^One of the players is \"(.*?)\"$")
     public void one_of_the_players_is(String expectedName) throws Throwable {
-        assertThat(game.playerExists(expectedName));
+        assertThat(players.exists(expectedName));
     }
 
     @Then("^An error is thrown with the message \"(.*?)\"$")

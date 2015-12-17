@@ -42,7 +42,7 @@ public class PlayerWin {
 
     @Then("^The other players continue complete the game$")
     public void the_other_players_continue_complete_the_game() throws Throwable {
-        game.completeGame();
+        game.complete();
     }
 
     @Then("^Have played (\\d+) rounds$")

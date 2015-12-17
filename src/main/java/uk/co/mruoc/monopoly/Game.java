@@ -27,12 +27,12 @@ public class Game {
     }
 
     public void play() {
-        while(!isGameComplete())
+        while(!isComplete())
             nextTurn(generateRoll());
     }
 
-    public void completeGame() {
-        while(!isGameComplete())
+    public void complete() {
+        while(!isComplete())
             nextTurn(10);
     }
 
@@ -47,14 +47,6 @@ public class Game {
         player.addRound(currentRound);
         player.endTurn();
         setNextPlayer();
-    }
-
-    public int getNumberOfPlayers() {
-        return players.getNumberOfPlayers();
-    }
-
-    public boolean playerExists(String name) {
-        return players.exists(name);
     }
 
     public int getNumberOfRounds() {
@@ -101,7 +93,8 @@ public class Game {
         return rounds.size() < TOTAL_ROUNDS;
     }
 
-    private boolean isGameComplete() {
+    private boolean isComplete() {
         return !playersRemaining() || !roundsRemaining();
     }
+
 }

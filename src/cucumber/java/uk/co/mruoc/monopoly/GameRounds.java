@@ -20,7 +20,7 @@ public class GameRounds {
 
     @When("^The game is complete$")
     public void the_game_is_complete() throws Throwable {
-        game.completeGame();
+        game.complete();
     }
 
     @Then("^There were (\\d+) rounds in total$")
