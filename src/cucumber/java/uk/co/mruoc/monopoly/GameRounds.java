@@ -3,16 +3,19 @@ package uk.co.mruoc.monopoly;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import uk.co.mruoc.monopoly.board.Board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameRounds {
 
+    private Players players;
     private Game game;
 
     @Given("^A game is played$")
     public void a_game_is_played() throws Throwable {
-        game = new Game(2, new uk.co.mruoc.monopoly.board.Board());
+        players = new Players(2, new Board());
+        game = new Game(players);
     }
 
     @When("^The game is complete$")
@@ -27,8 +30,8 @@ public class GameRounds {
 
     @Then("^Each player has played (\\d+) rounds$")
     public void each_player_has_played_rounds(int expectedNumberOfRounds) throws Throwable {
-        for(int p = 0; p < game.getNumberOfPlayers(); p++) {
-            Player player = game.getPlayer(p);
+        for(int p = 0; p < players.getNumberOfPlayers(); p++) {
+            Player player = players.getPlayer(p);
             assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
         }
     }

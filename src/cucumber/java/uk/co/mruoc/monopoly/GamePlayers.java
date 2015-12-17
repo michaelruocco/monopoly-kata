@@ -2,6 +2,7 @@ package uk.co.mruoc.monopoly;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import uk.co.mruoc.monopoly.board.Board;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GamePlayers {
 
     private List<Player> firstPlayers = new ArrayList<>();
+    private Players players;
     private Game game;
     private String errorMessage;
 
@@ -28,7 +30,7 @@ public class GamePlayers {
     public void games_are_created_with_players(int numberOfGames, int numberOfPlayers) throws Throwable {
         for(int g = 0; g < numberOfGames; g++) {
             createGame(numberOfPlayers);
-            firstPlayers.add(game.getPlayer(0));
+            firstPlayers.add(players.getPlayer(0));
         }
     }
 
@@ -61,7 +63,8 @@ public class GamePlayers {
 
     private void createGame(int numberOfPlayers) {
         try {
-            game = new Game(numberOfPlayers, new uk.co.mruoc.monopoly.board.Board());
+            players = new Players(numberOfPlayers, new Board());
+            game = new Game(players);
         } catch (GameException e) {
             errorMessage = e.getMessage();
         }

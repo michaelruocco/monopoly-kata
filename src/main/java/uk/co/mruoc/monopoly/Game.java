@@ -57,10 +57,6 @@ public class Game {
         return players.exists(name);
     }
 
-    public Player getPlayer(int index) {
-        return players.getPlayer(index);
-    }
-
     public int getNumberOfRounds() {
         return rounds.size();
     }
@@ -70,10 +66,6 @@ public class Game {
             if (round.playersMatch(players.getList()))
                 return true;
         return false;
-    }
-
-    public Player getWinner() {
-        return players.getWinner();
     }
 
     private int generateRoll() {

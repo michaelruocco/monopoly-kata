@@ -35,7 +35,7 @@ public class PlayerWin {
 
     @Then("^Player (\\d+) is the winner$")
     public void player_is_the_winner(int playerNumber) throws Throwable {
-        Player winner = game.getWinner();
+        Player winner = players.getWinner();
         Player player = getPlayer(playerNumber);
         assertThat(player).isEqualTo(winner);
     }
