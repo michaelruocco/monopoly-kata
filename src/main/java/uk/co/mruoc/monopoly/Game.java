@@ -69,7 +69,7 @@ public class Game {
     }
 
     private int generateRoll() {
-        return random.nextInt(12 - 1 + 1) + 1;
+        return random.nextInt(12) + 1;
     }
 
     private Player getNextPlayer() {
