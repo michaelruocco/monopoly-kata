@@ -33,8 +33,6 @@ public class PlayersTest {
     public void shouldReturnRemainingPlayers() {
         assertThat(players.getRemainingPlayers()).isEqualTo(players.getList());
         assertThat(players.getNumberOfRemainingPlayers()).isEqualTo(players.getNumberOfPlayers());
-        assertThat(players.onlyRemainingPlayer(getPlayerOne())).isFalse();
-        assertThat(players.onlyRemainingPlayer(getPlayerTwo())).isFalse();
     }
 
     @Test
@@ -45,7 +43,6 @@ public class PlayersTest {
 
         assertThat(remainingPlayers.size()).isEqualTo(1);
         assertThat(remainingPlayers.contains(getPlayerTwo())).isTrue();
-        assertThat(players.onlyRemainingPlayer(getPlayerTwo())).isTrue();
     }
 
     @Test

@@ -46,8 +46,6 @@ public class Game {
         currentRound.takeTurn(player);
         player.addRound(currentRound);
         player.endTurn();
-        if (players.onlyRemainingPlayer(player))
-            return;
         setNextPlayer();
     }
 

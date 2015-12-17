@@ -46,13 +46,6 @@ public class Players {
         return players;
     }
 
-    public boolean onlyRemainingPlayer(Player player) {
-        List<Player> otherPlayers = new ArrayList<>(players);
-        Collections.copy(otherPlayers, players);
-        otherPlayers.remove(player);
-        return allHaveLost(otherPlayers);
-    }
-
     public Player getWinner() {
         List<Player> remainingPlayers = getRemainingPlayers();
         return getPlayerWithHighestBalance(remainingPlayers);
@@ -76,13 +69,6 @@ public class Players {
         Collections.shuffle(players);
         for (Player player : players)
             logInfo("generated player " + player.getName());
-    }
-
-    private boolean allHaveLost(List<Player> otherPlayers) {
-        for (Player player : otherPlayers)
-            if (!player.hasLost())
-                return false;
-        return true;
     }
 
     private Player getPlayerWithHighestBalance(List<Player> remainingPlayers) {
