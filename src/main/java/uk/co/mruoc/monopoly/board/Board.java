@@ -70,7 +70,7 @@ public class Board {
         locations.add(new Property("Electric Company", 150));
         locations.add(new Property("Whitehall", 140));
         locations.add(new Property("Northumberland Avenue", 160));
-        locations.add(new Property("Marylebone Station", 200));
+        locations.add(new TrainStation("Marylebone Station"));
         locations.add(new Property("Bow Street", 180));
         locations.add(new BasicLocation("Community Chest 2"));
         locations.add(new Property("Marlborough Street", 180));
@@ -80,7 +80,7 @@ public class Board {
         locations.add(new BasicLocation("Chance 2"));
         locations.add(new Property("Fleet Street", 220));
         locations.add(new Property("Trafalgar Square", 240));
-        locations.add(new Property("Fenchurch Street Station", 200));
+        locations.add(new TrainStation("Fenchurch Street Station"));
         locations.add(new Property("Leicester Square", 260));
         locations.add(new Property("Coventry Street", 260));
         locations.add(new Property("Water Works", 150));
@@ -90,7 +90,7 @@ public class Board {
         locations.add(new Property("Oxford Street", 300));
         locations.add(new BasicLocation("Community Chest"));
         locations.add(new Property("Bond Street", 320));
-        locations.add(new Property("Liverpool Street Station", 200));
+        locations.add(new TrainStation("Liverpool Street Station"));
         locations.add(new BasicLocation("Chance"));
         locations.add(new Property("Park Lane", 350));
         locations.add(new SuperTax());

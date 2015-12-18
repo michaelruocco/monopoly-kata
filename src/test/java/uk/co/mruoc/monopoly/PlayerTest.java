@@ -165,9 +165,7 @@ public class PlayerTest {
 
         assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(0);
 
-        System.out.println("setting owner of train station 1 to player");
         trainStation1.setOwner(player);
-        System.out.println("setting owner of train station 2 to player");
         trainStation2.setOwner(player);
 
         assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(2);

@@ -84,7 +84,6 @@ public class Player {
     }
 
     public void addProperty(Location location) {
-        System.out.println("adding property " + location.getName());
         properties.add(location);
     }
 
