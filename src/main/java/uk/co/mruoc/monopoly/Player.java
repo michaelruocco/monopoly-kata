@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import uk.co.mruoc.monopoly.board.Board;
 import uk.co.mruoc.monopoly.board.GoToJail;
 import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.board.TrainStation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,7 @@ public class Player {
     }
 
     public void addProperty(Location location) {
+        System.out.println("adding property " + location.getName());
         properties.add(location);
     }
 
@@ -116,6 +118,14 @@ public class Player {
             receiveSalary();
 
         location.applyTo(this);
+    }
+    ;
+    public int getNumberOfTrainStationsOwned() {
+        int trainStationCount = 0;
+        for (Location location : properties)
+            if (location instanceof TrainStation)
+                trainStationCount++;
+        return trainStationCount;
     }
 
     private boolean hasPassedGo() {

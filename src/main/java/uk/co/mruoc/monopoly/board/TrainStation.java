@@ -16,7 +16,7 @@ public class TrainStation extends Property {
             collectRentFrom(player);
             return;
         }
-        
+
         if (isPurchasableBy(player))
             setOwner(player);
     }

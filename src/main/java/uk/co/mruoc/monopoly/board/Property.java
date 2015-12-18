@@ -20,7 +20,6 @@ public class Property extends Location {
     @Override
     public void setOwner(Player player) {
         player.decrementBalance(cost);
-        player.addProperty(this);
         super.setOwner(player);
     }
 

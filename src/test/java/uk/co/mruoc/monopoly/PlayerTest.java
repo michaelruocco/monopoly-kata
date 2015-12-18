@@ -4,6 +4,7 @@ import org.junit.Test;
 import uk.co.mruoc.monopoly.board.Board;
 import uk.co.mruoc.monopoly.board.Property;
 import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.board.TrainStation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -155,6 +156,21 @@ public class PlayerTest {
         player.setBalance(-10);
 
         assertThat(player.hasLost()).isTrue();
+    }
+
+    @Test
+    public void shouldReturnNumberOfTrainStationsOwned() {
+        Location trainStation1 = new TrainStation("Train Station 1");
+        Location trainStation2 = new TrainStation("Train Station 2");
+
+        assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(0);
+
+        System.out.println("setting owner of train station 1 to player");
+        trainStation1.setOwner(player);
+        System.out.println("setting owner of train station 2 to player");
+        trainStation2.setOwner(player);
+
+        assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(2);
     }
 
     private void givenPlayerHasPassedGo(int times) {
