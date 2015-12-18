@@ -33,7 +33,7 @@ public class BoardTest {
     public void shouldReturnLocationForPlayerPosition() {
         Player player = new Player("", board);
         player.setPosition(39);
-        uk.co.mruoc.monopoly.board.Location location = board.getLocation(player);
+        Location location = board.getLocation(player);
         assertThat(location.getName()).isEqualTo("Mayfair");
     }
 
@@ -55,7 +55,7 @@ public class BoardTest {
     @Test
     public void shouldReturnLocationGivenName() {
         String locationName = "Just Visiting / Jail";
-        uk.co.mruoc.monopoly.board.Location location = board.getLocation(locationName);
+        Location location = board.getLocation(locationName);
         assertThat(location.getName()).isEqualTo(locationName);
     }
 
@@ -63,6 +63,23 @@ public class BoardTest {
     public void shouldReturnJailPosition() {
         int expectedJailPosition = 10;
         assertThat(board.getJailPosition()).isEqualTo(expectedJailPosition);
+    }
+
+    @Test
+    public void shouldReturnProperty() {
+        String propertyName = "Pall Mall";
+        Property property = board.getProperty(propertyName);
+        assertThat(property.getName()).isEqualTo(propertyName);
+    }
+
+    @Test
+    public void shouldThrowGameExceptionIfNameDoesNotReferToProperty() {
+        try {
+            board.getProperty("Go");
+            fail();
+        } catch (GameException e) {
+            assertThat(e.getMessage()).isEqualTo("location Go is not a property");
+        }
     }
 
 }

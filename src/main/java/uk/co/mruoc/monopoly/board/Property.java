@@ -19,7 +19,7 @@ public abstract class Property extends Location {
             return;
         }
 
-        if (isPurchasableBy(player))
+        if (player.canAfford(this))
             setOwner(player);
     }
 
@@ -37,10 +37,8 @@ public abstract class Property extends Location {
         return getOwner() != null;
     }
 
-    private boolean isPurchasableBy(Player player) {
-        if (hasOwner())
-            return false;
-        return player.getBalance() >= cost;
+    public int getCost() {
+        return cost;
     }
 
     private void collectRentFrom(Player player) {

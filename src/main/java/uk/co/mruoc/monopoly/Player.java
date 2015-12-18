@@ -1,10 +1,7 @@
 package uk.co.mruoc.monopoly;
 
 import org.apache.log4j.Logger;
-import uk.co.mruoc.monopoly.board.Board;
-import uk.co.mruoc.monopoly.board.GoToJail;
-import uk.co.mruoc.monopoly.board.Location;
-import uk.co.mruoc.monopoly.board.TrainStation;
+import uk.co.mruoc.monopoly.board.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,6 +122,10 @@ public class Player {
             if (location instanceof TrainStation)
                 trainStationCount++;
         return trainStationCount;
+    }
+
+    public boolean canAfford(Property property) {
+        return balance >= property.getCost();
     }
 
     private boolean hasPassedGo() {

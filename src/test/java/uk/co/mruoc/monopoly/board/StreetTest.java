@@ -73,4 +73,9 @@ public class StreetTest {
         assertThat(street.calculateRent()).isEqualTo(RENT);
     }
 
+    @Test
+    public void shouldReturnCost() {
+        assertThat(street.getCost()).isEqualTo(COST);
+    }
+
 }

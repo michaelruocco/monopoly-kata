@@ -168,6 +168,24 @@ public class PlayerTest {
         assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(2);
     }
 
+    @Test
+    public void shouldReturnTrueIfPlayerCanAffordProperty() {
+        Property property = new Street("Name", 50, 0);
+
+        player.setBalance(50);
+
+        assertThat(player.canAfford(property)).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalseIfPlayerCannotAffordProperty() {
+        Property property = new Street("Name", 50, 0);
+
+        player.setBalance(0);
+
+        assertThat(player.canAfford(property)).isFalse();
+    }
+
     private void givenPlayerHasPassedGo(int times) {
         player.move(board.size() * times);
     }
