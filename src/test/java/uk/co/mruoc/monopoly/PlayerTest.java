@@ -117,6 +117,15 @@ public class PlayerTest {
     }
 
     @Test
+    public void shouldIncrementBalance() {
+        player.setBalance(100);
+
+        player.incrementBalance(25);
+
+        assertThat(player.getBalance()).isEqualTo(125);
+    }
+
+    @Test
     public void shouldOwnProperty() {
         Location location = createLocation();
 

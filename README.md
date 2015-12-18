@@ -17,5 +17,5 @@ tried to keep the code as clean and simple as possible. Feedback and comments ar
 You can run the unit and cucumber tests for this project by running the following command:
 
 ```
-gradlew assemble check cucumber
+gradlew clean build cucumber
 ```

@@ -6,10 +6,6 @@ public class Property extends Location {
 
     private final int cost;
 
-    public Property(String name) {
-        this(name, 0);
-    }
-
     public Property(String name, int cost) {
         super(name);
         this.cost = cost;

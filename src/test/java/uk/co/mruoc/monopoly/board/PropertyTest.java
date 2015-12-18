@@ -14,21 +14,6 @@ public class PropertyTest {
     private final Player player = new Player("PLAYER");
 
     @Test
-    public void shouldReturnName() {
-        assertThat(location.getName()).isEqualTo(NAME);
-    }
-
-    @Test
-    public void shouldReturnTrueIfEqualsName() {
-        assertThat(location.nameEquals(NAME)).isTrue();
-    }
-
-    @Test
-    public void shouldReturnFalseIfDoesNotEqualName() {
-        assertThat(location.nameEquals("NOT_EQUAL")).isFalse();
-    }
-
-    @Test
     public void shouldNotHaveOwnerByDefault() {
         assertThat(location.hasOwner()).isFalse();
         assertThat(location.getOwner()).isNull();

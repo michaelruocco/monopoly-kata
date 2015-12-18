@@ -101,6 +101,10 @@ public class Player {
         balance -= valueToSubtract;
     }
 
+    public void incrementBalance(double valueToAdd) {
+        balance += valueToAdd;
+    }
+
     public void endTurn() {
         Location location = board.getLocation(this);
         if (isGoToJail(location)) {
@@ -124,10 +128,6 @@ public class Player {
 
     private boolean hasNegativeBalance() {
         return balance < 0;
-    }
-
-    private void incrementBalance(double valueToAdd) {
-        balance += valueToAdd;
     }
 
     private void resetTimesPassedGo() {

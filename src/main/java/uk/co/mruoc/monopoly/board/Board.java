@@ -60,7 +60,7 @@ public class Board {
         locations.add(new BasicLocation("Community Chest 1"));
         locations.add(new Property("Whitechapel Road", 60));
         locations.add(new IncomeTax());
-        locations.add(new Property("Kings Cross Station", 200));
+        locations.add(new TrainStation("Kings Cross Station"));
         locations.add(new Property("The Angel Islington", 100));
         locations.add(new BasicLocation("Chance 1"));
         locations.add(new Property("Euston Road", 100));
@@ -75,7 +75,7 @@ public class Board {
         locations.add(new BasicLocation("Community Chest 2"));
         locations.add(new Property("Marlborough Street", 180));
         locations.add(new Property("Vine Street", 200));
-        locations.add(new Property("Free Parking"));
+        locations.add(new BasicLocation("Free Parking"));
         locations.add(new Property("Strand", 220));
         locations.add(new BasicLocation("Chance 2"));
         locations.add(new Property("Fleet Street", 220));

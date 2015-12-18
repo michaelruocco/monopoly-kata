@@ -4,6 +4,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
 
 import java.util.List;
 
@@ -21,10 +22,23 @@ public class PlayerWin {
         game = new Game(players);
     }
 
+    @Given("^Player (\\d+) starts with a balance of (\\d+)$")
+    public void player_starts_with_a_balance_of(int playerNumber, int balance) throws Throwable {
+        Player player = getPlayer(playerNumber);
+        player.setBalance(balance);
+    }
+
+    @Given("^Player (\\d+) owns \"([^\"]*)\"$")
+    public void player_owns(int playerNumber, String locationName) throws Throwable {
+        Player player = getPlayer(playerNumber);
+        Location location = board.getLocation(locationName);
+        location.setOwner(player);
+    }
+
     @When("^Player (\\d+) lands on \"(.*?)\"$")
     public void player_lands_on(int playerNumber, String locationName) throws Throwable {
         int position = board.getLocationPosition(locationName);
-        Player firstPlayer = players.getPlayer(playerNumber - 1);
+        Player firstPlayer = getPlayer(playerNumber);
         game.move(firstPlayer, position);
     }
 
@@ -51,6 +65,11 @@ public class PlayerWin {
         List<Player> remainingPlayers = players.getRemainingPlayers();
         for (Player player : remainingPlayers)
             assertThat(player.getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
+    }
+
+    @Then("^Player (\\d+) has to pay (\\d+) in rent to player (\\d+)$")
+    public void player_has_to_pay_in_rent_to_player(int  playerNumber1, int rent, int playerNumber2) throws Throwable {
+        //intentionally blank
     }
 
     private Player getPlayer(int playerNumber) {

@@ -16,7 +16,7 @@ public class GameTest {
 
     @Test
     public void playerOrderShouldBeTheSameForEveryRound() {
-        game.play(10);
+        game.play(20);
 
         assertThat(playerOrderIsSameForEveryRound(game)).isTrue();
     }
@@ -28,7 +28,7 @@ public class GameTest {
 
     @Test
     public void gameShouldHaveTwentyRoundsPlayed() {
-        game.play(10);
+        game.play(20);
 
         assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(20);
     }
@@ -77,19 +77,19 @@ public class GameTest {
 
     @Test
     public void shouldAddRoundWhenEachPlayerHasTakenTurn() {
-        game.nextTurn(10);
-        game.nextTurn(10);
-        game.nextTurn(10);
-        game.nextTurn(10);
+        game.nextTurn(20);
+        game.nextTurn(20);
+        game.nextTurn(20);
+        game.nextTurn(20);
         assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(2);
     }
 
     @Test
     public void gameShouldHaveEveryRoundPlayed() {
-        game.nextTurn(10);
-        game.nextTurn(10);
-        game.nextTurn(10);
-        game.nextTurn(10);
+        game.nextTurn(20);
+        game.nextTurn(20);
+        game.nextTurn(20);
+        game.nextTurn(20);
 
         Round round = game.getRounds().get(1);
 
@@ -100,7 +100,7 @@ public class GameTest {
     public void gameShouldSkipPlayerTurnIfPlayerHasLost() {
         givenPlayerOneHasLost();
 
-        game.nextTurn(10);
+        game.nextTurn(20);
 
         assertThat(getPlayerOne().getNumberOfRoundsPlayed()).isEqualTo(0);
         assertThat(getPlayerTwo().getNumberOfRoundsPlayed()).isEqualTo(1);
