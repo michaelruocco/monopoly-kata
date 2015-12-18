@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrainStationTest {
 
-    private final Location station1 = new TrainStation("Station1");
-    private final Location station2 = new TrainStation("Station2");
+    private final Property station1 = new TrainStation("Station1");
+    private final Property station2 = new TrainStation("Station2");
     private final Player player = new Player("PLAYER");
 
     @Test

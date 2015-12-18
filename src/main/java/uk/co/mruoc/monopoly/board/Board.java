@@ -46,6 +46,14 @@ public class Board {
         return getLocation(position);
     }
 
+    public Property getProperty(String propertyName) {
+        int position = getLocationPosition(propertyName);
+        Location location = getLocation(position);
+        if (location instanceof Property)
+            return (Property) location;
+        throw new GameException("location " + propertyName + " is not a property");
+    }
+
     public Location getLocation(Player player) {
         return getLocation(player.getPosition());
     }
@@ -56,45 +64,45 @@ public class Board {
 
     private void addLocations() {
         locations.add(new BasicLocation("Go"));
-        locations.add(new Property("Old Kent Road", 60));
+        locations.add(new Street("Old Kent Road", 60, 2));
         locations.add(new BasicLocation("Community Chest 1"));
-        locations.add(new Property("Whitechapel Road", 60));
+        locations.add(new Street("Whitechapel Road", 60, 4));
         locations.add(new IncomeTax());
         locations.add(new TrainStation("Kings Cross Station"));
-        locations.add(new Property("The Angel Islington", 100));
+        locations.add(new Street("The Angel Islington", 100, 6));
         locations.add(new BasicLocation("Chance 1"));
-        locations.add(new Property("Euston Road", 100));
-        locations.add(new Property("Pentonville Road", 120));
+        locations.add(new Street("Euston Road", 100, 6));
+        locations.add(new Street("Pentonville Road", 120, 8));
         locations.add(new BasicLocation(JAIL_POSITION_NAME));
-        locations.add(new Property("Pall Mall", 140));
-        locations.add(new Property("Electric Company", 150));
-        locations.add(new Property("Whitehall", 140));
-        locations.add(new Property("Northumberland Avenue", 160));
+        locations.add(new Street("Pall Mall", 140, 10));
+        locations.add(new Utility("Electric Company", 150));
+        locations.add(new Street("Whitehall", 140, 10));
+        locations.add(new Street("Northumberland Avenue", 160, 12));
         locations.add(new TrainStation("Marylebone Station"));
-        locations.add(new Property("Bow Street", 180));
+        locations.add(new Street("Bow Street", 180, 14));
         locations.add(new BasicLocation("Community Chest 2"));
-        locations.add(new Property("Marlborough Street", 180));
-        locations.add(new Property("Vine Street", 200));
+        locations.add(new Street("Marlborough Street", 180, 14));
+        locations.add(new Street("Vine Street", 200, 16));
         locations.add(new BasicLocation("Free Parking"));
-        locations.add(new Property("Strand", 220));
+        locations.add(new Street("Strand", 220, 18));
         locations.add(new BasicLocation("Chance 2"));
-        locations.add(new Property("Fleet Street", 220));
-        locations.add(new Property("Trafalgar Square", 240));
+        locations.add(new Street("Fleet Street", 220, 18));
+        locations.add(new Street("Trafalgar Square", 240, 20));
         locations.add(new TrainStation("Fenchurch Street Station"));
-        locations.add(new Property("Leicester Square", 260));
-        locations.add(new Property("Coventry Street", 260));
-        locations.add(new Property("Water Works", 150));
-        locations.add(new Property("Piccadilly", 280));
+        locations.add(new Street("Leicester Square", 260, 22));
+        locations.add(new Street("Coventry Street", 260, 22));
+        locations.add(new Utility("Water Works", 150));
+        locations.add(new Street("Piccadilly", 280, 24));
         locations.add(new GoToJail(this));
-        locations.add(new Property("Regent Street", 300));
-        locations.add(new Property("Oxford Street", 300));
+        locations.add(new Street("Regent Street", 300, 26));
+        locations.add(new Street("Oxford Street", 300, 26));
         locations.add(new BasicLocation("Community Chest"));
-        locations.add(new Property("Bond Street", 320));
+        locations.add(new Street("Bond Street", 320, 28));
         locations.add(new TrainStation("Liverpool Street Station"));
         locations.add(new BasicLocation("Chance"));
-        locations.add(new Property("Park Lane", 350));
+        locations.add(new Street("Park Lane", 350, 35));
         locations.add(new SuperTax());
-        locations.add(new Property("Mayfair", 400));
+        locations.add(new Street("Mayfair", 400, 50));
     }
 
 }

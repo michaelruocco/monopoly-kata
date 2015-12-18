@@ -1,10 +1,7 @@
 package uk.co.mruoc.monopoly;
 
 import org.junit.Test;
-import uk.co.mruoc.monopoly.board.Board;
-import uk.co.mruoc.monopoly.board.Property;
-import uk.co.mruoc.monopoly.board.Location;
-import uk.co.mruoc.monopoly.board.TrainStation;
+import uk.co.mruoc.monopoly.board.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -128,20 +125,20 @@ public class PlayerTest {
 
     @Test
     public void shouldOwnProperty() {
-        Location location = createLocation();
+        Property property = createProperty();
 
-        player.addProperty(location);
+        player.addProperty(property);
 
-        assertThat(player.ownsProperty(location)).isTrue();
+        assertThat(player.ownsProperty(property)).isTrue();
     }
 
     @Test
     public void shouldOwnPropertyByName() {
-        Location location = createLocation();
+        Property property = createProperty();
 
-        player.addProperty(location);
+        player.addProperty(property);
 
-        assertThat(player.ownsProperty(location.getName())).isTrue();
+        assertThat(player.ownsProperty(property.getName())).isTrue();
     }
 
     @Test
@@ -160,8 +157,8 @@ public class PlayerTest {
 
     @Test
     public void shouldReturnNumberOfTrainStationsOwned() {
-        Location trainStation1 = new TrainStation("Train Station 1");
-        Location trainStation2 = new TrainStation("Train Station 2");
+        Property trainStation1 = new TrainStation("Train Station 1");
+        Property trainStation2 = new TrainStation("Train Station 2");
 
         assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(0);
 
@@ -180,8 +177,8 @@ public class PlayerTest {
         player.move(goToJailPosition);
     }
 
-    private Location createLocation() {
-        return new Property("PROPERTY", 50);
+    private Property createProperty() {
+        return new Street("PROPERTY", 50, 0);
     }
 
 }

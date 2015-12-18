@@ -2,9 +2,10 @@ package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.Player;
 
-public class Property extends Location {
+public abstract class Property extends Location {
 
     private final int cost;
+    private Player owner;
 
     public Property(String name, int cost) {
         super(name);
@@ -13,20 +14,41 @@ public class Property extends Location {
 
     @Override
     public void applyTo(Player player) {
+        if (hasOwner()) {
+            collectRentFrom(player);
+            return;
+        }
+
         if (isPurchasableBy(player))
             setOwner(player);
     }
 
-    @Override
-    public void setOwner(Player player) {
-        player.decrementBalance(cost);
-        super.setOwner(player);
+    public void setOwner(Player owner) {
+        owner.decrementBalance(cost);
+        owner.addProperty(this);
+        this.owner = owner;
     }
 
-    public boolean isPurchasableBy(Player player) {
+    public Player getOwner() {
+        return owner;
+    }
+
+    public boolean hasOwner() {
+        return getOwner() != null;
+    }
+
+    private boolean isPurchasableBy(Player player) {
         if (hasOwner())
             return false;
         return player.getBalance() >= cost;
     }
+
+    private void collectRentFrom(Player player) {
+        int rent = calculateRent();
+        player.decrementBalance(rent);
+        getOwner().incrementBalance(rent);
+    }
+
+    public abstract int calculateRent();
 
 }

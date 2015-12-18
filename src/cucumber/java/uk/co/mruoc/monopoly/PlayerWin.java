@@ -4,7 +4,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import uk.co.mruoc.monopoly.board.Board;
-import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.board.Property;
 
 import java.util.List;
 
@@ -29,10 +29,10 @@ public class PlayerWin {
     }
 
     @Given("^Player (\\d+) owns \"([^\"]*)\"$")
-    public void player_owns(int playerNumber, String locationName) throws Throwable {
+    public void player_owns(int playerNumber, String propertyName) throws Throwable {
         Player player = getPlayer(playerNumber);
-        Location location = board.getLocation(locationName);
-        location.setOwner(player);
+        Property property = board.getProperty(propertyName);
+        property.setOwner(player);
     }
 
     @When("^Player (\\d+) lands on \"(.*?)\"$")

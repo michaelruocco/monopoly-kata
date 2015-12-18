@@ -11,23 +11,7 @@ public class TrainStation extends Property {
     }
 
     @Override
-    public void applyTo(Player player) {
-        if (hasOwner()) {
-            collectRentFrom(player);
-            return;
-        }
-
-        if (isPurchasableBy(player))
-            setOwner(player);
-    }
-
-    private void collectRentFrom(Player player) {
-        int rent = calculateRent();
-        player.decrementBalance(rent);
-        getOwner().incrementBalance(rent);
-    }
-
-    private int calculateRent() {
+    public int calculateRent() {
         Player owner = getOwner();
         int rent = BASE_RENT;
         for (int i = 1; i < owner.getNumberOfTrainStationsOwned(); i++)

@@ -1,7 +1,5 @@
 package uk.co.mruoc.monopoly;
 
-import uk.co.mruoc.monopoly.board.Board;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

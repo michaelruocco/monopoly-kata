@@ -3,7 +3,6 @@ package uk.co.mruoc.monopoly;
 import org.junit.Test;
 import uk.co.mruoc.monopoly.board.Board;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
