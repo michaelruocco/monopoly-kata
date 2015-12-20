@@ -115,14 +115,6 @@ public class Player {
 
         location.applyTo(this, roll);
     }
-    ;
-    public int getNumberOfTrainStationsOwned() {
-        int trainStationCount = 0;
-        for (Location location : properties)
-            if (location instanceof TrainStation)
-                trainStationCount++;
-        return trainStationCount;
-    }
 
     public boolean canAfford(Property property) {
         return balance >= property.getCost();

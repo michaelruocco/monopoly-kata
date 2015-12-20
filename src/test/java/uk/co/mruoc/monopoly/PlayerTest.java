@@ -158,19 +158,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldReturnNumberOfTrainStationsOwned() {
-        Property trainStation1 = new TrainStation("Train Station 1", group);
-        Property trainStation2 = new TrainStation("Train Station 2", group);
-
-        assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(0);
-
-        trainStation1.setOwner(player);
-        trainStation2.setOwner(player);
-
-        assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(2);
-    }
-
-    @Test
     public void shouldReturnTrueIfPlayerCanAffordProperty() {
         Property property = new Street("Name", group, 50, 0);
 

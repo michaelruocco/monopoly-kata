@@ -13,9 +13,10 @@ public class TrainStation extends Property {
 
     @Override
     public int calculateRent(int roll) {
+        PropertyGroup group = getGroup();
         Player owner = getOwner();
         int rent = BASE_RENT;
-        for (int i = 1; i < owner.getNumberOfTrainStationsOwned(); i++)
+        for (int i = 1; i < group.getNumberOfPropertiesOwnedBy(owner); i++)
             rent = rent * 2;
         return rent;
     }
