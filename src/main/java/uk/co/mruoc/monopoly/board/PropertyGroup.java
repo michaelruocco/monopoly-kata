@@ -14,17 +14,31 @@ public class PropertyGroup {
     }
 
     public boolean allOwned() {
-        for (Property property : properties)
-            if (!property.hasOwner())
-                return false;
-        return true;
+        return getNumberOfPropertiesOwned() == size();
     }
 
     public boolean allOwnedBy(Player player) {
+        return getNumberOfPropertiesOwnedBy(player) == size();
+    }
+
+    public int getNumberOfPropertiesOwned() {
+        int count = 0;
         for (Property property : properties)
-            if (!player.ownsProperty(property))
-                return false;
-        return true;
+            if (property.hasOwner())
+                count++;
+        return count;
+    }
+
+    public int getNumberOfPropertiesOwnedBy(Player player) {
+        int count = 0;
+        for (Property property : properties)
+            if (player.ownsProperty(property))
+                count++;
+        return count;
+    }
+
+    public int size() {
+        return properties.size();
     }
 
 }

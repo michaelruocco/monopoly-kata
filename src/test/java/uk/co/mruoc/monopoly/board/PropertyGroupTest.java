@@ -28,8 +28,18 @@ public class PropertyGroupTest {
     }
 
     @Test
+    public void shouldReturnSize() {
+        assertThat(group.size()).isEqualTo(3);
+    }
+
+    @Test
     public void shouldReturnFalseIfAllPropertiesInGroupAreNotOwned() {
         assertThat(group.allOwned()).isFalse();
+    }
+
+    @Test
+    public void shouldReturnNumberOfPropertiesOwned() {
+        assertThat(group.getNumberOfPropertiesOwned()).isEqualTo(0);
     }
 
     @Test
@@ -39,6 +49,12 @@ public class PropertyGroupTest {
         street3.setOwner(player2);
 
         assertThat(group.allOwned()).isTrue();
+        assertThat(group.getNumberOfPropertiesOwned()).isEqualTo(3);
+    }
+
+    @Test
+    public void shouldReturnNumberOfPropertiesOwnedByPlayer() {
+        assertThat(group.getNumberOfPropertiesOwnedBy(player1)).isEqualTo(0);
     }
 
     @Test
@@ -48,6 +64,8 @@ public class PropertyGroupTest {
         street3.setOwner(player2);
 
         assertThat(group.allOwnedBy(player1)).isFalse();
+        assertThat(group.getNumberOfPropertiesOwnedBy(player1)).isEqualTo(2);
+        assertThat(group.getNumberOfPropertiesOwnedBy(player2)).isEqualTo(1);
     }
 
     @Test
@@ -57,6 +75,8 @@ public class PropertyGroupTest {
         street3.setOwner(player1);
 
         assertThat(group.allOwnedBy(player1)).isTrue();
+        assertThat(group.getNumberOfPropertiesOwnedBy(player1)).isEqualTo(3);
+        assertThat(group.getNumberOfPropertiesOwnedBy(player2)).isEqualTo(0);
     }
 
 }
