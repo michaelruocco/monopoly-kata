@@ -142,7 +142,7 @@ public class Player {
         message.append(getName());
         message.append(" ");
         message.append(roll.value());
-        message.append(" space to board ");
+        message.append(" spaces to ");
         message.append(location.getName());
         return message.toString();
     }
