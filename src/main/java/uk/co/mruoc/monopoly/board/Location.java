@@ -1,6 +1,7 @@
 package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.Player;
+import uk.co.mruoc.monopoly.Roll;
 
 public abstract class Location {
 
@@ -18,8 +19,10 @@ public abstract class Location {
         return this.name.equalsIgnoreCase(name);
     }
 
-    public abstract void applyTo(Player player, int roll);
+    public void applyTo(Player player) {
+        applyTo(player, new Roll());
+    }
 
-    public abstract void applyTo(Player player);
+    public abstract void applyTo(Player player, Roll roll);
 
 }

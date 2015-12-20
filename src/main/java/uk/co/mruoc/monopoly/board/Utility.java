@@ -1,5 +1,7 @@
 package uk.co.mruoc.monopoly.board;
 
+import uk.co.mruoc.monopoly.Roll;
+
 public class Utility extends Property {
 
     public Utility(String name, PropertyGroup group, int cost) {
@@ -7,15 +9,15 @@ public class Utility extends Property {
     }
 
     @Override
-    public int calculateRent(int roll) {
+    public int calculateRent(Roll roll) {
         PropertyGroup group = getGroup();
         if (group.getNumberOfPropertiesOwned() == 0)
             return 0;
 
         if (group.allOwned())
-            return roll * 10;
+            return roll.value() * 10;
 
-        return roll * 4;
+        return roll.value() * 4;
     }
 
 }

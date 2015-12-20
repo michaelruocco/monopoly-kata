@@ -9,3 +9,8 @@ Feature: Player Movement
     Given A player starts a turn on "Mayfair"
     When The player rolls a 6
     Then The player ends the turn on "Kings Cross Station"
+
+  Scenario: Player does not roll doubles
+    Given A player starts a turn on "Go"
+    When The players rolls a 1 and a 6
+    Then The player ends the turn on "Chance 1"

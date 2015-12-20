@@ -2,6 +2,7 @@ package uk.co.mruoc.monopoly.board;
 
 import org.junit.Test;
 import uk.co.mruoc.monopoly.Player;
+import uk.co.mruoc.monopoly.Roll;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,7 +10,7 @@ public class UtilityTest {
 
     private static final String NAME = "NAME";
     private static final int COST = 20;
-    private static final int ROLL = 10;
+    private static final Roll ROLL = new Roll(10, 0);
 
     private final PropertyGroup group = new PropertyGroup();
     private final Player player = new Player("Player1");
@@ -26,7 +27,7 @@ public class UtilityTest {
     public void shouldCalculateRentAsFourTimesDiceValueIfOneUtilityOwned() {
         utility1.setOwner(player);
 
-        assertThat(utility1.calculateRent(ROLL)).isEqualTo(4 * ROLL);
+        assertThat(utility1.calculateRent(ROLL)).isEqualTo(4 * ROLL.value());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class UtilityTest {
         utility1.setOwner(player);
         utility2.setOwner(player);
 
-        assertThat(utility1.calculateRent(ROLL)).isEqualTo(10 * ROLL);
+        assertThat(utility1.calculateRent(ROLL)).isEqualTo(10 * ROLL.value());
     }
 
 }

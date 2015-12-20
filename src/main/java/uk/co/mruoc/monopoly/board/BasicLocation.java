@@ -1,6 +1,7 @@
 package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.Player;
+import uk.co.mruoc.monopoly.Roll;
 
 public class BasicLocation extends Location {
 
@@ -9,12 +10,7 @@ public class BasicLocation extends Location {
     }
 
     @Override
-    public void applyTo(Player player) {
-        applyTo(player, 0);
-    }
-
-    @Override
-    public void applyTo(Player player, int roll) {
+    public void applyTo(Player player, Roll roll) {
         //intentionally blank
     }
 

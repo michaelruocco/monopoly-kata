@@ -29,8 +29,12 @@ public class Player {
         this.board = board;
     }
 
-    public void move(int roll) {
-        this.position += roll;
+    public void move(int rollValue) {
+        move(new Roll(rollValue, 0));
+    }
+
+    public void move(Roll roll) {
+        this.position += roll.value();
         while (passedGo()) {
             setPosition(getPassedGoPosition());
             incrementTimesPassedGo();
@@ -87,7 +91,11 @@ public class Player {
         balance += valueToAdd;
     }
 
-    public void endTurn(int roll) {
+    public void endTurn(int rollValue) {
+        endTurn(new Roll(rollValue, 0));
+    }
+
+    public void endTurn(Roll roll) {
         Location location = board.getLocation(this);
         if (isGoToJail(location)) {
             location.applyTo(this, roll);
@@ -128,7 +136,7 @@ public class Player {
         return getPosition() - board.size();
     }
 
-    private String createMoveDebugMessage(int roll) {
+    private String createMoveDebugMessage(Roll roll) {
         Location location = board.getLocation(this);
         StringBuilder message = new StringBuilder("moved player ");
         message.append(getName());

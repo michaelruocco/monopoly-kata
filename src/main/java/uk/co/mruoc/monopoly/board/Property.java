@@ -1,6 +1,7 @@
 package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.Player;
+import uk.co.mruoc.monopoly.Roll;
 
 public abstract class Property extends Location {
 
@@ -16,12 +17,7 @@ public abstract class Property extends Location {
     }
 
     @Override
-    public void applyTo(Player player) {
-        applyTo(player, 0);
-    }
-
-    @Override
-    public void applyTo(Player player, int roll) {
+    public void applyTo(Player player, Roll roll) {
         if (hasOwner()) {
             collectRentFrom(player, roll);
             return;
@@ -59,12 +55,12 @@ public abstract class Property extends Location {
     }
 
     public int calculateRent() {
-        return calculateRent(0);
+        return calculateRent(new Roll());
     }
 
-    public abstract int calculateRent(int roll);
+    public abstract int calculateRent(Roll roll);
 
-    private void collectRentFrom(Player player, int roll) {
+    private void collectRentFrom(Player player, Roll roll) {
         int rent = calculateRent(roll);
         player.decrementBalance(rent);
         getOwner().incrementBalance(rent);

@@ -25,7 +25,11 @@ public class Game {
             nextTurn(generateRoll());
     }
 
-    public void play(int fixedRoll) {
+    public void play(int fixedRollValue) {
+        play(new Roll(fixedRollValue, 0));
+    }
+
+    public void play(Roll fixedRoll) {
         while(!isComplete())
             nextTurn(fixedRoll);
     }
@@ -34,12 +38,21 @@ public class Game {
         return !playersRemaining() || !roundsRemaining();
     }
 
-    public void nextTurn(int roll) {
+    public void nextTurn(int rollValue) {
+        Player player = getNextPlayer();
+        move(player, new Roll(rollValue, 0));
+    }
+
+    public void nextTurn(Roll roll) {
         Player player = getNextPlayer();
         move(player, roll);
     }
 
-    public void move(Player player, int roll) {
+    public void move(Player player, int rollValue) {
+        move(player, new Roll(rollValue, 0));
+    }
+
+    public void move(Player player, Roll roll) {
         player.move(roll);
         currentRound.takeTurn(player);
         player.endTurn(roll);
@@ -54,8 +67,14 @@ public class Game {
         return rounds;
     }
 
-    private int generateRoll() {
-        return random.nextInt(12) + 1;
+    private Roll generateRoll() {
+        int dice1 = generateDiceValue();
+        int dice2 = generateDiceValue();
+        return new Roll(dice1, dice2);
+    }
+
+    private int generateDiceValue() {
+        return random.nextInt(6) + 1;
     }
 
     private Player getNextPlayer() {

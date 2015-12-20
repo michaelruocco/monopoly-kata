@@ -1,6 +1,7 @@
 package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.Player;
+import uk.co.mruoc.monopoly.Roll;
 
 public class TrainStation extends Property {
 
@@ -12,7 +13,7 @@ public class TrainStation extends Property {
     }
 
     @Override
-    public int calculateRent(int roll) {
+    public int calculateRent(Roll roll) {
         PropertyGroup group = getGroup();
         Player owner = getOwner();
         int rent = BASE_RENT;
