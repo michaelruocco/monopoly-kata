@@ -14,3 +14,19 @@ Feature: Player Movement
     Given A player starts a turn on "Go"
     When The players rolls a 1 and a 6
     Then The player ends the turn on "Chance 1"
+
+  Scenario: Player does rolls doubles and can take an extra turn
+    Given A player starts a turn on "Go"
+    When The players rolls a 3 and a 3
+    Then The player ends the turn on "The Angel Islington"
+    When The players rolls a 1 and a 3
+    Then The player ends the turn on "Just Visiting / Jail"
+
+  Scenario: Player does rolls two doubles and can take two extra turns
+    Given A player starts a turn on "Go"
+    When The players rolls a 3 and a 3
+    Then The player ends the turn on "The Angel Islington"
+    When The players rolls a 3 and a 3
+    Then The player ends the turn on "Electric Company"
+    When The players rolls a 1 and a 3
+    Then The player ends the turn on "Bow Street"

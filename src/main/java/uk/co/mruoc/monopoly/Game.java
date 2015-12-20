@@ -56,7 +56,7 @@ public class Game {
         player.move(roll);
         currentRound.takeTurn(player);
         player.endTurn(roll);
-        setNextPlayer();
+        setNextPlayer(roll);
     }
 
     public int getNumberOfRoundsPlayed() {
@@ -89,7 +89,9 @@ public class Game {
         return players.getPlayer(nextPlayerIndex);
     }
 
-    private void setNextPlayer() {
+    private void setNextPlayer(Roll roll) {
+        if (roll.isDouble())
+            return;
         nextPlayerIndex++;
         if (nextPlayerIndex >= players.getNumberOfPlayers())
             setNextRound();

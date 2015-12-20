@@ -39,13 +39,13 @@ public class PlayerMovement {
     @When("^The player rolls a (\\d+)$")
     public void the_player_rolls_a(int rollValue) throws Throwable {
         Roll roll = new Roll(rollValue, 0);
-        game.move(player, roll);
+        game.nextTurn(rollValue);
     }
 
     @When("^The players rolls a (\\d+) and a (\\d+)$")
     public void the_players_rolls_a_and_a(int dice1, int dice2) throws Throwable {
         Roll roll = new Roll(dice1, dice2);
-        game.move(player, roll);
+        game.nextTurn(roll);
     }
 
     @Then("^The player is at position (\\d+)$")
