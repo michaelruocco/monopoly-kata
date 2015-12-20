@@ -157,6 +157,13 @@ public class PlayerTest {
         assertThat(player.canAfford(property)).isFalse();
     }
 
+    @Test
+    public void shouldMoveToJustVisiting() {
+        player.moveToJustVisiting();
+
+        assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
+    }
+
     private void givenPlayerHasPassedGo(int times) {
         player.move(board.size() * times);
     }

@@ -155,4 +155,8 @@ public class Player {
         LOG.info(message);
     }
 
+    public void moveToJustVisiting() {
+        position = board.getJailPosition();
+    }
+
 }

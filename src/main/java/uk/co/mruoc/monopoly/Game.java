@@ -13,8 +13,9 @@ public class Game {
 
     private final Players players;
 
-    private int nextPlayerIndex;
     private Round currentRound = new Round();
+    private int nextPlayerIndex;
+    private int doubleCount;
 
     public Game(Players players) {
         this.players = players;
@@ -53,10 +54,24 @@ public class Game {
     }
 
     public void move(Player player, Roll roll) {
-        player.move(roll);
+        movePlayer(player, roll);
         currentRound.takeTurn(player);
         player.endTurn(roll);
         setNextPlayer(roll);
+    }
+
+    private void movePlayer(Player player, Roll roll) {
+        if (threeConsecutiveDoubles(roll)) {
+            player.moveToJustVisiting();
+            return;
+        }
+        player.move(roll);
+    }
+
+    private boolean threeConsecutiveDoubles(Roll roll) {
+        if (doubleCount == 2)
+            return roll.isDouble();
+        return false;
     }
 
     public int getNumberOfRoundsPlayed() {
@@ -85,16 +100,23 @@ public class Game {
     }
 
     private Player skipPlayer() {
-        nextPlayerIndex++;
+        setNextPlayer();
         return players.getPlayer(nextPlayerIndex);
     }
 
     private void setNextPlayer(Roll roll) {
-        if (roll.isDouble())
+        if (roll.isDouble()) {
+            doubleCount++;
             return;
-        nextPlayerIndex++;
+        }
+        setNextPlayer();
         if (nextPlayerIndex >= players.getNumberOfPlayers())
             setNextRound();
+    }
+
+    private void setNextPlayer() {
+        nextPlayerIndex++;
+        doubleCount = 0;
     }
 
     private void setNextRound() {

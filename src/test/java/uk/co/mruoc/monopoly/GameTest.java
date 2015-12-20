@@ -105,6 +105,42 @@ public class GameTest {
         assertThat(getPlayerTwo().getNumberOfRoundsPlayed()).isEqualTo(1);
     }
 
+    @Test
+    public void gameShouldSwitchPlayerIfDoubleNotRolled() {
+        Roll roll = new Roll(2, 3);
+        Player player1 = players.getPlayer(0);
+        Player player2 = players.getPlayer(1);
+
+        game.nextTurn(roll);
+        game.nextTurn(roll);
+
+        assertThat(player1.getPosition()).isEqualTo(5);
+        assertThat(player2.getPosition()).isEqualTo(5);
+    }
+
+    @Test
+    public void shouldGivePlayerExtraTurnIfPlayerRollsDouble() {
+        Roll doubleRoll = new Roll(3, 3);
+        Player player1 = players.getPlayer(0);
+
+        game.nextTurn(doubleRoll);
+        game.nextTurn(doubleRoll);
+
+        assertThat(player1.getPosition()).isEqualTo(12);
+    }
+
+    @Test
+    public void shouldMovePlayerToJustVisitingIfThreeDoublesRolled() {
+        Roll doubleRoll = new Roll(3, 3);
+        Player player1 = players.getPlayer(0);
+
+        game.nextTurn(doubleRoll);
+        game.nextTurn(doubleRoll);
+        game.nextTurn(doubleRoll);
+
+        assertThat(player1.getPosition()).isEqualTo(board.getJailPosition());
+    }
+
     private boolean playerOrderIsSameForEveryRound(Game game) {
         for(Round round : game.getRounds())
             if (round.playersMatch(players))
