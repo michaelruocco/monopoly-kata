@@ -158,8 +158,8 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldMoveToJustVisiting() {
-        player.moveToJustVisiting();
+    public void shouldMoveToJail() {
+        player.moveToJail();
 
         assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
     }

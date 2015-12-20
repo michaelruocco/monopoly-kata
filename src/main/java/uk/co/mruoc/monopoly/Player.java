@@ -155,7 +155,7 @@ public class Player {
         LOG.info(message);
     }
 
-    public void moveToJustVisiting() {
+    public void moveToJail() {
         position = board.getJailPosition();
     }
 
