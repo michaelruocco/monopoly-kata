@@ -13,7 +13,7 @@ public class Player {
     private static final SalaryCalculator SALARY_CALCULATOR = new SalaryCalculator();
 
     private final List<Round> rounds = new ArrayList<>();
-    private final List<Location> properties = new ArrayList<>();
+    private final List<Property> properties = new ArrayList<>();
     private final Board board;
 
     private final String name;
@@ -80,17 +80,17 @@ public class Player {
         return name;
     }
 
-    public void addProperty(Location location) {
+    public void addProperty(Property location) {
         properties.add(location);
     }
 
-    public boolean ownsProperty(Location locationToCheck) {
-        return ownsProperty(locationToCheck.getName());
+    public boolean ownsProperty(Property propertyToCheck) {
+        return ownsProperty(propertyToCheck.getName());
     }
 
-    public boolean ownsProperty(String locationName) {
-        for (Location location : properties)
-            if (location.getName().equalsIgnoreCase(locationName))
+    public boolean ownsProperty(String propertyName) {
+        for (Property property : properties)
+            if (property.getName().equalsIgnoreCase(propertyName))
                 return true;
         return false;
     }
