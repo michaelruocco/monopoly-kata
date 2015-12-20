@@ -141,7 +141,7 @@ public class Player {
         StringBuilder message = new StringBuilder("moved player ");
         message.append(getName());
         message.append(" ");
-        message.append(roll);
+        message.append(roll.value());
         message.append(" space to board ");
         message.append(location.getName());
         return message.toString();
