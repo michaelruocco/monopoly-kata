@@ -126,24 +126,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldOwnProperty() {
-        Property property = createProperty();
-
-        player.addProperty(property);
-
-        assertThat(player.ownsProperty(property)).isTrue();
-    }
-
-    @Test
-    public void shouldOwnPropertyByName() {
-        Property property = createProperty();
-
-        player.addProperty(property);
-
-        assertThat(player.ownsProperty(property.getName())).isTrue();
-    }
-
-    @Test
     public void playerShouldStillBePlayingIfBalanceIsZeroOrGreater() {
         player.setBalance(0);
 
@@ -182,10 +164,6 @@ public class PlayerTest {
     private void givenPlayerLandsOnGoToJail() {
         int goToJailPosition = 30;
         player.move(goToJailPosition);
-    }
-
-    private Property createProperty() {
-        return new Street("PROPERTY", group, 50, 0);
     }
 
 }

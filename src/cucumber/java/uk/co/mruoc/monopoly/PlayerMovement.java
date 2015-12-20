@@ -59,7 +59,8 @@ public class PlayerMovement {
 
     @Then("^The player owns \"(.*?)\"$")
     public void the_player_owns(String expectedPropertyName) throws Throwable {
-        assertThat(player.ownsProperty(expectedPropertyName)).isTrue();
+        Property property = board.getProperty(expectedPropertyName);
+        assertThat(property.ownedBy(player)).isTrue();
     }
 
     private void setPlayerLocation(String locationName) {

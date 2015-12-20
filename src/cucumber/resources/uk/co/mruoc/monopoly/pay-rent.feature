@@ -66,3 +66,24 @@ Feature: Pay Rent
     Then Player 2 has to pay 120 in rent to player 1
     And Player 1 has a balance of 120
     And Player 2 has a balance of 80
+
+  Scenario: Player lands on property and all properties in group are not owned, player pays basic rent
+    Given The game is set up with 2 players
+    And Player 1 owns "Old Kent Road"
+    And Player 1 starts with a balance of 0
+    And Player 2 starts with a balance of 200
+    When Player 2 lands on "Old Kent Road"
+    Then Player 2 has to pay 2 in rent to player 1
+    And Player 1 has a balance of 2
+    And Player 2 has a balance of 198
+
+  Scenario: Player lands on property and all properties in group are owned, player pays double basic rent
+    Given The game is set up with 2 players
+    And Player 1 owns "Old Kent Road"
+    And Player 1 owns "Whitechapel Road"
+    And Player 1 starts with a balance of 0
+    And Player 2 starts with a balance of 200
+    When Player 2 lands on "Old Kent Road"
+    Then Player 2 has to pay 4 in rent to player 1
+    And Player 1 has a balance of 4
+    And Player 2 has a balance of 196

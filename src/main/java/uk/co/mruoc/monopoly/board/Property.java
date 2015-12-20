@@ -33,7 +33,6 @@ public abstract class Property extends Location {
 
     public void setOwner(Player owner) {
         owner.decrementBalance(cost);
-        owner.addProperty(this);
         this.owner = owner;
     }
 
@@ -45,14 +44,18 @@ public abstract class Property extends Location {
         return getOwner() != null;
     }
 
+    public boolean ownedBy(Player player) {
+        if (!hasOwner())
+            return false;
+        return owner.equals(player);
+    }
+
     public int getCost() {
         return cost;
     }
 
-    private void collectRentFrom(Player player, int roll) {
-        int rent = calculateRent(roll);
-        player.decrementBalance(rent);
-        getOwner().incrementBalance(rent);
+    public PropertyGroup getGroup() {
+        return group;
     }
 
     public int calculateRent() {
@@ -61,8 +64,10 @@ public abstract class Property extends Location {
 
     public abstract int calculateRent(int roll);
 
-    public PropertyGroup getGroup() {
-        return group;
+    private void collectRentFrom(Player player, int roll) {
+        int rent = calculateRent(roll);
+        player.decrementBalance(rent);
+        getOwner().incrementBalance(rent);
     }
 
 }

@@ -32,7 +32,7 @@ public class PropertyGroup {
     public int getNumberOfPropertiesOwnedBy(Player player) {
         int count = 0;
         for (Property property : properties)
-            if (player.ownsProperty(property))
+            if (property.ownedBy(player))
                 count++;
         return count;
     }
