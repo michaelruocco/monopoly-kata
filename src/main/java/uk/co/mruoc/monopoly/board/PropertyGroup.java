@@ -9,8 +9,8 @@ public class PropertyGroup {
 
     private final List<Property> properties = new ArrayList<>();
 
-    public void addProperty(Property street) {
-        properties.add(street);
+    public void addProperty(Property property) {
+        properties.add(property);
     }
 
     public boolean allOwned() {
@@ -39,6 +39,10 @@ public class PropertyGroup {
 
     public int size() {
         return properties.size();
+    }
+
+    public boolean contains(Property property) {
+        return properties.contains(property);
     }
 
 }

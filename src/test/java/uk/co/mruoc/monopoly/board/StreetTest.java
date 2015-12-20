@@ -11,8 +11,10 @@ public class StreetTest {
     private static final int COST = 20;
     private static final int RENT = 0;
 
-    private final Property street = new Street(NAME, COST, RENT);
+    private final PropertyGroup group = new PropertyGroup();
     private final Player player = new Player("PLAYER");
+
+    private final Property street = new Street(NAME, group, COST, RENT);
 
     @Test
     public void shouldNotHaveOwnerByDefault() {
@@ -76,6 +78,12 @@ public class StreetTest {
     @Test
     public void shouldReturnCost() {
         assertThat(street.getCost()).isEqualTo(COST);
+    }
+
+    @Test
+    public void shouldAddPropertyToGroup() {
+        assertThat(group.size()).isEqualTo(1);
+        assertThat(group.contains(street)).isTrue();
     }
 
 }

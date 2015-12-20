@@ -2,13 +2,20 @@ package uk.co.mruoc.monopoly.board;
 
 public class Utility extends Property {
 
-    public Utility(String name, int cost) {
-        super(name, cost);
+    public Utility(String name, PropertyGroup group, int cost) {
+        super(name, group, cost);
     }
 
     @Override
     public int calculateRent(int roll) {
-        return 4 * roll;
+        PropertyGroup group = getGroup();
+        if (group.getNumberOfPropertiesOwned() == 0)
+            return 0;
+
+        if (group.allOwned())
+            return roll * 10;
+
+        return roll * 4;
     }
 
 }

@@ -5,11 +5,14 @@ import uk.co.mruoc.monopoly.Player;
 public abstract class Property extends Location {
 
     private final int cost;
+    private final PropertyGroup group;
     private Player owner;
 
-    public Property(String name, int cost) {
+    public Property(String name, PropertyGroup group, int cost) {
         super(name);
+        this.group = group;
         this.cost = cost;
+        group.addProperty(this);
     }
 
     @Override
@@ -57,5 +60,9 @@ public abstract class Property extends Location {
     }
 
     public abstract int calculateRent(int roll);
+
+    public PropertyGroup getGroup() {
+        return group;
+    }
 
 }

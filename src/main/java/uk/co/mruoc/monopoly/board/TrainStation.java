@@ -4,10 +4,11 @@ import uk.co.mruoc.monopoly.Player;
 
 public class TrainStation extends Property {
 
+    private static final int COST = 200;
     private static final int BASE_RENT = 25;
 
-    public TrainStation(String name) {
-        super(name, 200);
+    public TrainStation(String name, PropertyGroup group) {
+        super(name, group, COST);
     }
 
     @Override

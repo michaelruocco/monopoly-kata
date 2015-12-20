@@ -4,8 +4,8 @@ public class Street extends Property {
 
     private final int rent;
 
-    public Street(String name, int cost, int rent) {
-        super(name, cost);
+    public Street(String name, PropertyGroup group, int cost, int rent) {
+        super(name, group, cost);
         this.rent  = rent;
     }
 

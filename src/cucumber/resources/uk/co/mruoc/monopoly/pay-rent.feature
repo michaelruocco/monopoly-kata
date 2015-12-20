@@ -55,3 +55,14 @@ Feature: Pay Rent
     Then Player 2 has to pay 48 in rent to player 1
     And Player 1 has a balance of 48
     And Player 2 has a balance of 152
+
+  Scenario: Player lands on electric company when both utilities are owned and pays rent of 10 times value of dice
+    Given The game is set up with 2 players
+    And Player 1 owns "Electric Company"
+    And Player 2 owns "Water Works"
+    And Player 1 starts with a balance of 0
+    And Player 2 starts with a balance of 200
+    When Player 2 lands on "Electric Company" and has rolled a 12
+    Then Player 2 has to pay 120 in rent to player 1
+    And Player 1 has a balance of 120
+    And Player 2 has a balance of 80

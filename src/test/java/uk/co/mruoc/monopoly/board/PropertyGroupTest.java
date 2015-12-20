@@ -14,17 +14,17 @@ public class PropertyGroupTest {
     private final Player player1 = new Player("Player 1");
     private final Player player2 = new Player("Player 2");
 
-    private final Property street1 = new Street("Street 1", COST, RENT);
-    private final Property street2 = new Street("Street 2", COST, RENT);
-    private final Property street3 = new Street("Street 3", COST, RENT);
-
     private final PropertyGroup group = new PropertyGroup();
 
-    @Before
-    public void setUp() {
-        group.addProperty(street1);
-        group.addProperty(street2);
-        group.addProperty(street3);
+    private final Property street1 = new Street("Street 1", group, COST, RENT);
+    private final Property street2 = new Street("Street 2", group, COST, RENT);
+    private final Property street3 = new Street("Street 3", group, COST, RENT);
+
+    @Test
+    public void shouldReturnPropertyGroup() {
+        assertThat(street1.getGroup()).isEqualTo(group);
+        assertThat(street2.getGroup()).isEqualTo(group);
+        assertThat(street3.getGroup()).isEqualTo(group);
     }
 
     @Test
@@ -77,6 +77,13 @@ public class PropertyGroupTest {
         assertThat(group.allOwnedBy(player1)).isTrue();
         assertThat(group.getNumberOfPropertiesOwnedBy(player1)).isEqualTo(3);
         assertThat(group.getNumberOfPropertiesOwnedBy(player2)).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldContainProperty() {
+        assertThat(group.contains(street1)).isTrue();
+        assertThat(group.contains(street2)).isTrue();
+        assertThat(group.contains(street3)).isTrue();
     }
 
 }

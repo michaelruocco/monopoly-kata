@@ -7,8 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrainStationTest {
 
-    private final Property station1 = new TrainStation("Station1");
-    private final Property station2 = new TrainStation("Station2");
+    private final PropertyGroup group = new PropertyGroup();
+    private final Property station1 = new TrainStation("Station1", group);
+    private final Property station2 = new TrainStation("Station2", group);
     private final Player player = new Player("PLAYER");
 
     @Test

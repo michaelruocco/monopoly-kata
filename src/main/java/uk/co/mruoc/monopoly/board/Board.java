@@ -11,6 +11,17 @@ public class Board {
 
     private final List<Location> locations = new ArrayList<>();
 
+    private PropertyGroup brownGroup = new PropertyGroup();
+    private PropertyGroup trainStationGroup = new PropertyGroup();
+    private PropertyGroup blueGroup = new PropertyGroup();
+    private PropertyGroup pinkGroup = new PropertyGroup();
+    private PropertyGroup utilityGroup = new PropertyGroup();
+    private PropertyGroup orangeGroup = new PropertyGroup();
+    private PropertyGroup redGroup = new PropertyGroup();
+    private PropertyGroup yellowGroup = new PropertyGroup();
+    private PropertyGroup greenGroup = new PropertyGroup();
+    private PropertyGroup purpleGroup = new PropertyGroup();
+
     public Board() {
         addLocations();
     }
@@ -64,45 +75,45 @@ public class Board {
 
     private void addLocations() {
         locations.add(new BasicLocation("Go"));
-        locations.add(new Street("Old Kent Road", 60, 2));
+        locations.add(new Street("Old Kent Road", brownGroup, 60, 2));
         locations.add(new BasicLocation("Community Chest 1"));
-        locations.add(new Street("Whitechapel Road", 60, 4));
+        locations.add(new Street("Whitechapel Road", brownGroup, 60, 4));
         locations.add(new IncomeTax());
-        locations.add(new TrainStation("Kings Cross Station"));
-        locations.add(new Street("The Angel Islington", 100, 6));
+        locations.add(new TrainStation("Kings Cross Station", trainStationGroup));
+        locations.add(new Street("The Angel Islington", blueGroup, 100, 6));
         locations.add(new BasicLocation("Chance 1"));
-        locations.add(new Street("Euston Road", 100, 6));
-        locations.add(new Street("Pentonville Road", 120, 8));
+        locations.add(new Street("Euston Road", blueGroup, 100, 6));
+        locations.add(new Street("Pentonville Road", blueGroup, 120, 8));
         locations.add(new BasicLocation(JAIL_POSITION_NAME));
-        locations.add(new Street("Pall Mall", 140, 10));
-        locations.add(new Utility("Electric Company", 150));
-        locations.add(new Street("Whitehall", 140, 10));
-        locations.add(new Street("Northumberland Avenue", 160, 12));
-        locations.add(new TrainStation("Marylebone Station"));
-        locations.add(new Street("Bow Street", 180, 14));
+        locations.add(new Street("Pall Mall", pinkGroup, 140, 10));
+        locations.add(new Utility("Electric Company", utilityGroup, 150));
+        locations.add(new Street("Whitehall", pinkGroup, 140, 10));
+        locations.add(new Street("Northumberland Avenue", pinkGroup, 160, 12));
+        locations.add(new TrainStation("Marylebone Station", trainStationGroup));
+        locations.add(new Street("Bow Street", orangeGroup, 180, 14));
         locations.add(new BasicLocation("Community Chest 2"));
-        locations.add(new Street("Marlborough Street", 180, 14));
-        locations.add(new Street("Vine Street", 200, 16));
+        locations.add(new Street("Marlborough Street", orangeGroup, 180, 14));
+        locations.add(new Street("Vine Street", orangeGroup, 200, 16));
         locations.add(new BasicLocation("Free Parking"));
-        locations.add(new Street("Strand", 220, 18));
+        locations.add(new Street("Strand", redGroup, 220, 18));
         locations.add(new BasicLocation("Chance 2"));
-        locations.add(new Street("Fleet Street", 220, 18));
-        locations.add(new Street("Trafalgar Square", 240, 20));
-        locations.add(new TrainStation("Fenchurch Street Station"));
-        locations.add(new Street("Leicester Square", 260, 22));
-        locations.add(new Street("Coventry Street", 260, 22));
-        locations.add(new Utility("Water Works", 150));
-        locations.add(new Street("Piccadilly", 280, 24));
+        locations.add(new Street("Fleet Street", redGroup, 220, 18));
+        locations.add(new Street("Trafalgar Square", redGroup, 240, 20));
+        locations.add(new TrainStation("Fenchurch Street Station", trainStationGroup));
+        locations.add(new Street("Leicester Square", yellowGroup, 260, 22));
+        locations.add(new Street("Coventry Street", yellowGroup, 260, 22));
+        locations.add(new Utility("Water Works", utilityGroup, 150));
+        locations.add(new Street("Piccadilly", yellowGroup, 280, 24));
         locations.add(new GoToJail(this));
-        locations.add(new Street("Regent Street", 300, 26));
-        locations.add(new Street("Oxford Street", 300, 26));
+        locations.add(new Street("Regent Street", greenGroup, 300, 26));
+        locations.add(new Street("Oxford Street", greenGroup, 300, 26));
         locations.add(new BasicLocation("Community Chest"));
-        locations.add(new Street("Bond Street", 320, 28));
-        locations.add(new TrainStation("Liverpool Street Station"));
+        locations.add(new Street("Bond Street", greenGroup, 320, 28));
+        locations.add(new TrainStation("Liverpool Street Station", trainStationGroup));
         locations.add(new BasicLocation("Chance"));
-        locations.add(new Street("Park Lane", 350, 35));
+        locations.add(new Street("Park Lane", purpleGroup, 350, 35));
         locations.add(new SuperTax());
-        locations.add(new Street("Mayfair", 400, 50));
+        locations.add(new Street("Mayfair", purpleGroup, 400, 50));
     }
 
 }

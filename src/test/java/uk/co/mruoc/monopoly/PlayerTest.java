@@ -11,6 +11,7 @@ public class PlayerTest {
     private static final String NAME = "Horse";
 
     private final Board board = new Board();
+    private final PropertyGroup group = new PropertyGroup();
     private final Player player = new Player(NAME, board);
 
     @Test
@@ -158,8 +159,8 @@ public class PlayerTest {
 
     @Test
     public void shouldReturnNumberOfTrainStationsOwned() {
-        Property trainStation1 = new TrainStation("Train Station 1");
-        Property trainStation2 = new TrainStation("Train Station 2");
+        Property trainStation1 = new TrainStation("Train Station 1", group);
+        Property trainStation2 = new TrainStation("Train Station 2", group);
 
         assertThat(player.getNumberOfTrainStationsOwned()).isEqualTo(0);
 
@@ -171,7 +172,7 @@ public class PlayerTest {
 
     @Test
     public void shouldReturnTrueIfPlayerCanAffordProperty() {
-        Property property = new Street("Name", 50, 0);
+        Property property = new Street("Name", group, 50, 0);
 
         player.setBalance(50);
 
@@ -180,7 +181,7 @@ public class PlayerTest {
 
     @Test
     public void shouldReturnFalseIfPlayerCannotAffordProperty() {
-        Property property = new Street("Name", 50, 0);
+        Property property = new Street("Name", group, 50, 0);
 
         player.setBalance(0);
 
@@ -197,7 +198,7 @@ public class PlayerTest {
     }
 
     private Property createProperty() {
-        return new Street("PROPERTY", 50, 0);
+        return new Street("PROPERTY", group, 50, 0);
     }
 
 }
