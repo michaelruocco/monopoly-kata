@@ -3,13 +3,14 @@ package uk.co.mruoc.monopoly;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import uk.co.mruoc.monopoly.board.Board;
 import uk.co.mruoc.monopoly.board.Property;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerMovement {
 
-    private final uk.co.mruoc.monopoly.board.Board board = new uk.co.mruoc.monopoly.board.Board();
+    private final Board board = new Board();
     private final Players players = new Players(2, board);
     private final Game game = new Game(players);
     private final Player player = players.getPlayer(0);
