@@ -8,12 +8,13 @@ public class UtilityTest {
 
     private static final String NAME = "NAME";
     private static final int COST = 20;
+    private static final int ROLL = 10;
 
     private final Property property = new Utility(NAME, COST);
 
     @Test
-    public void shouldCalculateRent() {
-        assertThat(property.calculateRent()).isEqualTo(0);
+    public void shouldCalculateRentAsFourTimesDiceValueIfOneUtilityOwned() {
+        assertThat(property.calculateRent(ROLL)).isEqualTo(4 * ROLL);
     }
 
 }

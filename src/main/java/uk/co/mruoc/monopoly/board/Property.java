@@ -14,8 +14,13 @@ public abstract class Property extends Location {
 
     @Override
     public void applyTo(Player player) {
+        applyTo(player, 0);
+    }
+
+    @Override
+    public void applyTo(Player player, int roll) {
         if (hasOwner()) {
-            collectRentFrom(player);
+            collectRentFrom(player, roll);
             return;
         }
 
@@ -41,12 +46,16 @@ public abstract class Property extends Location {
         return cost;
     }
 
-    private void collectRentFrom(Player player) {
-        int rent = calculateRent();
+    private void collectRentFrom(Player player, int roll) {
+        int rent = calculateRent(roll);
         player.decrementBalance(rent);
         getOwner().incrementBalance(rent);
     }
 
-    public abstract int calculateRent();
+    public int calculateRent() {
+        return calculateRent(0);
+    }
+
+    public abstract int calculateRent(int roll);
 
 }

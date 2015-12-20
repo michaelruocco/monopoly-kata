@@ -103,17 +103,17 @@ public class Player {
         balance += valueToAdd;
     }
 
-    public void endTurn() {
+    public void endTurn(int roll) {
         Location location = board.getLocation(this);
         if (isGoToJail(location)) {
-            location.applyTo(this);
+            location.applyTo(this, roll);
             return;
         }
 
         if (hasPassedGo())
             receiveSalary();
 
-        location.applyTo(this);
+        location.applyTo(this, roll);
     }
     ;
     public int getNumberOfTrainStationsOwned() {

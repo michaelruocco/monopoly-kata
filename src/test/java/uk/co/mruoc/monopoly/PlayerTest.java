@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerTest {
 
+    private static final int ROLL = 1;
     private static final String NAME = "Horse";
 
     private final Board board = new Board();
@@ -72,7 +73,7 @@ public class PlayerTest {
 
     @Test
     public void playerShouldReceiveNoSalaryIfTheyHaveNotPassedGo() {
-        player.endTurn();
+        player.endTurn(ROLL);
 
         assertThat(player.getBalance()).isEqualTo(0);
     }
@@ -82,7 +83,7 @@ public class PlayerTest {
         int timesPassedGo = 1;
         givenPlayerHasPassedGo(timesPassedGo);
 
-        player.endTurn();
+        player.endTurn(ROLL);
 
         assertThat(player.getBalance()).isEqualTo(200);
     }
@@ -91,7 +92,7 @@ public class PlayerTest {
     public void playerShouldReceiveMultipleSalariesIfTheyPassGoMoreThanOnce() {
         givenPlayerHasPassedGo(5);
 
-        player.endTurn();
+        player.endTurn(ROLL);
 
         assertThat(player.getBalance()).isEqualTo(1000);
     }
@@ -100,7 +101,7 @@ public class PlayerTest {
     public void playerShouldGoToJailIfLandsOnGoToJail() {
         givenPlayerLandsOnGoToJail();
 
-        player.endTurn();
+        player.endTurn(ROLL);
 
         assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
     }

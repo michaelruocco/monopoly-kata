@@ -10,7 +10,7 @@ public class Street extends Property {
     }
 
     @Override
-    public int calculateRent() {
+    public int calculateRent(int roll) {
         return rent;
     }
 

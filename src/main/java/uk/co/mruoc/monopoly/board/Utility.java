@@ -7,8 +7,8 @@ public class Utility extends Property {
     }
 
     @Override
-    public int calculateRent() {
-        return 0;
+    public int calculateRent(int roll) {
+        return 4 * roll;
     }
 
 }

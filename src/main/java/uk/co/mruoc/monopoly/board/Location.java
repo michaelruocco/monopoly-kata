@@ -18,6 +18,8 @@ public abstract class Location {
         return this.name.equalsIgnoreCase(name);
     }
 
+    public abstract void applyTo(Player player, int roll);
+
     public abstract void applyTo(Player player);
 
 }

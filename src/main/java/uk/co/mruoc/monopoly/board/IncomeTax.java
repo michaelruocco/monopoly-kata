@@ -13,6 +13,11 @@ public class IncomeTax extends Location {
 
     @Override
     public void applyTo(Player player) {
+        applyTo(player, 0);
+    }
+
+    @Override
+    public void applyTo(Player player, int roll) {
         payIncomeTax(player);
     }
 

@@ -42,7 +42,7 @@ public class Game {
     public void move(Player player, int roll) {
         player.move(roll);
         currentRound.takeTurn(player);
-        player.endTurn();
+        player.endTurn(roll);
         setNextPlayer();
     }
 

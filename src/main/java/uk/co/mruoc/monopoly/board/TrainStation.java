@@ -11,7 +11,7 @@ public class TrainStation extends Property {
     }
 
     @Override
-    public int calculateRent() {
+    public int calculateRent(int roll) {
         Player owner = getOwner();
         int rent = BASE_RENT;
         for (int i = 1; i < owner.getNumberOfTrainStationsOwned(); i++)

@@ -38,8 +38,15 @@ public class PlayerWin {
     @When("^Player (\\d+) lands on \"(.*?)\"$")
     public void player_lands_on(int playerNumber, String locationName) throws Throwable {
         int position = board.getLocationPosition(locationName);
-        Player firstPlayer = getPlayer(playerNumber);
-        game.move(firstPlayer, position);
+        Player player = getPlayer(playerNumber);
+        game.move(player, position);
+    }
+
+    @When("^Player (\\d+) lands on \"([^\"]*)\" and has rolled a (\\d+)$")
+    public void player_lands_on_and_has_rolled_a(int playerNumber, String locationName, int roll) throws Throwable {
+        int position = board.getLocationPosition(locationName);
+        Player player = getPlayer(playerNumber);
+        game.move(player, position);
     }
 
     @Then("^Player (\\d+) has a balance of (-?\\d+)$")
