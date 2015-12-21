@@ -13,3 +13,8 @@ Feature: Go To Jail
     When The player lands on "Go To Jail"
     Then The player is in jail
     And The player has a balance of 500
+
+  Scenario: Player passes over go to jail and turn continues as normal
+    Given A player starts a turn on "Piccadilly"
+    When The player rolls a 2
+    Then The player ends the turn on "Regent Street"
