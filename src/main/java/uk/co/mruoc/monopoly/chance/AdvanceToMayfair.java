@@ -2,9 +2,9 @@ package uk.co.mruoc.monopoly.chance;
 
 import uk.co.mruoc.monopoly.Player;
 
-public class AdvanceToTrafalgarSquare implements ChanceCard {
+public class AdvanceToMayfair implements ChanceCard {
 
-    private static final String LOCATION_NAME = "Trafalgar Square";
+    private final String LOCATION_NAME = "Mayfair";
 
     @Override
     public void applyTo(Player player) {
@@ -13,7 +13,7 @@ public class AdvanceToTrafalgarSquare implements ChanceCard {
 
     @Override
     public String getText() {
-        return "Advance to " + LOCATION_NAME + ". If you pass GO, collect £200";
+        return "Advance to " + LOCATION_NAME;
     }
 
 }

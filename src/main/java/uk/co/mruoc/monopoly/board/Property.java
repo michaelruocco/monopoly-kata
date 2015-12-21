@@ -1,9 +1,12 @@
 package uk.co.mruoc.monopoly.board;
 
+import org.apache.log4j.Logger;
 import uk.co.mruoc.monopoly.Player;
 import uk.co.mruoc.monopoly.Roll;
 
 public abstract class Property extends Location {
+
+    private static final Logger LOG = Logger.getLogger(Property.class);
 
     private final int cost;
     private final PropertyGroup group;
@@ -18,6 +21,7 @@ public abstract class Property extends Location {
 
     @Override
     public void applyTo(Player player, Roll roll) {
+        logInfo("player " + player.getName() + " landed on location " + getName());
         if (hasOwner()) {
             collectRentFrom(player, roll);
             return;
@@ -30,6 +34,7 @@ public abstract class Property extends Location {
     public void setOwner(Player owner) {
         owner.decrementBalance(cost);
         this.owner = owner;
+        logInfo(owner.getName() + " brought " + getName() + " for " + cost);
     }
 
     public Player getOwner() {
@@ -64,6 +69,17 @@ public abstract class Property extends Location {
         int rent = calculateRent(roll);
         player.decrementBalance(rent);
         getOwner().incrementBalance(rent);
+        logInfo(getName() + " is owned by " + getOwnerName() + " so " + player.getName() + " is paying rent " + rent);
+    }
+
+    private String getOwnerName() {
+        if (hasOwner())
+            return owner.getName();
+        return "";
+    }
+
+    private void logInfo(String message) {
+        LOG.info(message);
     }
 
 }

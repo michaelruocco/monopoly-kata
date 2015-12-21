@@ -5,14 +5,16 @@ import uk.co.mruoc.monopoly.board.Board;
 
 public class AdvanceToGo implements ChanceCard {
 
+    private static final String LOCATION_NAME = "Go";
+
     @Override
     public void applyTo(Player player) {
-        player.advanceTo("Go");
+        player.advanceTo(LOCATION_NAME);
     }
 
     @Override
     public String getText() {
-        return "Advance to GO";
+        return "Advance to " + LOCATION_NAME.toUpperCase();
     }
 
 }

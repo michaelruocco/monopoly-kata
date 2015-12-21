@@ -3,19 +3,21 @@ package uk.co.mruoc.monopoly.chance;
 import org.junit.Test;
 import uk.co.mruoc.monopoly.Player;
 import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.board.Property;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AdvanceToTrafalgarSquareTest {
+public class AdvanceToPallMallTest {
 
-    private static final String LOCATION_NAME = "Trafalgar Square";
+    private static final String LOCATION_NAME = "Pall Mall";
 
     private final Board board = new Board();
-    private final ChanceCard chanceCard = new AdvanceToTrafalgarSquare();
-    private final Player player = new Player("NAME");
+    private final ChanceCard chanceCard = new AdvanceToPallMall();
+    private final Player player = new Player("NAME", board);
 
     @Test
-    public void shouldMovePlayerToTrafalgarSquareWithNoSalaryIfDoesntPassGo() {
+    public void shouldMovePlayerToPallMallWithNoSalaryIfDoesntPassGo() {
         player.setPosition(0);
         player.setBalance(0);
 
@@ -27,8 +29,10 @@ public class AdvanceToTrafalgarSquareTest {
 
 
     @Test
-    public void shouldMovePlayerToTrafalgarSquareWithSalaryIfPassesGo() {
+    public void shouldMovePlayerToPallMallWithSalaryIfPassesGo() {
         int position = board.getLocationPosition(LOCATION_NAME);
+        Property property = board.getProperty(LOCATION_NAME);
+        property.setOwner(player);
         player.setPosition(position + 1);
         player.setBalance(0);
 
