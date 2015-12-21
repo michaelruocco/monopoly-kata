@@ -31,7 +31,7 @@ Feature: Player Movement
     When The player rolls a 1 and a 3
     Then The player ends the turn on "Bow Street"
 
-  Scenario: Player does rolls three doubles and moves to just visiting
+  Scenario: Player rolls three doubles and goes to jail
     Given A player starts a turn on "Go"
     When The player rolls a 3 and a 3
     Then The player ends the turn on "The Angel Islington"
