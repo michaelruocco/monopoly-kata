@@ -108,8 +108,8 @@ public class GameTest {
     @Test
     public void gameShouldSwitchPlayerIfDoubleNotRolled() {
         Roll roll = new Roll(2, 3);
-        Player player1 = players.getPlayer(0);
-        Player player2 = players.getPlayer(1);
+        Player player1 = getPlayerOne();
+        Player player2 = getPlayerTwo();
 
         game.nextTurn(roll);
         game.nextTurn(roll);
@@ -121,7 +121,7 @@ public class GameTest {
     @Test
     public void shouldGivePlayerExtraTurnIfPlayerRollsDouble() {
         Roll doubleRoll = new Roll(3, 3);
-        Player player1 = players.getPlayer(0);
+        Player player1 = getPlayerOne();
 
         game.nextTurn(doubleRoll);
         game.nextTurn(doubleRoll);
@@ -132,13 +132,26 @@ public class GameTest {
     @Test
     public void shouldPutPlayerInJailIfThreeDoublesRolled() {
         Roll doubleRoll = new Roll(3, 3);
-        Player player1 = players.getPlayer(0);
+        Player player1 = getPlayerOne();
 
         game.nextTurn(doubleRoll);
         game.nextTurn(doubleRoll);
         game.nextTurn(doubleRoll);
 
         assertThat(player1.isInJail()).isTrue();
+    }
+
+    @Test
+    public void shouldBailPlayerOutIfPlayerIsInJailAndCanAffordBail() {
+        Player player1 = getPlayerOne();
+        player1.setBalance(100);
+        player1.goToJail();
+
+        game.nextTurn(0);
+
+        assertThat(player1.isInJail()).isFalse();
+        assertThat(player1.getBalance()).isEqualTo(50);
+        assertThat(player1.getPosition()).isEqualTo(board.getJustVisitingPosition());
     }
 
     private boolean playerOrderIsSameForEveryRound(Game game) {

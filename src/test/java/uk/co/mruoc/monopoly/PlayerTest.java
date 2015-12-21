@@ -164,6 +164,32 @@ public class PlayerTest {
         assertThat(player.isInJail()).isTrue();
     }
 
+    @Test
+    public void canAffordBailShouldBeFalseIfPlayerCannotAffordBail() {
+        player.setBalance(49);
+
+        assertThat(player.canAffordBail()).isFalse();
+    }
+
+    @Test
+    public void canAffordBailShouldBeTrueIfPlayerCanAffordBail() {
+        player.setBalance(50);
+
+        assertThat(player.canAffordBail()).isTrue();
+    }
+
+    @Test
+    public void payBailShouldDecrementBalanceRemovePlayerFromJailAndMovePlayerToJustVisiting() {
+        player.goToJail();
+        player.setBalance(51);
+
+        player.payBail();
+
+        assertThat(player.getBalance()).isEqualTo(1);
+        assertThat(player.getPosition()).isEqualTo(board.getJustVisitingPosition());
+        assertThat(player.isInJail()).isFalse();
+    }
+
     private void givenPlayerHasPassedGo(int times) {
         player.move(board.size() * times);
     }

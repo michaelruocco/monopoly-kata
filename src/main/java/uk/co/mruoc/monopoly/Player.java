@@ -120,6 +120,7 @@ public class Player {
     }
 
     public void payBail() {
+        jail.remove(this);
         decrementBalance(jail.getBailAmount());
         logInfo("player " + getName() + " paid bail: " + jail.getBailAmount());
         moveToJustVisiting();
