@@ -1,6 +1,8 @@
 package uk.co.mruoc.monopoly.board;
 
 import uk.co.mruoc.monopoly.*;
+import uk.co.mruoc.monopoly.chance.ChanceCards;
+import uk.co.mruoc.monopoly.chance.DefaultChanceCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +13,17 @@ public class Board {
 
     private final List<Location> locations = new ArrayList<>();
 
-    private PropertyGroup brownGroup = new PropertyGroup();
-    private PropertyGroup trainStationGroup = new PropertyGroup();
-    private PropertyGroup blueGroup = new PropertyGroup();
-    private PropertyGroup pinkGroup = new PropertyGroup();
-    private PropertyGroup utilityGroup = new PropertyGroup();
-    private PropertyGroup orangeGroup = new PropertyGroup();
-    private PropertyGroup redGroup = new PropertyGroup();
-    private PropertyGroup yellowGroup = new PropertyGroup();
-    private PropertyGroup greenGroup = new PropertyGroup();
-    private PropertyGroup purpleGroup = new PropertyGroup();
+    private final ChanceCards chanceCards = new DefaultChanceCards();
+    private final PropertyGroup brownGroup = new PropertyGroup();
+    private final PropertyGroup trainStationGroup = new PropertyGroup();
+    private final PropertyGroup blueGroup = new PropertyGroup();
+    private final PropertyGroup pinkGroup = new PropertyGroup();
+    private final PropertyGroup utilityGroup = new PropertyGroup();
+    private final PropertyGroup orangeGroup = new PropertyGroup();
+    private final PropertyGroup redGroup = new PropertyGroup();
+    private final PropertyGroup yellowGroup = new PropertyGroup();
+    private final PropertyGroup greenGroup = new PropertyGroup();
+    private final PropertyGroup purpleGroup = new PropertyGroup();
 
     public Board() {
         addLocations();
@@ -81,7 +84,7 @@ public class Board {
         locations.add(new IncomeTax());
         locations.add(new TrainStation("Kings Cross Station", trainStationGroup));
         locations.add(new Street("The Angel Islington", blueGroup, 100, 6));
-        locations.add(new Chance("Chance 1"));
+        locations.add(new Chance("Chance 1", chanceCards));
         locations.add(new Street("Euston Road", blueGroup, 100, 6));
         locations.add(new Street("Pentonville Road", blueGroup, 120, 8));
         locations.add(new BasicLocation(JAIL_POSITION_NAME));
@@ -96,7 +99,7 @@ public class Board {
         locations.add(new Street("Vine Street", orangeGroup, 200, 16));
         locations.add(new BasicLocation("Free Parking"));
         locations.add(new Street("Strand", redGroup, 220, 18));
-        locations.add(new Chance("Chance 2"));
+        locations.add(new Chance("Chance 2", chanceCards));
         locations.add(new Street("Fleet Street", redGroup, 220, 18));
         locations.add(new Street("Trafalgar Square", redGroup, 240, 20));
         locations.add(new TrainStation("Fenchurch Street Station", trainStationGroup));
@@ -110,7 +113,7 @@ public class Board {
         locations.add(new BasicLocation("Community Chest 3"));
         locations.add(new Street("Bond Street", greenGroup, 320, 28));
         locations.add(new TrainStation("Liverpool Street Station", trainStationGroup));
-        locations.add(new Chance("Chance 3"));
+        locations.add(new Chance("Chance 3", chanceCards));
         locations.add(new Street("Park Lane", purpleGroup, 350, 35));
         locations.add(new SuperTax());
         locations.add(new Street("Mayfair", purpleGroup, 400, 50));

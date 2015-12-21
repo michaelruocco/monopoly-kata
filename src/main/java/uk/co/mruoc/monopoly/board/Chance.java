@@ -12,10 +12,6 @@ public class Chance extends Location {
     private static final Logger LOG = Logger.getLogger(Chance.class);
     private final ChanceCards chanceCards;
 
-    public Chance(String name) {
-        this(name, new DefaultChanceCards());
-    }
-
     public Chance(String name, ChanceCards chanceCards) {
         super(name);
         this.chanceCards = chanceCards;
