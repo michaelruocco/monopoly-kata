@@ -49,3 +49,9 @@ Feature: Go To Jail
     Then The player ends the turn on "The Angel Islington"
     When The player rolls a 3 and a 3
     Then The player ends the turn on "Electric Company"
+
+  Scenario: Player is in jail at beginning of turn and pays 50 bail to get out and take turn
+    Given A players starts a turn in jail with a balance of 100
+    When The player rolls a 4
+    Then The player ends the turn on "Northumberland Avenue"
+    And The player has a balance of 50

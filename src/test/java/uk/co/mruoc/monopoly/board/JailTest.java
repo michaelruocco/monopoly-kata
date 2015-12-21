@@ -29,4 +29,9 @@ public class JailTest {
         assertThat(player.isInJail()).isFalse();
     }
 
+    @Test
+    public void bailAmountShouldBeFifty() {
+        assertThat(jail.getBailAmount()).isEqualTo(50);
+    }
+
 }

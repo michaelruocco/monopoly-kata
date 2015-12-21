@@ -53,6 +53,12 @@ public class PlayerMovement {
         player.setBalance(balance);
     }
 
+    @Given("^A players starts a turn in jail with a balance of (\\d+)$")
+    public void a_players_starts_a_turn_in_jail_with_a_balance_of(int balance) throws Throwable {
+        player.goToJail();
+        player.setBalance(balance);
+    }
+
     @When("^The player rolls a (\\d+)$")
     public void the_player_rolls_a(int rollValue) throws Throwable {
         game.nextTurn(rollValue);

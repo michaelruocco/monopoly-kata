@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Player {
 
-    private Logger LOG = Logger.getLogger(Player.class);
+    private static final Logger LOG = Logger.getLogger(Player.class);
 
     private static final SalaryCalculator SALARY_CALCULATOR = new SalaryCalculator();
 
@@ -112,6 +112,22 @@ public class Player {
 
     public boolean canAfford(Property property) {
         return balance >= property.getCost();
+    }
+
+    public boolean canAffordBail() {
+        logInfo("player " + getName() + " can afford bail: " + (balance >= jail.getBailAmount()));
+        return balance >= jail.getBailAmount();
+    }
+
+    public void payBail() {
+        decrementBalance(jail.getBailAmount());
+        logInfo("player " + getName() + " paid bail: " + jail.getBailAmount());
+        moveToJustVisiting();
+    }
+
+    public void moveToJustVisiting() {
+        position = board.getJustVisitingPosition();
+        logInfo("player " + getName() + " moved to just visiting");
     }
 
     public void goToJail() {

@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Board {
 
+    private static final String JUST_VISITING = "Just Visiting";
+
     private final List<Location> locations = new ArrayList<>();
 
     private final ChanceCards chanceCards = new DefaultChanceCards();
@@ -77,6 +79,10 @@ public class Board {
         return jail;
     }
 
+    public int getJustVisitingPosition() {
+        return getLocationPosition(JUST_VISITING);
+    }
+
     private Location getLocation(int index) {
         return locations.get(index);
     }
@@ -92,7 +98,7 @@ public class Board {
         locations.add(new Chance("Chance 1", chanceCards));
         locations.add(new Street("Euston Road", blueGroup, 100, 6));
         locations.add(new Street("Pentonville Road", blueGroup, 120, 8));
-        locations.add(new BasicLocation("Just Visiting"));
+        locations.add(new BasicLocation(JUST_VISITING));
         locations.add(new Street("Pall Mall", pinkGroup, 140, 10));
         locations.add(new Utility("Electric Company", utilityGroup, 150));
         locations.add(new Street("Whitehall", pinkGroup, 140, 10));
