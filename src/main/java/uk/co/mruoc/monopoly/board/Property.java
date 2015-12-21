@@ -73,9 +73,7 @@ public abstract class Property extends Location {
     }
 
     private String getOwnerName() {
-        if (hasOwner())
-            return owner.getName();
-        return "";
+        return owner.getName();
     }
 
     private void logInfo(String message) {

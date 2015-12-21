@@ -81,7 +81,7 @@ public class Board {
         locations.add(new IncomeTax());
         locations.add(new TrainStation("Kings Cross Station", trainStationGroup));
         locations.add(new Street("The Angel Islington", blueGroup, 100, 6));
-        locations.add(new BasicLocation("Chance 1"));
+        locations.add(new Chance("Chance 1"));
         locations.add(new Street("Euston Road", blueGroup, 100, 6));
         locations.add(new Street("Pentonville Road", blueGroup, 120, 8));
         locations.add(new BasicLocation(JAIL_POSITION_NAME));
@@ -96,7 +96,7 @@ public class Board {
         locations.add(new Street("Vine Street", orangeGroup, 200, 16));
         locations.add(new BasicLocation("Free Parking"));
         locations.add(new Street("Strand", redGroup, 220, 18));
-        locations.add(new BasicLocation("Chance 2"));
+        locations.add(new Chance("Chance 2"));
         locations.add(new Street("Fleet Street", redGroup, 220, 18));
         locations.add(new Street("Trafalgar Square", redGroup, 240, 20));
         locations.add(new TrainStation("Fenchurch Street Station", trainStationGroup));
@@ -107,10 +107,10 @@ public class Board {
         locations.add(new GoToJail(this));
         locations.add(new Street("Regent Street", greenGroup, 300, 26));
         locations.add(new Street("Oxford Street", greenGroup, 300, 26));
-        locations.add(new BasicLocation("Community Chest"));
+        locations.add(new BasicLocation("Community Chest 3"));
         locations.add(new Street("Bond Street", greenGroup, 320, 28));
         locations.add(new TrainStation("Liverpool Street Station", trainStationGroup));
-        locations.add(new BasicLocation("Chance"));
+        locations.add(new Chance("Chance 3"));
         locations.add(new Street("Park Lane", purpleGroup, 350, 35));
         locations.add(new SuperTax());
         locations.add(new Street("Mayfair", purpleGroup, 400, 50));

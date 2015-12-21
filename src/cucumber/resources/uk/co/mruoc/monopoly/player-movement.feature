@@ -2,8 +2,8 @@ Feature: Player Movement
 
   Scenario: Movement from go
     Given A player starts a turn on "Go"
-    When The player rolls a 7
-    Then The player ends the turn on "Chance 1"
+    When The player rolls a 6
+    Then The player ends the turn on "The Angel Islington"
 
   Scenario: Movement when player passes go
     Given A player starts a turn on "Mayfair"
@@ -12,8 +12,8 @@ Feature: Player Movement
 
   Scenario: Player does not roll doubles
     Given A player starts a turn on "Go"
-    When The players rolls a 1 and a 6
-    Then The player ends the turn on "Chance 1"
+    When The players rolls a 1 and a 5
+    Then The player ends the turn on "The Angel Islingtong"
 
   Scenario: Player rolls doubles and can take an extra turn
     Given A player starts a turn on "Go"
