@@ -1,17 +1,18 @@
 package uk.co.mruoc.monopoly.chance;
 
 import uk.co.mruoc.monopoly.Player;
+import uk.co.mruoc.monopoly.board.Board;
 
-public class AdvanceToTrafalgarSquare implements ChanceCard {
+public class AdvanceToGo implements ChanceCard {
 
     @Override
     public void applyTo(Player player) {
-        player.advanceTo("Trafalgar Square");
+        player.advanceTo("Go");
     }
 
     @Override
     public String getText() {
-        return "Advance to Trafalgar Square. If you pass GO, collect £200";
+        return "Advance to GO";
     }
 
 }

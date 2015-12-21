@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AdvanceToTrafalgarSquareTest {
 
     private final Board board = new Board();
-    private final ChanceCard chanceCard = new AdvanceToTrafalgarSquare(board);
+    private final ChanceCard chanceCard = new AdvanceToTrafalgarSquare();
     private final Player player = new Player("NAME");
 
     @Test
@@ -19,8 +19,7 @@ public class AdvanceToTrafalgarSquareTest {
 
         chanceCard.applyTo(player);
 
-        int trafalgarPosition = board.getLocationPosition("Trafalgar Square");
-        assertThat(player.getPosition()).isEqualTo(trafalgarPosition);
+        assertThat(player.getPosition()).isEqualTo(board.getLocationPosition("Trafalgar Square"));
         assertThat(player.getBalance()).isEqualTo(0);
     }
 

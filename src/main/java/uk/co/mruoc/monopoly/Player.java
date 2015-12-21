@@ -112,6 +112,23 @@ public class Player {
         return balance >= property.getCost();
     }
 
+    public void moveToJail() {
+        position = board.getJailPosition();
+    }
+
+    public void advanceTo(String locationName) {
+        int spacesToMove = calculateSpacesToMove(locationName);
+        move(spacesToMove);
+        endTurn(0);
+    }
+
+    private int calculateSpacesToMove(String locationName) {
+        int locationPosition = board.getLocationPosition(locationName);
+        if (position >= locationPosition)
+            return (board.size() - position + locationPosition);
+        return locationPosition - position;
+    }
+
     private boolean hasPassedGo() {
         return timesPassedGo > 0;
     }
@@ -153,10 +170,6 @@ public class Player {
 
     private void logInfo(String message) {
         LOG.info(message);
-    }
-
-    public void moveToJail() {
-        position = board.getJailPosition();
     }
 
 }
