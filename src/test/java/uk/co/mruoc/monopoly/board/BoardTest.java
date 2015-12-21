@@ -54,15 +54,9 @@ public class BoardTest {
 
     @Test
     public void shouldReturnLocationGivenName() {
-        String locationName = "Just Visiting / Jail";
+        String locationName = "Just Visiting";
         Location location = board.getLocation(locationName);
         assertThat(location.getName()).isEqualTo(locationName);
-    }
-
-    @Test
-    public void shouldReturnJailPosition() {
-        int expectedJailPosition = 10;
-        assertThat(board.getJailPosition()).isEqualTo(expectedJailPosition);
     }
 
     @Test

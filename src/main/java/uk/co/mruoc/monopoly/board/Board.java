@@ -9,8 +9,6 @@ import java.util.List;
 
 public class Board {
 
-    private static final String JAIL_POSITION_NAME = "Just Visiting / Jail";
-
     private final List<Location> locations = new ArrayList<>();
 
     private final ChanceCards chanceCards = new DefaultChanceCards();
@@ -25,7 +23,14 @@ public class Board {
     private final PropertyGroup greenGroup = new PropertyGroup();
     private final PropertyGroup purpleGroup = new PropertyGroup();
 
+    private final Jail jail;
+
     public Board() {
+        this(new Jail());
+    }
+
+    public Board(Jail jail) {
+        this.jail = jail;
         addLocations();
     }
 
@@ -51,10 +56,6 @@ public class Board {
         throw new GameException("no location found with name " + locationName);
     }
 
-    public int getJailPosition() {
-        return getLocationPosition(JAIL_POSITION_NAME);
-    }
-
     public Location getLocation(String locationName) {
         int position = getLocationPosition(locationName);
         return getLocation(position);
@@ -72,6 +73,10 @@ public class Board {
         return getLocation(player.getPosition());
     }
 
+    public Jail getJail() {
+        return jail;
+    }
+
     private Location getLocation(int index) {
         return locations.get(index);
     }
@@ -87,7 +92,7 @@ public class Board {
         locations.add(new Chance("Chance 1", chanceCards));
         locations.add(new Street("Euston Road", blueGroup, 100, 6));
         locations.add(new Street("Pentonville Road", blueGroup, 120, 8));
-        locations.add(new BasicLocation(JAIL_POSITION_NAME));
+        locations.add(new BasicLocation("Just Visiting"));
         locations.add(new Street("Pall Mall", pinkGroup, 140, 10));
         locations.add(new Utility("Electric Company", utilityGroup, 150));
         locations.add(new Street("Whitehall", pinkGroup, 140, 10));
@@ -107,7 +112,7 @@ public class Board {
         locations.add(new Street("Coventry Street", yellowGroup, 260, 22));
         locations.add(new Utility("Water Works", utilityGroup, 150));
         locations.add(new Street("Piccadilly", yellowGroup, 280, 24));
-        locations.add(new GoToJail(this));
+        locations.add(new GoToJail(jail));
         locations.add(new Street("Regent Street", greenGroup, 300, 26));
         locations.add(new Street("Oxford Street", greenGroup, 300, 26));
         locations.add(new BasicLocation("Community Chest 3"));

@@ -5,16 +5,16 @@ import uk.co.mruoc.monopoly.Roll;
 
 public class GoToJail extends Location {
 
-    private final Board board;
+    private final Jail jail;
 
-    public GoToJail(Board board) {
+    public GoToJail(Jail jail) {
         super("Go To Jail");
-        this.board = board;
+        this.jail = jail;
     }
 
     @Override
     public void applyTo(Player player, Roll roll) {
-        player.setPosition(board.getJailPosition());
+        jail.put(player);
     }
 
 }

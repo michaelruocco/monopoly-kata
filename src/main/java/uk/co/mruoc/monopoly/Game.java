@@ -62,7 +62,7 @@ public class Game {
 
     private void movePlayer(Player player, Roll roll) {
         if (threeConsecutiveDoubles(roll)) {
-            player.moveToJail();
+            player.goToJail();
             return;
         }
         player.move(roll);

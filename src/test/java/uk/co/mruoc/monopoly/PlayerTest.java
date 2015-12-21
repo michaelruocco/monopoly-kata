@@ -104,7 +104,7 @@ public class PlayerTest {
 
         player.endTurn(ROLL);
 
-        assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
+        assertThat(player.isInJail()).isTrue();
     }
 
     @Test
@@ -159,9 +159,9 @@ public class PlayerTest {
 
     @Test
     public void shouldMoveToJail() {
-        player.moveToJail();
+        player.goToJail();
 
-        assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
+        assertThat(player.isInJail()).isTrue();
     }
 
     private void givenPlayerHasPassedGo(int times) {

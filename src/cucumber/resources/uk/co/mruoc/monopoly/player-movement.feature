@@ -12,30 +12,30 @@ Feature: Player Movement
 
   Scenario: Player does not roll doubles
     Given A player starts a turn on "Go"
-    When The players rolls a 1 and a 5
+    When The player rolls a 1 and a 5
     Then The player ends the turn on "The Angel Islington"
 
   Scenario: Player rolls doubles and can take an extra turn
     Given A player starts a turn on "Go"
-    When The players rolls a 3 and a 3
+    When The player rolls a 3 and a 3
     Then The player ends the turn on "The Angel Islington"
-    When The players rolls a 1 and a 3
-    Then The player ends the turn on "Just Visiting / Jail"
+    When The player rolls a 1 and a 3
+    Then The player ends the turn on "Just Visiting"
 
   Scenario: Player rolls two doubles and can take two extra turns
     Given A player starts a turn on "Go"
-    When The players rolls a 3 and a 3
+    When The player rolls a 3 and a 3
     Then The player ends the turn on "The Angel Islington"
-    When The players rolls a 3 and a 3
+    When The player rolls a 3 and a 3
     Then The player ends the turn on "Electric Company"
-    When The players rolls a 1 and a 3
+    When The player rolls a 1 and a 3
     Then The player ends the turn on "Bow Street"
 
   Scenario: Player does rolls three doubles and moves to just visiting
     Given A player starts a turn on "Go"
-    When The players rolls a 3 and a 3
+    When The player rolls a 3 and a 3
     Then The player ends the turn on "The Angel Islington"
-    When The players rolls a 3 and a 3
+    When The player rolls a 3 and a 3
     Then The player ends the turn on "Electric Company"
-    When The players rolls a 3 and a 3
-    Then The player ends the turn on "Just Visiting / Jail"
+    When The player rolls a 3 and a 3
+    Then The player is in jail

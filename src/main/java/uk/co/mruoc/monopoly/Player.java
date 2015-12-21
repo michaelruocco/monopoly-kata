@@ -14,6 +14,7 @@ public class Player {
 
     private final List<Round> rounds = new ArrayList<>();
     private final Board board;
+    private final Jail jail;
 
     private final String name;
     private int position;
@@ -27,6 +28,7 @@ public class Player {
     public Player(String name, Board board) {
         this.name = name;
         this.board = board;
+        this.jail = board.getJail();
     }
 
     public void move(int rollValue) {
@@ -112,8 +114,12 @@ public class Player {
         return balance >= property.getCost();
     }
 
-    public void moveToJail() {
-        position = board.getJailPosition();
+    public void goToJail() {
+        jail.put(this);
+    }
+
+    public boolean isInJail() {
+        return jail.contains(this);
     }
 
     public void advanceTo(String locationName) {

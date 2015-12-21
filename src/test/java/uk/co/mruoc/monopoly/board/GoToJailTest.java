@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoToJailTest {
 
-    private final Board board = new Board();
-    private final Location location = new GoToJail(board);
+    private final Jail jail = new Jail();
+    private final Location location = new GoToJail(jail);
     private final Player player = new Player("NAME");
 
     @Test
@@ -19,7 +19,7 @@ public class GoToJailTest {
     @Test
     public void shouldMovePlayerToJail() {
         location.applyTo(player);
-        assertThat(player.getPosition()).isEqualTo(board.getJailPosition());
+        assertThat(jail.contains(player)).isTrue();
     }
 
 }

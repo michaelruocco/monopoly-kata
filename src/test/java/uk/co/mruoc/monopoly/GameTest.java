@@ -130,7 +130,7 @@ public class GameTest {
     }
 
     @Test
-    public void shouldMovePlayerToJustVisitingIfThreeDoublesRolled() {
+    public void shouldPutPlayerInJailIfThreeDoublesRolled() {
         Roll doubleRoll = new Roll(3, 3);
         Player player1 = players.getPlayer(0);
 
@@ -138,7 +138,7 @@ public class GameTest {
         game.nextTurn(doubleRoll);
         game.nextTurn(doubleRoll);
 
-        assertThat(player1.getPosition()).isEqualTo(board.getJailPosition());
+        assertThat(player1.isInJail()).isTrue();
     }
 
     private boolean playerOrderIsSameForEveryRound(Game game) {

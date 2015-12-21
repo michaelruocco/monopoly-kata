@@ -14,6 +14,7 @@ public class PlayerMovement {
     private final Players players = new Players(2, board);
     private final Game game = new Game(players);
     private final Player player = players.getPlayer(0);
+    private Roll roll;
 
     @Given("^A player starts a turn on \"(.*?)\" with a balance of (\\d+)$")
     public void a_player_starts_a_turn_on_with_a_balance_of(String locationName, double balance) throws Throwable {
@@ -37,16 +38,36 @@ public class PlayerMovement {
         property.setOwner(player);
     }
 
+    @Given("^A player has not rolled a double$")
+    public void a_player_has_not_rolled_a_double() throws Throwable {
+        roll = new Roll(1, 2);
+    }
+
+    @Given("^A player has rolled a double$")
+    public void a_player_has_rolled_a_double() throws Throwable {
+        roll = new Roll(2, 2);
+    }
+
+    @Given("^The player starts with a balance of (\\d+)$")
+    public void the_player_starts_with_a_balance_of(int balance) throws Throwable {
+        player.setBalance(balance);
+    }
+
     @When("^The player rolls a (\\d+)$")
     public void the_player_rolls_a(int rollValue) throws Throwable {
-        Roll roll = new Roll(rollValue, 0);
         game.nextTurn(rollValue);
     }
 
-    @When("^The players rolls a (\\d+) and a (\\d+)$")
+    @When("^The player rolls a (\\d+) and a (\\d+)$")
     public void the_players_rolls_a_and_a(int dice1, int dice2) throws Throwable {
-        Roll roll = new Roll(dice1, dice2);
+        roll = new Roll(dice1, dice2);
         game.nextTurn(roll);
+    }
+
+    @When("^The player lands on \"([^\"]*)\"$")
+    public void the_player_lands_on(String locationName) throws Throwable {
+        player.setPosition(board.getLocationPosition(locationName));
+        player.endTurn(roll);
     }
 
     @Then("^The player is at position (\\d+)$")
@@ -69,6 +90,11 @@ public class PlayerMovement {
     public void the_player_owns(String expectedPropertyName) throws Throwable {
         Property property = board.getProperty(expectedPropertyName);
         assertThat(property.ownedBy(player)).isTrue();
+    }
+
+    @Then("^The player is in jail$")
+    public void the_player_is_in_jail() throws Throwable {
+        assertThat(player.isInJail()).isTrue();
     }
 
     private void setPlayerLocation(String locationName) {
