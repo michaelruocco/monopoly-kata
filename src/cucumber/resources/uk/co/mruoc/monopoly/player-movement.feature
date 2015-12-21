@@ -13,7 +13,7 @@ Feature: Player Movement
   Scenario: Player does not roll doubles
     Given A player starts a turn on "Go"
     When The players rolls a 1 and a 5
-    Then The player ends the turn on "The Angel Islingtong"
+    Then The player ends the turn on "The Angel Islington"
 
   Scenario: Player rolls doubles and can take an extra turn
     Given A player starts a turn on "Go"
