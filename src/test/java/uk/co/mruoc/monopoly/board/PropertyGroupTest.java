@@ -1,6 +1,5 @@
 package uk.co.mruoc.monopoly.board;
 
-import org.junit.Before;
 import org.junit.Test;
 import uk.co.mruoc.monopoly.Player;
 

@@ -8,11 +8,9 @@ public class GameExceptionTest {
 
     private static final String MESSAGE = "MESSAGE";
 
-    private Exception exception;
-
     @Test
     public void shouldReturnMessage() {
-        exception = new GameException(MESSAGE);
+        Exception exception = new GameException(MESSAGE);
 
         assertThat(exception.getMessage()).isEqualTo(MESSAGE);
     }

@@ -1,16 +1,14 @@
 package uk.co.mruoc.monopoly.board;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Test;
-import uk.co.mruoc.monopoly.Player;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BasicLocationTest {
 
     private static final String LOCATION_NAME = "LOCATION";
 
     private final Location location = new BasicLocation(LOCATION_NAME);
-    private final Player player = new Player("PLAYER");
 
     @Test
     public void shouldReturnName() {

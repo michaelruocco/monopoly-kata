@@ -3,7 +3,6 @@ package uk.co.mruoc.monopoly.chance;
 import org.junit.Test;
 import uk.co.mruoc.monopoly.Player;
 import uk.co.mruoc.monopoly.board.Board;
-import uk.co.mruoc.monopoly.board.Location;
 import uk.co.mruoc.monopoly.board.Property;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -54,8 +54,7 @@ public class Game {
     }
 
     public void move(Player player, Roll roll) {
-        if (player.isInJail())
-            if (player.canAffordBail())
+        if (player.isInJail() && player.canAffordBail())
                 player.payBail();
         movePlayer(player, roll);
         currentRound.takeTurn(player);

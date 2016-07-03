@@ -13,7 +13,6 @@ public class GamePlayers {
 
     private List<Player> firstPlayers = new ArrayList<>();
     private Players players;
-    private Game game;
     private String errorMessage;
 
     @When("^A game is set up with (\\d+) players$")
@@ -64,7 +63,7 @@ public class GamePlayers {
     private void createGame(int numberOfPlayers) {
         try {
             players = new Players(numberOfPlayers, new Board());
-            game = new Game(players);
+            Game game = new Game(players);
         } catch (GameException e) {
             errorMessage = e.getMessage();
         }

@@ -5,7 +5,6 @@ import uk.co.mruoc.monopoly.Player;
 import uk.co.mruoc.monopoly.Roll;
 import uk.co.mruoc.monopoly.chance.ChanceCard;
 import uk.co.mruoc.monopoly.chance.ChanceCards;
-import uk.co.mruoc.monopoly.chance.DefaultChanceCards;
 
 public class Chance extends Location {
 
