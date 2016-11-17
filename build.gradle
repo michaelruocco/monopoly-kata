@@ -31,7 +31,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'info.cukes:cucumber-java:1.2.5'
     testCompile 'info.cukes:cucumber-junit:1.2.5'
-    testCompile 'org.mockito:mockito-core:2.2.9'
+    testCompile 'org.mockito:mockito-core:2.2.15'
     testCompile 'org.assertj:assertj-core:3.5.2'
     
     compile 'log4j:log4j:1.2.17'
