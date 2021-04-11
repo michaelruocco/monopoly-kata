@@ -1,40 +1,42 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "com.github.samueltbrown:gradle-cucumber-plugin:0.8"
-        classpath "info.cukes:cucumber-core:1.2.2"
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
-    }
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'jacoco'
+    id 'org.unbroken-dome.test-sets' version '3.0.1'
 }
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'com.github.samueltbrown.cucumber'
-apply plugin: 'jacoco'
-apply plugin: 'com.github.kt3k.coveralls'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
-cucumber {
-    formats = ['pretty']
-    tags = ['~@wip']
+testSets {
+    cucumberTest
+}
+
+configurations {
+    cucumberTest.setCanBeResolved(true)
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
-    testCompile 'info.cukes:cucumber-java:1.2.5'
-    testCompile 'info.cukes:cucumber-junit:1.2.5'
-    testCompile 'org.mockito:mockito-core:2.2.15'
-    testCompile 'org.assertj:assertj-core:3.5.2'
-    
     compile 'log4j:log4j:1.2.17'
+
+    testCompile 'org.assertj:assertj-core:3.5.2'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.2.15'
+
+    cucumberTestCompile 'io.cucumber:cucumber-java:6.8.1'
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses, cucumberTestClasses
+
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberTestRuntime + configurations.runtime + sourceSets.main.output + sourceSets.cucumberTest.output
+            args = ['--plugin', 'pretty', '--glue', 'uk.co.mruoc.monopoly', 'src/cucumberTest/resources']
+        }
+    }
 }
 
 jacocoTestReport {
