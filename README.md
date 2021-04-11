@@ -1,21 +1,36 @@
 # Monopoly Kata
 
-[![Build Status](https://travis-ci.org/michaelruocco/monopoly-kata.svg?branch=master)](https://travis-ci.org/michaelruocco/monopoly-kata)
-[![Coverage Status](https://coveralls.io/repos/michaelruocco/monopoly-kata/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaelruocco/monopoly-kata?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3242984c31e94848b4c83784b8a40b50)](https://www.codacy.com/app/michael-ruocco/monopoly-kata?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/monopoly-kata&amp;utm_campaign=Badge_Grade)
+[![Build](https://github.com/michaelruocco/monopoly-kata/workflows/pipeline/badge.svg)](https://github.com/michaelruocco/monopoly-kata/actions)
+[![codecov](https://codecov.io/gh/michaelruocco/monopoly-kata/branch/master/graph/badge.svg?token=FWDNP534O7)](https://codecov.io/gh/michaelruocco/monopoly-kata)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/272889cf707b4dcb90bf451392530794)](https://www.codacy.com/gh/michaelruocco/monopoly-kata/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/monopoly-kata&amp;utm_campaign=Badge_Grade)
+[![BCH compliance](https://bettercodehub.com/edge/badge/michaelruocco/monopoly-kata?branch=master)](https://bettercodehub.com/)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=michaelruocco_monopoly-kata&metric=alert_status)](https://sonarcloud.io/dashboard?id=michaelruocco_monopoly-kata)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=michaelruocco_monopoly-kata&metric=sqale_index)](https://sonarcloud.io/dashboard?id=michaelruocco_monopoly-kata)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=michaelruocco_monopoly-kata&metric=coverage)](https://sonarcloud.io/dashboard?id=michaelruocco_monopoly-kata)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=michaelruocco_monopoly-kata&metric=ncloc)](https://sonarcloud.io/dashboard?id=michaelruocco_monopoly-kata)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This project is my attempt at the monopoly kata exercise that is outlined
 [here](https://schuchert.github.io/wikispaces/pages/Monopoly)
 
 I have chosen to use cucumber as my BDD tool to translate the stated acceptance criteria into an executable
-specification to help verify the correctness of the system. The implementation has been developed using TDD and I have
+specification to help verify the correctness of the system. The implementation has been developed using TDD, and I have
 tried to keep the code as clean and simple as possible. Feedback and comments are very welcome!
 
-## Running the Tests
+## Test Reports
 
-You can run the unit and cucumber tests for this project by running the following command:
+Cucumber test reports from pipeline runs can be viewed [here](https://reports.cucumber.io/reports/52e8d833-95f1-4585-917c-96429cfc0d30)
 
-```
-gradlew clean build cucumber
+## Useful Commands
+
+```gradle
+// cleans build directories
+// prints currentVersion
+// formats code
+// builds code
+// runs tests
+// runs cucumber integration tests
+// checks for gradle issues
+// checks dependency versions
+./gradlew clean currentVersion dependencyUpdates lintGradle spotlessApply build cucumber
 ```

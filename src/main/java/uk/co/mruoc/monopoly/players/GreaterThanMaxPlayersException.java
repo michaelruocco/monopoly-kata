@@ -1,4 +1,6 @@
-package uk.co.mruoc.monopoly;
+package uk.co.mruoc.monopoly.players;
+
+import uk.co.mruoc.monopoly.MonopolyException;
 
 public class GreaterThanMaxPlayersException extends MonopolyException {
 
