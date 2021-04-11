@@ -12,19 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerSteps {
 
-    private int numberOfPlayers;
-    private Game game;
+    private Collection<String> players = new ArrayList<>();
     private Collection<Game> games = new ArrayList<>();
+    private Game game;
     private String errorMessage;
 
-    @Given("{int} player")
-    public void player(int numberOfPlayers) {
-        players(numberOfPlayers);
-    }
-
-    @Given("{int} players")
-    public void players(int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
+    @Given("a player {string}")
+    public void aPlayer(String name) {
+        players.add(name);
     }
 
     @When("{int} games are started")
@@ -35,7 +30,7 @@ public class PlayerSteps {
     @When("the game is started")
     public void startGame() {
         try {
-            game = new Game(numberOfPlayers);
+            game = new Game(players);
             game.start();
 
             games.add(game);

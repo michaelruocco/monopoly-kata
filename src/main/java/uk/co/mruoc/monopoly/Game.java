@@ -1,8 +1,10 @@
 package uk.co.mruoc.monopoly;
 
+import java.util.Collection;
+
 public class Game {
 
-    public Game(int numberOfPlayers) {
+    public Game(Collection<String> players) {
 
     }
 
