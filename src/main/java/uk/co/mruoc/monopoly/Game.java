@@ -19,11 +19,11 @@ public class Game {
     }
 
     public boolean hasPlayer(String name) {
-        return players.hasName(name);
+        return players.contains(name);
     }
 
-    public boolean hasFirstPlayer(String name) {
-        return players.hasFirstName(name);
+    public boolean isNextPlayer(String name) {
+        return players.isNext(name);
     }
 
 }

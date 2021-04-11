@@ -49,6 +49,42 @@ class PlayersTest {
                 .hasMessage("game has 9 players, cannot create a game with more than 8 players");
     }
 
+    @Test
+    void shouldHaveAllPlayerNamesAndRandomizedOrder() {
+        String[] names = generatePlayerNames(2);
+
+        Players players = new Players(names);
+
+        assertThat(players).containsExactlyInAnyOrder(names);
+    }
+
+    @Test
+    void containsShouldReturnTrueIfNameIsPresent() {
+        String[] names = generatePlayerNames(2);
+
+        Players players = new Players(names);
+
+        assertThat(players.contains("name-1")).isTrue();
+    }
+
+    @Test
+    void containsShouldReturnFalseIfNameIsNotPresent() {
+        String[] names = generatePlayerNames(2);
+
+        Players players = new Players(names);
+
+        assertThat(players.contains("other-name")).isFalse();
+    }
+
+    @Test
+    void containsReturnOnePlayerAsNextPlayer() {
+        String[] names = generatePlayerNames(2);
+
+        Players players = new Players(names);
+
+        assertThat(players.isNext(names[0]) || players.isNext(names[1])).isTrue();
+    }
+
     private static String[] generatePlayerNames(int numberOfNames) {
         return IntStream.rangeClosed(1, numberOfNames)
                 .mapToObj(i -> String.format("name-%d", i))

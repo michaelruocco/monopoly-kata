@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
-public class Players {
+public class Players implements Iterable<String> {
 
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 8;
 
-    private final Collection<String> names;
+    private final List<String> names;
+
+    private int nextPlayerIndex = 0;
 
     public Players(String... names) {
         this(Arrays.asList(names));
@@ -27,14 +30,17 @@ public class Players {
         log.info("player order randomized as {}", this.names);
     }
 
-    public boolean hasName(String name) {
-        return names.contains(name);
+    @Override
+    public Iterator<String> iterator() {
+        return names.iterator();
     }
 
-    public boolean hasFirstName(String name) {
-        return names.stream().findFirst()
-                .map(firstName -> firstName.equals(name))
-                .orElse(false);
+    public boolean isNext(String name) {
+        return names.get(nextPlayerIndex).equals(name);
+    }
+
+    public boolean contains(String name) {
+        return names.contains(name);
     }
 
     private static void validate(Collection<String> players) {
@@ -46,9 +52,10 @@ public class Players {
         }
     }
 
-    private static Collection<String> randomize(Collection<String> inputNames) {
+    private static List<String> randomize(Collection<String> inputNames) {
         List<String> randomizedNames = new ArrayList<>(inputNames);
         Collections.shuffle(randomizedNames);
         return Collections.unmodifiableList(randomizedNames);
     }
+
 }

@@ -51,7 +51,7 @@ public class PlayerSteps {
 
     @Then("{string} is the first player at least once")
     public void isTheFirstPlayerAtLeastOnce(String name) {
-        assertThat(games.stream().anyMatch(game -> game.hasFirstPlayer(name))).isTrue();
+        assertThat(games.stream().anyMatch(game -> game.isNextPlayer(name))).isTrue();
     }
 
 }
