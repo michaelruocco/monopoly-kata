@@ -10,7 +10,7 @@ Feature: Players
   Scenario: Error if less than two players
     Given a player "Horse"
     When the game is started
-    Then An error occurred with the message "cannot create a game with less than 2 players"
+    Then An error occurred with the message "game has 1 players, cannot create a game with less than 2 players"
 
   Scenario: Error if more than eight players
     Given a player "Horse"
@@ -23,7 +23,7 @@ Feature: Players
     And a player "Wheelbarrow"
     And a player "Iron"
     When the game is started
-    Then An error occurred with the message "cannot create a game with more than 8 players"
+    Then An error occurred with the message "game has 9 players, cannot create a game with more than 8 players"
 
   Scenario: Player order is assigned randomly
     Given a player "Horse"

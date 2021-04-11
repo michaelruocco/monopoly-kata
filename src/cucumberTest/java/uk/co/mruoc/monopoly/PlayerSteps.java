@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerSteps {
 
-    private Collection<String> players = new ArrayList<>();
-    private Collection<Game> games = new ArrayList<>();
+    private final Collection<String> players = new ArrayList<>();
+    private final Collection<Game> games = new ArrayList<>();
     private Game game;
     private String errorMessage;
 
@@ -34,7 +34,7 @@ public class PlayerSteps {
             game.start();
 
             games.add(game);
-        } catch (InvalidNumberOfPlayersException e) {
+        } catch (MonopolyException e) {
             errorMessage = e.getMessage();
         }
     }
