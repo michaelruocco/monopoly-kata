@@ -1,9 +1,6 @@
-package uk.co.mruoc.monopoly;
+package uk.co.mruoc.monopoly.players;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.monopoly.players.GreaterThanMaxPlayersException;
-import uk.co.mruoc.monopoly.players.LessThanMinPlayersException;
-import uk.co.mruoc.monopoly.players.Players;
 
 import java.util.stream.IntStream;
 
@@ -85,8 +82,27 @@ class PlayersTest {
         assertThat(players.isNext(names[0]) || players.isNext(names[1])).isTrue();
     }
 
-    private static String[] generatePlayerNames(int numberOfNames) {
-        return IntStream.rangeClosed(1, numberOfNames)
+    @Test
+    void containsReturnStreamOfPlayerNames() {
+        String[] names = generatePlayerNames(2);
+
+        Players players = new Players(names);
+
+        assertThat(players.stream()).containsExactlyInAnyOrder(names);
+    }
+
+    @Test
+    void shouldReturnSize() {
+        int numberOfPlayers = 2;
+        String[] names = generatePlayerNames(numberOfPlayers);
+
+        Players players = new Players(names);
+
+        assertThat(players.size()).isEqualTo(numberOfPlayers);
+    }
+
+    private static String[] generatePlayerNames(int numberOfPlayers) {
+        return IntStream.rangeClosed(1, numberOfPlayers)
                 .mapToObj(i -> String.format("name-%d", i))
                 .toArray(String[]::new);
     }

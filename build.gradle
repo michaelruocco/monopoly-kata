@@ -58,7 +58,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.assertj:assertj-core:${assertJVersion}"
-    testImplementation "org.mockito:mockito-core:3.8.0"
+    testImplementation "org.mockito:mockito-core:3.9.0"
 
     cucumberTestCompile "org.slf4j:slf4j-simple:${slf4jVersion}"
     cucumberTestCompile "io.cucumber:cucumber-java:6.10.2"

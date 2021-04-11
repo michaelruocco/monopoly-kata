@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Slf4j
 public class Players implements Iterable<String> {
@@ -35,6 +36,14 @@ public class Players implements Iterable<String> {
         return names.iterator();
     }
 
+    public int size() {
+        return names.size();
+    }
+
+    public Stream<String> stream() {
+        return names.stream();
+    }
+
     public boolean isNext(String name) {
         return names.get(nextPlayerIndex).equals(name);
     }
@@ -43,12 +52,12 @@ public class Players implements Iterable<String> {
         return names.contains(name);
     }
 
-    private static void validate(Collection<String> players) {
-        if (players.size() < 2) {
-            throw new LessThanMinPlayersException(players.size(), MIN_PLAYERS);
+    private static void validate(Collection<String> names) {
+        if (names.size() < 2) {
+            throw new LessThanMinPlayersException(names.size(), MIN_PLAYERS);
         }
-        if (players.size() > 8) {
-            throw new GreaterThanMaxPlayersException(players.size(), MAX_PLAYERS);
+        if (names.size() > 8) {
+            throw new GreaterThanMaxPlayersException(names.size(), MAX_PLAYERS);
         }
     }
 
