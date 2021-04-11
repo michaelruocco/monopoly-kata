@@ -5,9 +5,8 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5672ebd2107997003e0006be)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3242984c31e94848b4c83784b8a40b50)](https://www.codacy.com/app/michael-ruocco/monopoly-kata?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/monopoly-kata&amp;utm_campaign=Badge_Grade)
 
-This project is my attempt at the monopoly kata exercise that is outlined here: 
-
-http://c.wikispaces.com/Katas.MonopolyTheGame(r)
+This project is my attempt at the monopoly kata exercise that is outlined
+[here](https://schuchert.github.io/wikispaces/pages/Monopoly)
 
 I have chosen to use cucumber as my BDD tool to translate the stated acceptance criteria into an executable
 specification to help verify the correctness of the system. The implementation has been developed using TDD and I have
