@@ -3,6 +3,7 @@ package uk.co.mruoc.monopoly.players;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -47,12 +48,12 @@ class PlayersTest {
     }
 
     @Test
-    void shouldHaveAllPlayerNamesAndRandomizedOrder() {
+    void shouldHaveAllPlayerNames() {
         String[] names = generatePlayerNames(2);
 
         Players players = new Players(names);
 
-        assertThat(players).containsExactlyInAnyOrder(names);
+        assertThat(players).containsExactly(names);
     }
 
     @Test
@@ -74,31 +75,73 @@ class PlayersTest {
     }
 
     @Test
-    void containsReturnOnePlayerAsNextPlayer() {
+    void shouldReturnIsNextPlayer() {
         String[] names = generatePlayerNames(2);
-
         Players players = new Players(names);
 
-        assertThat(players.isNext(names[0]) || players.isNext(names[1])).isTrue();
+        boolean isNext = players.isNext(names[0]);
+
+        assertThat(isNext).isTrue();
     }
 
     @Test
-    void containsReturnStreamOfPlayerNames() {
+    void shouldReturnNextPlayer() {
         String[] names = generatePlayerNames(2);
-
         Players players = new Players(names);
 
-        assertThat(players.stream()).containsExactlyInAnyOrder(names);
+        String nextPlayer = players.getNextPlayer();
+
+        assertThat(nextPlayer).isEqualTo(names[0]);
+    }
+
+    @Test
+    void shouldReturnStreamOfPlayerNames() {
+        String[] names = generatePlayerNames(2);
+        Players players = new Players(names);
+
+        Stream<String> stream = players.stream();
+
+        assertThat(stream).containsExactlyInAnyOrder(names);
     }
 
     @Test
     void shouldReturnSize() {
         int numberOfPlayers = 2;
-        String[] names = generatePlayerNames(numberOfPlayers);
+        Players players = new Players(generatePlayerNames(numberOfPlayers));
 
-        Players players = new Players(names);
+        int size = players.size();
 
-        assertThat(players.size()).isEqualTo(numberOfPlayers);
+        assertThat(size).isEqualTo(numberOfPlayers);
+    }
+
+    @Test
+    void shouldReturnTrueIfNextPlayerIsFirstPlayer() {
+        Players players = new Players(generatePlayerNames(2));
+
+        boolean isFirst = players.isFirstPlayerNext();
+
+        assertThat(isFirst).isTrue();
+    }
+
+    @Test
+    void shouldReturnFalseIfNextPlayerIsNotFirstPlayer() {
+        Players players = new Players(generatePlayerNames(2));
+        players.updateNextPlayer();
+
+        boolean isFirst = players.isFirstPlayerNext();
+
+        assertThat(isFirst).isFalse();
+    }
+
+    @Test
+    void shouldSetNextPlayerBackToZeroOnLastPlayer() {
+        Players players = new Players(generatePlayerNames(2));
+        players.updateNextPlayer();
+        players.updateNextPlayer();
+
+        boolean isFirst = players.isFirstPlayerNext();
+
+        assertThat(isFirst).isTrue();
     }
 
     private static String[] generatePlayerNames(int numberOfPlayers) {

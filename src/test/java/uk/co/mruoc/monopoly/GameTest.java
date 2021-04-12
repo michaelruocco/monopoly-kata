@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import uk.co.mruoc.monopoly.board.Board;
 import uk.co.mruoc.monopoly.players.Players;
+import uk.co.mruoc.monopoly.round.Rounds;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,8 +19,9 @@ class GameTest {
 
     private final Players players = mock(Players.class);
     private final Board board = mock(Board.class);
+    private final Rounds rounds = mock(Rounds.class);
 
-    private final Game game = new Game(players, board);
+    private final Game game = new Game(players, board, rounds);
 
     @Test
     void shouldReturnHasPlayer() {
@@ -46,7 +48,7 @@ class GameTest {
         Collection<String> names = Arrays.asList("player-name-1", "player-name-2");
         given(players.stream()).willReturn(names.stream());
 
-        game.start();
+        game.play();
 
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(board, times(names.size())).addPlayer(captor.capture());
@@ -94,6 +96,36 @@ class GameTest {
         assertThat(playerNameGame.getNumberOfPlayers()).isEqualTo(2);
         assertThat(playerNameGame.hasPlayer(playerName1)).isTrue();
         assertThat(playerNameGame.hasPlayer(playerName2)).isTrue();
+    }
+
+    @Test
+    void shouldReturnNumberOfRoundsPlayed() {
+        long expectedNumberOfRoundsPlayed = 5;
+        given(rounds.getNumberOfRoundsPlayed()).willReturn(expectedNumberOfRoundsPlayed);
+
+        long numberOfRoundsPlayed = game.getNumberOfRoundsPlayed();
+
+        assertThat(numberOfRoundsPlayed).isEqualTo(expectedNumberOfRoundsPlayed);
+    }
+
+    @Test
+    void shouldReturnNumberOfRoundsPlayedByPlayer() {
+        String playerName = "player-name";
+        long expectedNumberOfRoundsPlayed = 5;
+        given(rounds.getNumberOfRoundsPlayedBy(playerName)).willReturn(expectedNumberOfRoundsPlayed);
+
+        long numberOfRoundsPlayed = game.getNumberOfRoundsPlayedBy(playerName);
+
+        assertThat(numberOfRoundsPlayed).isEqualTo(expectedNumberOfRoundsPlayed);
+    }
+
+    @Test
+    void shouldReturnPlayerOrderIsTheSameForEveryRound() {
+        given(rounds.allHavePlayersInSameOrder()).willReturn(true);
+
+        boolean playerOrderIsSame = game.playerOrderIsTheSameForEveryRound();
+
+        assertThat(playerOrderIsSame).isTrue();
     }
 
 }

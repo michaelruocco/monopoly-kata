@@ -27,21 +27,24 @@ public class GameSteps {
         game.setPlayerLocation(name, location);
     }
 
-    @When("{int} games are started")
-    public void gamesAreStarted(int numberOfGamesToStart) {
-        IntStream.range(0, numberOfGamesToStart).forEach(g -> startGame());
+    @When("{int} games are created")
+    public void gamesAreCreated(int numberOfGamesToCreate) {
+        IntStream.range(0, numberOfGamesToCreate).forEach(g -> createGame());
     }
 
-    @When("the game is started")
-    public void startGame() {
+    @When("the game is created")
+    public void createGame() {
         try {
             game = new Game(players);
-            game.start();
-
             games.add(game);
         } catch (MonopolyException e) {
             errorMessage = e.getMessage();
         }
+    }
+
+    @When("the game is played")
+    public void playGame() {
+        game.play();
     }
 
     @When("player {string} rolls {int}")
@@ -67,6 +70,21 @@ public class GameSteps {
     @Then("player {string} is at location {int}")
     public void assertPlayerLocation(String name, int location) {
         assertThat(game.getPlayerLocation(name)).isEqualTo(location);
+    }
+
+    @Then("{int} rounds have been played in total")
+    public void roundsHaveBeenPlayedInTotal(int expectedNumberOfRounds) {
+        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(expectedNumberOfRounds);
+    }
+
+    @Then("{string} has played {int} rounds")
+    public void hasPlayedRounds(String name, int expectedNumberOfRounds) {
+        assertThat(game.getNumberOfRoundsPlayedBy(name)).isEqualTo(expectedNumberOfRounds);
+    }
+
+    @Then("the order of the players is the same in every round")
+    public void theOrderOfThePlayersIsTheSameInEveryRound() {
+        assertThat(game.playerOrderIsTheSameForEveryRound()).isTrue();
     }
 
 }

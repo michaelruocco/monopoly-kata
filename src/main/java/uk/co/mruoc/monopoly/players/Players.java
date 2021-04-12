@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -27,8 +26,7 @@ public class Players implements Iterable<String> {
     public Players(Collection<String> names) {
         validate(names);
         log.info("players created with names {}", names);
-        this.names = randomize(names);
-        log.info("player order randomized as {}", this.names);
+        this.names = new ArrayList<>(names);
     }
 
     @Override
@@ -42,6 +40,21 @@ public class Players implements Iterable<String> {
 
     public Stream<String> stream() {
         return names.stream();
+    }
+
+    public String getNextPlayer() {
+        return names.get(nextPlayerIndex);
+    }
+
+    public void updateNextPlayer() {
+        nextPlayerIndex++;
+        if (nextPlayerIndex >= size()) {
+            nextPlayerIndex = 0;
+        }
+    }
+
+    public boolean isFirstPlayerNext() {
+        return nextPlayerIndex == 0;
     }
 
     public boolean isNext(String name) {
@@ -59,12 +72,6 @@ public class Players implements Iterable<String> {
         if (names.size() > 8) {
             throw new GreaterThanMaxPlayersException(names.size(), MAX_PLAYERS);
         }
-    }
-
-    private static List<String> randomize(Collection<String> inputNames) {
-        List<String> randomizedNames = new ArrayList<>(inputNames);
-        Collections.shuffle(randomizedNames);
-        return Collections.unmodifiableList(randomizedNames);
     }
 
 }
