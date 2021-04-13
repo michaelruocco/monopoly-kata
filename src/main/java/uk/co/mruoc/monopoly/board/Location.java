@@ -1,28 +1,13 @@
 package uk.co.mruoc.monopoly.board;
 
-import uk.co.mruoc.monopoly.Player;
-import uk.co.mruoc.monopoly.Roll;
+import uk.co.mruoc.monopoly.players.Player;
 
-public abstract class Location {
+public interface Location {
 
-    private final String name;
+    String getName();
 
-    public Location(String name) {
-        this.name = name;
+    default void land(Player player) {
+        // intentionally blank
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean nameEquals(String name) {
-        return this.name.equalsIgnoreCase(name);
-    }
-
-    public void applyTo(Player player) {
-        applyTo(player, new Roll());
-    }
-
-    public abstract void applyTo(Player player, Roll roll);
 
 }

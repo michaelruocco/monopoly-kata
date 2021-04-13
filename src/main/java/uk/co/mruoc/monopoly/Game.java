@@ -1,138 +1,109 @@
 package uk.co.mruoc.monopoly;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.players.Player;
+import uk.co.mruoc.monopoly.players.Players;
+import uk.co.mruoc.monopoly.players.RandomOrderPlayers;
+import uk.co.mruoc.monopoly.round.Round;
+import uk.co.mruoc.monopoly.round.Rounds;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.IntStream;
+
+import static uk.co.mruoc.monopoly.players.Players.toPlayers;
+
+@RequiredArgsConstructor
+@Slf4j
 public class Game {
 
-    private static final int TOTAL_ROUNDS = 20;
-
-    private final List<Round> rounds = new ArrayList<>(TOTAL_ROUNDS);
-    private final Random random = new Random();
-
     private final Players players;
+    private final Board board;
+    private final Rounds rounds;
 
-    private Round currentRound = new Round();
-    private int nextPlayerIndex;
-    private int doubleCount;
+    public Game(String... playerNames) {
+        this(Arrays.asList(playerNames));
+    }
+
+    public Game(Collection<String> playerNames) {
+        this(new RandomOrderPlayers(toPlayers(playerNames)));
+    }
 
     public Game(Players players) {
-        this.players = players;
+        this(players, new Board(), new Rounds());
     }
 
     public void play() {
-        while(!isComplete())
-            nextTurn(generateRoll());
+        start();
+        IntStream.range(0, rounds.getNumberOfRounds()).forEach(i -> playRound());
     }
 
-    public void play(int fixedRollValue) {
-        play(new Roll(fixedRollValue, 0));
+    public boolean hasPlayer(String name) {
+        return players.contains(name);
     }
 
-    public void play(Roll fixedRoll) {
-        while(!isComplete())
-            nextTurn(fixedRoll);
+    public boolean isNextPlayer(String name) {
+        return players.isNext(name);
     }
 
-    public boolean isComplete() {
-        return !playersRemaining() || !roundsRemaining();
+    public int getNumberOfPlayers() {
+        return players.size();
     }
 
-    public void nextTurn(int rollValue) {
-        Player player = getNextPlayer();
-        move(player, new Roll(rollValue, 0));
+    public void setPlayerLocation(String playerName, String locationName) {
+        board.placePlayer(playerName, locationName);
     }
 
-    public void nextTurn(Roll roll) {
-        Player player = getNextPlayer();
-        move(player, roll);
+    public void setPlayerLocation(String playerName, int location) {
+        board.placePlayer(playerName, location);
     }
 
-    public void move(Player player, int rollValue) {
-        move(player, new Roll(rollValue, 0));
+    public void playTurn(String name, int rolled) {
+        Location location = board.movePlayer(name, rolled);
+        Player player = players.forceFind(name);
+        location.land(player);
     }
 
-    public void move(Player player, Roll roll) {
-        if (player.isInJail() && player.canAffordBail())
-                player.payBail();
-        movePlayer(player, roll);
-        currentRound.takeTurn(player);
-        player.endTurn(roll);
-        setNextPlayer(roll);
+    public String getPlayerLocationName(String playerName) {
+        return board.getLocationName(playerName);
     }
 
-    private void movePlayer(Player player, Roll roll) {
-        if (threeConsecutiveDoubles(roll)) {
-            player.goToJail();
-            return;
-        }
-        player.move(roll);
+    public int getPlayerLocation(String playerName) {
+        return board.getLocation(playerName);
     }
 
-    private boolean threeConsecutiveDoubles(Roll roll) {
-        if (doubleCount == 2)
-            return roll.isDouble();
-        return false;
+    public long getNumberOfRoundsPlayed() {
+        return rounds.getNumberOfRoundsPlayed();
     }
 
-    public int getNumberOfRoundsPlayed() {
-        return rounds.size();
+    public long getNumberOfRoundsPlayedBy(String name) {
+        return rounds.getNumberOfRoundsPlayedBy(name);
     }
 
-    public List<Round> getRounds() {
-        return rounds;
+    public boolean playerOrderIsTheSameForEveryRound() {
+        return rounds.allHavePlayersInSameOrder();
     }
 
-    private Roll generateRoll() {
-        int dice1 = generateDiceValue();
-        int dice2 = generateDiceValue();
-        return new Roll(dice1, dice2);
+    private void start() {
+        players.streamNames().forEach(board::addPlayer);
     }
 
-    private int generateDiceValue() {
-        return random.nextInt(6) + 1;
+    private void playRound() {
+        Round round = rounds.startNextRound();
+        do {
+            String player = players.getNextPlayerName();
+            round.addPlayer(player);
+            log.info("rolling for player {} on round {}", player, round.getNumber());
+            players.updateNextPlayer();
+        } while (!players.isFirstPlayerNext());
+        log.info("round {} complete", round.getNumber());
     }
 
-    private Player getNextPlayer() {
-        Player player = players.getPlayer(nextPlayerIndex);
-        while(player.hasLost())
-            player = skipPlayer();
-        return player;
+    public BigDecimal getPlayerBalance(String name) {
+        return players.getBalance(name);
     }
-
-    private Player skipPlayer() {
-        setNextPlayer();
-        return players.getPlayer(nextPlayerIndex);
-    }
-
-    private void setNextPlayer(Roll roll) {
-        if (roll.isDouble()) {
-            doubleCount++;
-            return;
-        }
-        setNextPlayer();
-        if (nextPlayerIndex >= players.getNumberOfPlayers())
-            setNextRound();
-    }
-
-    private void setNextPlayer() {
-        nextPlayerIndex++;
-        doubleCount = 0;
-    }
-
-    private void setNextRound() {
-        nextPlayerIndex = 0;
-        rounds.add(currentRound);
-        currentRound = new Round();
-    }
-
-    private boolean playersRemaining() {
-        return players.getNumberOfRemainingPlayers() > 1;
-    }
-
-    private boolean roundsRemaining() {
-        return rounds.size() < TOTAL_ROUNDS;
-    }
-
 }

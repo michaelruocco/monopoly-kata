@@ -1,177 +1,215 @@
 package uk.co.mruoc.monopoly;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.players.Player;
+import uk.co.mruoc.monopoly.players.Players;
+import uk.co.mruoc.monopoly.round.Round;
+import uk.co.mruoc.monopoly.round.Rounds;
 
-import java.util.Collections;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-public class GameTest {
+class GameTest {
 
-    private Board board = new Board();
-    private Players players = new Players(2, board);
-    private Game game = new Game(players);
+    private final Players players = mock(Players.class);
+    private final Board board = mock(Board.class);
+    private final Rounds rounds = mock(Rounds.class);
+
+    private final Game game = new Game(players, board, rounds);
 
     @Test
-    public void playerOrderShouldBeTheSameForEveryRound() {
-        game.play(20);
+    void shouldReturnHasPlayer() {
+        String playerName = "player-name-1";
+        given(players.contains(playerName)).willReturn(true);
 
-        assertThat(playerOrderIsSameForEveryRound(game)).isTrue();
+        boolean present = game.hasPlayer(playerName);
+
+        assertThat(present).isTrue();
     }
 
     @Test
-    public void newGameShouldHaveZeroRoundsPlayed() {
-        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(0);
+    void shouldReturnIsNextPlayer() {
+        String playerName = "player-name-2";
+        given(players.isNext(playerName)).willReturn(true);
+
+        boolean next = game.isNextPlayer(playerName);
+
+        assertThat(next).isTrue();
     }
 
     @Test
-    public void gameShouldHaveTwentyRoundsPlayed() {
-        game.play(20);
+    void startGameShouldAddAllPlayersToBoardWhenGameStarted() {
+        Collection<String> names = Arrays.asList("player-name-1", "player-name-2");
+        given(players.streamNames()).willReturn(names.stream());
 
-        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(20);
-    }
-
-    @Test
-    public void shouldPlayGameWithEachRollRandomlyGenerated() {
         game.play();
 
-        assertThat(game.isComplete()).isTrue();
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(board, times(names.size())).addPlayer(captor.capture());
+        assertThat(captor.getAllValues()).containsExactlyInAnyOrderElementsOf(names);
     }
 
     @Test
-    public void gameShouldReturnFalseIfGameIsNotComplete() {
-        assertThat(game.isComplete()).isFalse();
+    void shouldPlacePlayerOnSetPlayerLocation() {
+        String playerName = "player-name";
+        int location = 7;
+
+        game.setPlayerLocation(playerName, location);
+
+        verify(board).placePlayer(playerName, location);
     }
 
     @Test
-    public void shouldMovePlayerAndTakeTurn() {
-        Player playerOne = players.getPlayer(0);
+    void shouldPlacePlayerOnSetPlayerLocationName() {
+        String playerName = "player-name";
+        String locationName = "location-name";
 
-        game.move(playerOne, 2);
+        game.setPlayerLocation(playerName, locationName);
 
-        assertThat(playerOne.getNumberOfRoundsPlayed()).isEqualTo(1);
-        assertThat(board.getLocationName(playerOne)).isEqualTo("Community Chest 1");
+        verify(board).placePlayer(playerName, locationName);
     }
 
     @Test
-    public void shouldMoveNextPlayerAndTakeTurn() {
-        Player playerOne = players.getPlayer(0);
+    void shouldMovePlayerOnPlayTurn() {
+        String playerName = "player-name";
+        int roll = 7;
+        givenLandsOnLocation(playerName, roll);
 
-        game.nextTurn(2);
+        game.playTurn(playerName, roll);
 
-        assertThat(playerOne.getNumberOfRoundsPlayed()).isEqualTo(1);
-        assertThat(board.getLocationName(playerOne)).isEqualTo("Community Chest 1");
+        verify(board).movePlayer(playerName, roll);
     }
 
     @Test
-    public void newGameShouldHaveNoRoundsPlayed() {
-        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(0);
+    void shouldLandPlayerLocation() {
+        String playerName = "player-name";
+        int roll = 7;
+        Location location = givenLandsOnLocation(playerName, roll);
+        Player player = givenPlayerFound(playerName);
+
+        game.playTurn(playerName, roll);
+
+        verify(location).land(player);
     }
 
     @Test
-    public void newGameShouldHaveNoRounds() {
-        assertThat(game.getRounds()).isEqualTo(Collections.emptyList());
+    void shouldGetGetPlayerLocation() {
+        String playerName = "player-name";
+        int expectedLocation = 9;
+        given(board.getLocation(playerName)).willReturn(expectedLocation);
+
+        int location = game.getPlayerLocation(playerName);
+
+        assertThat(location).isEqualTo(expectedLocation);
     }
 
     @Test
-    public void shouldAddRoundWhenEachPlayerHasTakenTurn() {
-        game.nextTurn(20);
-        game.nextTurn(20);
-        game.nextTurn(20);
-        game.nextTurn(20);
-        assertThat(game.getNumberOfRoundsPlayed()).isEqualTo(2);
+    void shouldGetGetPlayerLocationName() {
+        String playerName = "player-name";
+        String expectedLocationName = "location-name";
+        given(board.getLocationName(playerName)).willReturn(expectedLocationName);
+
+        String locationName = game.getPlayerLocationName(playerName);
+
+        assertThat(locationName).isEqualTo(expectedLocationName);
     }
 
     @Test
-    public void gameShouldHaveEveryRoundPlayed() {
-        game.nextTurn(20);
-        game.nextTurn(20);
-        game.nextTurn(20);
-        game.nextTurn(20);
+    void shouldCreateGameWithPlayerNames() {
+        String playerName1 = "player-name-1";
+        String playerName2 = "player-name-2";
 
-        Round round = game.getRounds().get(1);
+        Game playerNameGame = new Game(playerName1, playerName2);
 
-        assertThat(round.playersMatch(players)).isTrue();
+        assertThat(playerNameGame.getNumberOfPlayers()).isEqualTo(2);
+        assertThat(playerNameGame.hasPlayer(playerName1)).isTrue();
+        assertThat(playerNameGame.hasPlayer(playerName2)).isTrue();
     }
 
     @Test
-    public void gameShouldSkipPlayerTurnIfPlayerHasLost() {
-        givenPlayerOneHasLost();
+    void shouldReturnNumberOfRoundsPlayed() {
+        long expectedNumberOfRoundsPlayed = 5;
+        given(rounds.getNumberOfRoundsPlayed()).willReturn(expectedNumberOfRoundsPlayed);
 
-        game.nextTurn(20);
+        long numberOfRoundsPlayed = game.getNumberOfRoundsPlayed();
 
-        assertThat(getPlayerOne().getNumberOfRoundsPlayed()).isEqualTo(0);
-        assertThat(getPlayerTwo().getNumberOfRoundsPlayed()).isEqualTo(1);
+        assertThat(numberOfRoundsPlayed).isEqualTo(expectedNumberOfRoundsPlayed);
     }
 
     @Test
-    public void gameShouldSwitchPlayerIfDoubleNotRolled() {
-        Roll roll = new Roll(2, 3);
-        Player player1 = getPlayerOne();
-        Player player2 = getPlayerTwo();
+    void shouldReturnNumberOfRoundsPlayedByPlayer() {
+        String playerName = "player-name";
+        long expectedNumberOfRoundsPlayed = 5;
+        given(rounds.getNumberOfRoundsPlayedBy(playerName)).willReturn(expectedNumberOfRoundsPlayed);
 
-        game.nextTurn(roll);
-        game.nextTurn(roll);
+        long numberOfRoundsPlayed = game.getNumberOfRoundsPlayedBy(playerName);
 
-        assertThat(player1.getPosition()).isEqualTo(5);
-        assertThat(player2.getPosition()).isEqualTo(5);
+        assertThat(numberOfRoundsPlayed).isEqualTo(expectedNumberOfRoundsPlayed);
     }
 
     @Test
-    public void shouldGivePlayerExtraTurnIfPlayerRollsDouble() {
-        Roll doubleRoll = new Roll(3, 3);
-        Player player1 = getPlayerOne();
+    void shouldReturnPlayerOrderIsTheSameForEveryRound() {
+        given(rounds.allHavePlayersInSameOrder()).willReturn(true);
 
-        game.nextTurn(doubleRoll);
-        game.nextTurn(doubleRoll);
+        boolean playerOrderIsSame = game.playerOrderIsTheSameForEveryRound();
 
-        assertThat(player1.getPosition()).isEqualTo(12);
+        assertThat(playerOrderIsSame).isTrue();
     }
 
     @Test
-    public void shouldPutPlayerInJailIfThreeDoublesRolled() {
-        Roll doubleRoll = new Roll(3, 3);
-        Player player1 = getPlayerOne();
+    void shouldPlayAllRoundsOfGame() {
+        String playerName1 = "player-name-1";
+        String playerName2 = "player-name-2";
+        given(players.streamNames()).willReturn(Stream.of(playerName1, playerName2));
+        given(players.getNextPlayerName()).willReturn(playerName1, playerName2);
+        given(players.isFirstPlayerNext()).willReturn(false, true);
+        int numberOfRounds = 1;
+        given(rounds.getNumberOfRounds()).willReturn(numberOfRounds);
+        Round round = mock(Round.class);
+        given(rounds.startNextRound()).willReturn(round);
 
-        game.nextTurn(doubleRoll);
-        game.nextTurn(doubleRoll);
-        game.nextTurn(doubleRoll);
+        game.play();
 
-        assertThat(player1.isInJail()).isTrue();
+        InOrder inOrder = inOrder(round, players);
+        inOrder.verify(round).addPlayer(playerName1);
+        inOrder.verify(round).addPlayer(playerName2);
+        inOrder.verify(players).updateNextPlayer();
     }
 
     @Test
-    public void shouldBailPlayerOutIfPlayerIsInJailAndCanAffordBail() {
-        Player player1 = getPlayerOne();
-        player1.setBalance(100);
-        player1.goToJail();
+    void shouldReturnPlayerBalance() {
+        String name = "player-name";
+        BigDecimal expectedBalance = BigDecimal.TEN;
+        given(players.getBalance(name)).willReturn(expectedBalance);
 
-        game.nextTurn(0);
+        BigDecimal balance = game.getPlayerBalance(name);
 
-        assertThat(player1.isInJail()).isFalse();
-        assertThat(player1.getBalance()).isEqualTo(50);
-        assertThat(player1.getPosition()).isEqualTo(board.getJustVisitingPosition());
+        assertThat(balance).isEqualTo(expectedBalance);
     }
 
-    private boolean playerOrderIsSameForEveryRound(Game game) {
-        for(Round round : game.getRounds())
-            if (round.playersMatch(players))
-                return true;
-        return false;
+    private Location givenLandsOnLocation(String playerName, int roll) {
+        Location location = mock(Location.class);
+        given(board.movePlayer(playerName, roll)).willReturn(location);
+        return location;
     }
 
-    private void givenPlayerOneHasLost() {
-        Player player = getPlayerOne();
-        player.setBalance(-10);
-    }
-
-    private Player getPlayerOne() {
-        return players.getPlayer(0);
-    }
-
-    private Player getPlayerTwo() {
-        return players.getPlayer(1);
+    private Player givenPlayerFound(String name) {
+        Player player = mock(Player.class);
+        given(players.forceFind(name)).willReturn(player);
+        return player;
     }
 
 }

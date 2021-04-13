@@ -1,79 +1,95 @@
 package uk.co.mruoc.monopoly.board;
 
-import org.junit.Test;
-import uk.co.mruoc.monopoly.GameException;
-import uk.co.mruoc.monopoly.Player;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
-public class BoardTest {
+class BoardTest {
 
-    private Board board = new Board();
+    private static final int NUMBER_OF_LOCATIONS = 40;
+
+    private final Locations locations = mock(Locations.class);
+
+    private final Board board = new Board(locations);
 
     @Test
-    public void shouldReturnBoardSize() {
-        int expectedSize = 40;
-        assertThat(board.size()).isEqualTo(expectedSize);
+    void shouldReturnSizeAsFortyByDefault() {
+        givenNumberOfLocations();
+
+        int size = board.size();
+
+        assertThat(size).isEqualTo(NUMBER_OF_LOCATIONS);
     }
 
     @Test
-    public void shouldReturnLocationName() {
-        assertThat(board.getLocationName(0)).isEqualTo("Go");
+    void shouldAddPlayerAtZeroLocation() {
+        String playerName = "player-1";
+
+        board.addPlayer(playerName);
+
+        assertThat(board.getLocation(playerName)).isZero();
     }
 
     @Test
-    public void shouldReturnLocationNameForPlayerPosition() {
-        Player player = new Player("", board);
-        player.setPosition(39);
-        assertThat(board.getLocationName(player)).isEqualTo("Mayfair");
+    void shouldPlaceGivenPlayerAtLocation() {
+        String playerName = "player-1";
+        int location = 5;
+
+        board.placePlayer(playerName, location);
+
+        assertThat(board.getLocation(playerName)).isEqualTo(location);
     }
 
     @Test
-    public void shouldReturnLocationForPlayerPosition() {
-        Player player = new Player("", board);
-        player.setPosition(39);
-        Location location = board.getLocation(player);
-        assertThat(location.getName()).isEqualTo("Mayfair");
+    void shouldPlaceGivenPlayerAtLocationByName() {
+        String playerName = "player-1";
+        String locationName = "location-name";
+        int locationIndex = 5;
+        given(locations.get(locationName)).willReturn(locationIndex);
+        Location location = givenLocationWithName(locationName);
+        given(locations.get(locationIndex)).willReturn(location);
+
+        board.placePlayer(playerName, locationName);
+
+        assertThat(board.getLocationName(playerName)).isEqualTo(locationName);
     }
 
     @Test
-    public void shouldReturnLocationPositionForLocationName() {
-        assertThat(board.getLocationPosition("Go")).isEqualTo(0);
+    void shouldMovePlayerByRoll() {
+        givenNumberOfLocations();
+        String playerName = "player-1";
+        int location = 5;
+        int roll = 3;
+        board.placePlayer(playerName, location);
+
+        board.movePlayer(playerName, roll);
+
+        assertThat(board.getLocation(playerName)).isEqualTo(8);
     }
 
     @Test
-    public void shouldThrowGameExceptionIfLocationPositionNotFound() {
-        try {
-            board.getLocationPosition("Invalid Location");
-            fail();
-        } catch (GameException e) {
-            assertThat(e.getMessage()).isEqualTo("no location found with name Invalid Location");
-        }
+    void shouldMovePlayerPastEndOfBoard() {
+        givenNumberOfLocations();
+        String playerName = "player-1";
+        int location = 38;
+        int roll = 4;
+        board.placePlayer(playerName, location);
+
+        board.movePlayer(playerName, roll);
+
+        assertThat(board.getLocation(playerName)).isEqualTo(2);
     }
 
-    @Test
-    public void shouldReturnLocationGivenName() {
-        String locationName = "Just Visiting";
-        Location location = board.getLocation(locationName);
-        assertThat(location.getName()).isEqualTo(locationName);
+    private void givenNumberOfLocations() {
+        given(locations.getNumberOfLocations()).willReturn(NUMBER_OF_LOCATIONS);
     }
 
-    @Test
-    public void shouldReturnProperty() {
-        String propertyName = "Pall Mall";
-        Property property = board.getProperty(propertyName);
-        assertThat(property.getName()).isEqualTo(propertyName);
-    }
-
-    @Test
-    public void shouldThrowGameExceptionIfNameDoesNotReferToProperty() {
-        try {
-            board.getProperty("Go");
-            fail();
-        } catch (GameException e) {
-            assertThat(e.getMessage()).isEqualTo("location Go is not a property");
-        }
+    private Location givenLocationWithName(String name) {
+        Location location = mock(DefaultLocation.class);
+        given(location.getName()).willReturn(name);
+        return location;
     }
 
 }
