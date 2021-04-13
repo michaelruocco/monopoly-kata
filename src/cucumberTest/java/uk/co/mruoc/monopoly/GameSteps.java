@@ -23,8 +23,13 @@ public class GameSteps {
     }
 
     @Given("player {string} starts at location {int}")
-    public void setPlayerLocation(String name, int location) {
-        game.setPlayerLocation(name, location);
+    public void setPlayerLocation(String playerName, int location) {
+        game.setPlayerLocation(playerName, location);
+    }
+
+    @Given("player {string} starts at location {string}")
+    public void player_starts_at_location(String playerName, String locationName) {
+        game.setPlayerLocation(playerName, locationName);
     }
 
     @When("{int} games are created")
@@ -67,9 +72,14 @@ public class GameSteps {
         assertThat(games.stream().anyMatch(game -> game.isNextPlayer(name))).isTrue();
     }
 
+    @Then("player {string} is at location {string}")
+    public void assertPlayerLocation(String playerName, String locationName) {
+        assertThat(game.getPlayerLocationName(playerName)).isEqualTo(locationName);
+    }
+
     @Then("player {string} is at location {int}")
-    public void assertPlayerLocation(String name, int location) {
-        assertThat(game.getPlayerLocation(name)).isEqualTo(location);
+    public void assertPlayerLocation(String playerName, int location) {
+        assertThat(game.getPlayerLocation(playerName)).isEqualTo(location);
     }
 
     @Then("{int} rounds have been played in total")

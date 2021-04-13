@@ -49,16 +49,24 @@ public class Game {
         return players.size();
     }
 
-    public void setPlayerLocation(String name, int location) {
-        board.placePlayer(name, location);
+    public void setPlayerLocation(String playerName, String locationName) {
+        board.placePlayer(playerName, locationName);
+    }
+
+    public void setPlayerLocation(String playerName, int location) {
+        board.placePlayer(playerName, location);
     }
 
     public void playTurn(String name, int rolled) {
         board.movePlayer(name, rolled);
     }
 
-    public int getPlayerLocation(String name) {
-        return board.getLocation(name);
+    public String getPlayerLocationName(String playerName) {
+        return board.getLocationName(playerName);
+    }
+
+    public int getPlayerLocation(String playerName) {
+        return board.getLocation(playerName);
     }
 
     public long getNumberOfRoundsPlayed() {

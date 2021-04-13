@@ -8,18 +8,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class Board {
 
-    private static final int DEFAULT_SIZE = 40;
+    private static final Locations DEFAULT_LOCATIONS = new DefaultLocations();
 
+    private final Locations locations;
     private final Map<String, Integer> playerLocations = new HashMap<>();
 
-    private final int size;
-
     public Board() {
-        this(DEFAULT_SIZE);
+        this(DEFAULT_LOCATIONS);
     }
 
     public int size() {
-        return size;
+        return locations.getNumberOfLocations();
     }
 
     public void addPlayer(String playerName) {
@@ -32,6 +31,11 @@ public class Board {
         placePlayer(playerName, newLocation);
     }
 
+    public void placePlayer(String playerName, String locationName) {
+        int location = locations.get(locationName);
+        playerLocations.put(playerName, location);
+    }
+
     public void placePlayer(String playerName, int location) {
         playerLocations.put(playerName, location);
     }
@@ -40,8 +44,15 @@ public class Board {
         return playerLocations.get(playerName);
     }
 
+    public String getLocationName(String playerName) {
+        int playerLocation = playerLocations.get(playerName);
+        Location location = locations.get(playerLocation);
+        return location.getName();
+    }
+
     private int calculateNewLocation(int originalLocation, int placesToMove) {
         int newLocation = originalLocation + placesToMove;
+        int size = locations.getNumberOfLocations();
         if (newLocation < size) {
             return newLocation;
         }
