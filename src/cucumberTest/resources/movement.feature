@@ -1,4 +1,4 @@
-Feature: Player Movement
+Feature: Movement
 
   Scenario: Player moves according to roll using location index
     Given a player "Horse"
