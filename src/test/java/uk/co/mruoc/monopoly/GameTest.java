@@ -70,6 +70,16 @@ class GameTest {
     }
 
     @Test
+    void shouldPlacePlayerOnSetPlayerLocationName() {
+        String playerName = "player-name";
+        String locationName = "location-name";
+
+        game.setPlayerLocation(playerName, locationName);
+
+        verify(board).placePlayer(playerName, locationName);
+    }
+
+    @Test
     void shouldMovePlayerOnPlayTurn() {
         String playerName = "player-name";
         int location = 7;
@@ -88,6 +98,17 @@ class GameTest {
         int location = game.getPlayerLocation(playerName);
 
         assertThat(location).isEqualTo(expectedLocation);
+    }
+
+    @Test
+    void shouldGetGetPlayerLocationName() {
+        String playerName = "player-name";
+        String expectedLocationName = "location-name";
+        given(board.getLocationName(playerName)).willReturn(expectedLocationName);
+
+        String locationName = game.getPlayerLocationName(playerName);
+
+        assertThat(locationName).isEqualTo(expectedLocationName);
     }
 
     @Test
