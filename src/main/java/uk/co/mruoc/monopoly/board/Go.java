@@ -19,6 +19,7 @@ public class Go implements Location {
         return "Go";
     }
 
+    @Override
     public void land(Player player) {
         player.receive(salary);
     }
