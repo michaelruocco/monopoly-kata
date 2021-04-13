@@ -1,6 +1,6 @@
 package uk.co.mruoc.monopoly.round;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,13 +8,14 @@ import java.util.Deque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 @RequiredArgsConstructor
-@Data
 @Slf4j
 public class Rounds {
 
     private static final int DEFAULT_NUMBER_OF_ROUNDS = 20;
 
+    @Getter
     private final int numberOfRounds;
+
     private final Deque<Round> values = new LinkedBlockingDeque<>();
 
     public Rounds() {

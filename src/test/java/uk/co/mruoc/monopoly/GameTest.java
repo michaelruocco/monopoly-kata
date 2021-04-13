@@ -2,15 +2,19 @@ package uk.co.mruoc.monopoly;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import uk.co.mruoc.monopoly.board.Board;
 import uk.co.mruoc.monopoly.players.Players;
+import uk.co.mruoc.monopoly.round.Round;
 import uk.co.mruoc.monopoly.round.Rounds;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -126,6 +130,26 @@ class GameTest {
         boolean playerOrderIsSame = game.playerOrderIsTheSameForEveryRound();
 
         assertThat(playerOrderIsSame).isTrue();
+    }
+
+    @Test
+    void shouldPlayAllRoundsOfGame() {
+        String playerName1 = "player-name-1";
+        String playerName2 = "player-name-2";
+        given(players.stream()).willReturn(Stream.of(playerName1, playerName2));
+        given(players.getNextPlayer()).willReturn(playerName1, playerName2);
+        given(players.isFirstPlayerNext()).willReturn(false, true);
+        int numberOfRounds = 1;
+        given(rounds.getNumberOfRounds()).willReturn(numberOfRounds);
+        Round round = mock(Round.class);
+        given(rounds.startNextRound()).willReturn(round);
+
+        game.play();
+
+        InOrder inOrder = inOrder(round, players);
+        inOrder.verify(round).addPlayer(playerName1);
+        inOrder.verify(round).addPlayer(playerName2);
+        inOrder.verify(players).updateNextPlayer();
     }
 
 }

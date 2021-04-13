@@ -1,15 +1,15 @@
 package uk.co.mruoc.monopoly.round;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @RequiredArgsConstructor
-@Data
 public class Round {
 
+    @Getter
     private final int number;
     private final Collection<String> players = new ArrayList<>();
 
