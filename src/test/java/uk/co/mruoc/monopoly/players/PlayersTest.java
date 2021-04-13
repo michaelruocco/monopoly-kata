@@ -89,7 +89,7 @@ class PlayersTest {
         String[] names = generatePlayerNames(2);
         Players players = new Players(names);
 
-        String nextPlayer = players.getNextPlayer();
+        String nextPlayer = players.getNextPlayerName();
 
         assertThat(nextPlayer).isEqualTo(names[0]);
     }
@@ -99,7 +99,7 @@ class PlayersTest {
         String[] names = generatePlayerNames(2);
         Players players = new Players(names);
 
-        Stream<String> stream = players.stream();
+        Stream<String> stream = players.streamNames();
 
         assertThat(stream).containsExactlyInAnyOrder(names);
     }

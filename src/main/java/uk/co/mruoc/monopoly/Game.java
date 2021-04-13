@@ -82,13 +82,13 @@ public class Game {
     }
 
     private void start() {
-        players.stream().forEach(board::addPlayer);
+        players.streamNames().forEach(board::addPlayer);
     }
 
     private void playRound() {
         Round round = rounds.startNextRound();
         do {
-            String player = players.getNextPlayer();
+            String player = players.getNextPlayerName();
             round.addPlayer(player);
             log.info("rolling for player {} on round {}", player, round.getNumber());
             players.updateNextPlayer();

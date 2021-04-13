@@ -32,7 +32,7 @@ class RandomOrderPlayersTest {
 
         Players players = new RandomOrderPlayers(names);
 
-        assertThat(players.stream()).containsExactlyInAnyOrder(names);
+        assertThat(players.streamNames()).containsExactlyInAnyOrder(names);
     }
 
 }

@@ -50,7 +50,7 @@ class GameTest {
     @Test
     void startGameShouldAddAllPlayersToBoardWhenGameStarted() {
         Collection<String> names = Arrays.asList("player-name-1", "player-name-2");
-        given(players.stream()).willReturn(names.stream());
+        given(players.streamNames()).willReturn(names.stream());
 
         game.play();
 
@@ -157,8 +157,8 @@ class GameTest {
     void shouldPlayAllRoundsOfGame() {
         String playerName1 = "player-name-1";
         String playerName2 = "player-name-2";
-        given(players.stream()).willReturn(Stream.of(playerName1, playerName2));
-        given(players.getNextPlayer()).willReturn(playerName1, playerName2);
+        given(players.streamNames()).willReturn(Stream.of(playerName1, playerName2));
+        given(players.getNextPlayerName()).willReturn(playerName1, playerName2);
         given(players.isFirstPlayerNext()).willReturn(false, true);
         int numberOfRounds = 1;
         given(rounds.getNumberOfRounds()).willReturn(numberOfRounds);

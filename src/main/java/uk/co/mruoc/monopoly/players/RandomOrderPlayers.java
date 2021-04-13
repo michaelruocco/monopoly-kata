@@ -16,7 +16,7 @@ public class RandomOrderPlayers extends Players {
     }
 
     public RandomOrderPlayers(Collection<String> names) {
-        super(randomize(names));
+        super(toPlayers(randomize(names)));
     }
 
     private static List<String> randomize(Collection<String> inputNames) {
