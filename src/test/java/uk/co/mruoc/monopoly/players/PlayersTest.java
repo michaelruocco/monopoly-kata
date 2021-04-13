@@ -2,6 +2,7 @@ package uk.co.mruoc.monopoly.players;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -131,6 +132,41 @@ class PlayersTest {
         boolean isFirst = players.isFirstPlayerNext();
 
         assertThat(isFirst).isFalse();
+    }
+
+    @Test
+    void shouldReturnPlayerIfPlayerWithNameFound() {
+        String[] names = generatePlayerNames(2);
+        Players players = new Players(names);
+        String name = names[1];
+
+        Player player = players.forceFind(name);
+
+        assertThat(player.getName()).isEqualTo(name);
+    }
+
+    @Test
+    void shouldReturnPlayerBalanceIfPlayerWithNameFound() {
+        String[] names = generatePlayerNames(2);
+        Players players = new Players(names);
+        String name = names[1];
+
+        BigDecimal balance = players.getBalance(name);
+
+        assertThat(balance).isEqualTo(BigDecimal.ZERO);
+    }
+
+    @Test
+    void shouldThrowExceptionIfPlayerWithNameNotFound() {
+        String[] names = generatePlayerNames(2);
+        Players players = new Players(names);
+        String otherName = "other-name";
+
+        Throwable error = catchThrowable(() -> players.forceFind(otherName));
+
+        assertThat(error)
+                .isInstanceOf(PlayerNotFoundException.class)
+                .hasMessage(otherName);
     }
 
     @Test

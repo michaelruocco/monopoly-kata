@@ -12,8 +12,8 @@ import static org.mockito.Mockito.mock;
 
 class DefaultLocationsTest {
 
-    private final Location location1 = mock(Location.class);
-    private final Location location2 = mock(Location.class);
+    private final Location location1 = mock(DefaultLocation.class);
+    private final Location location2 = mock(DefaultLocation.class);
     private final List<Location> values = Arrays.asList(location1, location2);
 
     private final Locations locations = new DefaultLocations(values);

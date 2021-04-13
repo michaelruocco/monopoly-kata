@@ -25,10 +25,11 @@ public class Board {
         placePlayer(playerName, 0);
     }
 
-    public void movePlayer(String playerName, int placesToMove) {
+    public Location movePlayer(String playerName, int placesToMove) {
         int originalLocation = getLocation(playerName);
         int newLocation = calculateNewLocation(originalLocation, placesToMove);
         placePlayer(playerName, newLocation);
+        return locations.get(newLocation);
     }
 
     public void placePlayer(String playerName, String locationName) {

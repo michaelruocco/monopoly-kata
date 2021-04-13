@@ -2,11 +2,13 @@ package uk.co.mruoc.monopoly.players;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,8 +68,22 @@ public class Players implements Iterable<String> {
         return values.get(nextPlayerIndex).hasName(name);
     }
 
+    public BigDecimal getBalance(String name) {
+        return forceFind(name).getBalance();
+    }
+
+    public Player forceFind(String name) {
+        return find(name).orElseThrow(() -> new PlayerNotFoundException(name));
+    }
+
     public boolean contains(String name) {
-        return values.stream().anyMatch(player -> player.hasName(name));
+        return find(name).isPresent();
+    }
+
+    private Optional<Player> find(String name) {
+        return values.stream()
+                .filter(player -> player.hasName(name))
+                .findFirst();
     }
 
     private static void validate(Collection<Player> values) {

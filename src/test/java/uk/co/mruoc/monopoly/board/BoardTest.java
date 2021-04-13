@@ -87,7 +87,7 @@ class BoardTest {
     }
 
     private Location givenLocationWithName(String name) {
-        Location location = mock(Location.class);
+        Location location = mock(DefaultLocation.class);
         given(location.getName()).willReturn(name);
         return location;
     }

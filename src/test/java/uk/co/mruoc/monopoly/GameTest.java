@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.players.Player;
 import uk.co.mruoc.monopoly.players.Players;
 import uk.co.mruoc.monopoly.round.Round;
 import uk.co.mruoc.monopoly.round.Rounds;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -82,11 +85,24 @@ class GameTest {
     @Test
     void shouldMovePlayerOnPlayTurn() {
         String playerName = "player-name";
-        int location = 7;
+        int roll = 7;
+        givenLandsOnLocation(playerName, roll);
 
-        game.playTurn(playerName, location);
+        game.playTurn(playerName, roll);
 
-        verify(board).movePlayer(playerName, location);
+        verify(board).movePlayer(playerName, roll);
+    }
+
+    @Test
+    void shouldLandPlayerLocation() {
+        String playerName = "player-name";
+        int roll = 7;
+        Location location = givenLandsOnLocation(playerName, roll);
+        Player player = givenPlayerFound(playerName);
+
+        game.playTurn(playerName, roll);
+
+        verify(location).land(player);
     }
 
     @Test
@@ -171,6 +187,29 @@ class GameTest {
         inOrder.verify(round).addPlayer(playerName1);
         inOrder.verify(round).addPlayer(playerName2);
         inOrder.verify(players).updateNextPlayer();
+    }
+
+    @Test
+    void shouldReturnPlayerBalance() {
+        String name = "player-name";
+        BigDecimal expectedBalance = BigDecimal.TEN;
+        given(players.getBalance(name)).willReturn(expectedBalance);
+
+        BigDecimal balance = game.getPlayerBalance(name);
+
+        assertThat(balance).isEqualTo(expectedBalance);
+    }
+
+    private Location givenLandsOnLocation(String playerName, int roll) {
+        Location location = mock(Location.class);
+        given(board.movePlayer(playerName, roll)).willReturn(location);
+        return location;
+    }
+
+    private Player givenPlayerFound(String name) {
+        Player player = mock(Player.class);
+        given(players.forceFind(name)).willReturn(player);
+        return player;
     }
 
 }

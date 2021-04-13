@@ -3,14 +3,19 @@ package uk.co.mruoc.monopoly;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.monopoly.board.Board;
+import uk.co.mruoc.monopoly.board.Location;
+import uk.co.mruoc.monopoly.players.Player;
 import uk.co.mruoc.monopoly.players.Players;
 import uk.co.mruoc.monopoly.players.RandomOrderPlayers;
 import uk.co.mruoc.monopoly.round.Round;
 import uk.co.mruoc.monopoly.round.Rounds;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.IntStream;
+
+import static uk.co.mruoc.monopoly.players.Players.toPlayers;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -25,7 +30,7 @@ public class Game {
     }
 
     public Game(Collection<String> playerNames) {
-        this(new RandomOrderPlayers(playerNames));
+        this(new RandomOrderPlayers(toPlayers(playerNames)));
     }
 
     public Game(Players players) {
@@ -58,7 +63,9 @@ public class Game {
     }
 
     public void playTurn(String name, int rolled) {
-        board.movePlayer(name, rolled);
+        Location location = board.movePlayer(name, rolled);
+        Player player = players.forceFind(name);
+        location.land(player);
     }
 
     public String getPlayerLocationName(String playerName) {
@@ -96,4 +103,7 @@ public class Game {
         log.info("round {} complete", round.getNumber());
     }
 
+    public BigDecimal getPlayerBalance(String name) {
+        return players.getBalance(name);
+    }
 }

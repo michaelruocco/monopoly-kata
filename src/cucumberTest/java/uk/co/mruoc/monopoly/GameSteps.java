@@ -3,7 +3,11 @@ package uk.co.mruoc.monopoly;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import uk.co.mruoc.monopoly.players.Player;
+import uk.co.mruoc.monopoly.players.Players;
+import uk.co.mruoc.monopoly.players.RandomOrderPlayers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.IntStream;
@@ -12,14 +16,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameSteps {
 
-    private final Collection<String> players = new ArrayList<>();
+    private final Collection<Player> players = new ArrayList<>();
     private final Collection<Game> games = new ArrayList<>();
     private Game game;
     private String errorMessage;
 
     @Given("a player {string}")
     public void aPlayer(String name) {
-        players.add(name);
+        aPlayerWithABalanceOf(name, 0D);
+    }
+
+    @Given("a player {string} with a balance of {double}")
+    public void aPlayerWithABalanceOf(String name, double balance) {
+        players.add(new Player(name, BigDecimal.valueOf(balance)));
     }
 
     @Given("player {string} starts at location {int}")
@@ -40,7 +49,7 @@ public class GameSteps {
     @When("the game is created")
     public void createGame() {
         try {
-            game = new Game(players);
+            game = new Game(new RandomOrderPlayers(players));
             games.add(game);
         } catch (MonopolyException e) {
             errorMessage = e.getMessage();
@@ -95,6 +104,11 @@ public class GameSteps {
     @Then("the order of the players is the same in every round")
     public void theOrderOfThePlayersIsTheSameInEveryRound() {
         assertThat(game.playerOrderIsTheSameForEveryRound()).isTrue();
+    }
+
+    @Then("player {string} has a balance of {double}")
+    public void playerHasABalanceOf(String name, double balance) {
+        assertThat(game.getPlayerBalance(name)).isEqualTo(BigDecimal.valueOf(balance));
     }
 
 }

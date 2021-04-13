@@ -12,15 +12,15 @@ import java.util.List;
 public class RandomOrderPlayers extends Players {
 
     public RandomOrderPlayers(String... names) {
-        this(Arrays.asList(names));
+        this(toPlayers(Arrays.asList(names)));
     }
 
-    public RandomOrderPlayers(Collection<String> names) {
-        super(toPlayers(randomize(names)));
+    public RandomOrderPlayers(Collection<Player> names) {
+        super(randomize(names));
     }
 
-    private static List<String> randomize(Collection<String> inputNames) {
-        List<String> randomizedNames = new ArrayList<>(inputNames);
+    private static List<Player> randomize(Collection<Player> inputNames) {
+        List<Player> randomizedNames = new ArrayList<>(inputNames);
         Collections.shuffle(randomizedNames);
         log.info("player order randomized as {}", randomizedNames);
         return Collections.unmodifiableList(randomizedNames);

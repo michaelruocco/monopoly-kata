@@ -1,12 +1,13 @@
 package uk.co.mruoc.monopoly.board;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import uk.co.mruoc.monopoly.players.Player;
 
-@RequiredArgsConstructor
-public class Location {
+public interface Location {
 
-    @Getter
-    private final String name;
+    String getName();
+
+    default void land(Player player) {
+        // intentionally blank
+    }
 
 }
